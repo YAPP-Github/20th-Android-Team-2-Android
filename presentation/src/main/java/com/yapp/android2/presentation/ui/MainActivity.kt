@@ -11,8 +11,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        val navController = binding.hostFragmentContainer.findNavController()
 
-//        binding.bottomNav.setupWithNavController(navController)
     }
 }
