@@ -16,6 +16,4 @@ rootProject.name = "Android2Team"
 include ':app'
 include ':presentation'
 include ':domain'
-include ':remote'
-include ':local'
 include ':data'
