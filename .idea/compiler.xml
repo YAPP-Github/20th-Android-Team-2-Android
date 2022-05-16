@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.8">
-      <module name="YappAndroid2.app" target="11" />
-      <module name="YappAndroid2.data" target="11" />
-      <module name="YappAndroid2.local" target="11" />
-      <module name="YappAndroid2.presentation" target="11" />
-      <module name="YappAndroid2.remote" target="11" />
+    <bytecodeTargetLevel target="1.7">
+      <module name="Android2Team.app" target="11" />
+      <module name="Android2Team.data" target="11" />
+      <module name="Android2Team.local" target="11" />
+      <module name="Android2Team.presentation" target="11" />
+      <module name="Android2Team.remote" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
