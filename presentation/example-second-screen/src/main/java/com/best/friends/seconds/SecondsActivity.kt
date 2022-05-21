@@ -1,26 +1,26 @@
-package com.best.friends.home
+package com.best.friends.seconds
 
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.best.friends.core.BaseActivity
-import com.best.friends.home.databinding.ActivityMainBinding
-import com.best.friends.navigator.SecondsNavigator
+import com.best.friends.navigator.HomeNavigator
+import com.best.friends.seconds.databinding.ActivitySecondsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+class SecondsActivity : BaseActivity<ActivitySecondsBinding>(R.layout.activity_seconds) {
 
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by viewModels<SecondsViewModel>()
 
     @Inject
-    lateinit var secondsNavigator: SecondsNavigator
+    lateinit var homeNavigator: HomeNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding.tvNavigation.setOnClickListener {
-            val intent = secondsNavigator.intent(this)
+            val intent = homeNavigator.intent(this)
             startActivity(intent)
         }
     }
