@@ -6,14 +6,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 
-abstract class BaseActivity<T : ViewDataBinding>(@LayoutRes private val layoutId: Int) : AppCompatActivity() {
+abstract class BaseActivity<T : ViewDataBinding>(
+    @LayoutRes private val layoutId: Int
+) : AppCompatActivity() {
 
-    protected val binding: T by lazy(LazyThreadSafetyMode.NONE) {
-        DataBindingUtil.setContentView(this, layoutId)
-    }
+    protected lateinit var binding: T
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = DataBindingUtil.setContentView(this, layoutId)
         binding.lifecycleOwner = this
     }
 

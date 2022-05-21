@@ -2,10 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.yapp.android2.presentation">
 
-<!--    <application>-->
-<!--        <activity-->
-<!--            android:name=".ui.MainActivity2"-->
-<!--            android:exported="false" />-->
-<!--    </application>-->
+    <application>
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:launchMode="singleTask" />
+    </application>
 
 </manifest>
