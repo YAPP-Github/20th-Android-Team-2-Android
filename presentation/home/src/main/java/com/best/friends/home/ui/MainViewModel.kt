@@ -1,6 +1,6 @@
-package com.yapp.android2.presentation.ui
+package com.best.friends.home.ui
 
-import com.yapp.android2.presentation.base.BaseViewModel
+import com.best.friends.home.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.yapp.android2.presentation
+package com.best.friends.home
 
 import org.junit.Test
 

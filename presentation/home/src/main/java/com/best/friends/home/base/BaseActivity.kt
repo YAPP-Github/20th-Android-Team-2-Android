@@ -1,4 +1,4 @@
-package com.yapp.android2.presentation.base
+package com.best.friends.home.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes

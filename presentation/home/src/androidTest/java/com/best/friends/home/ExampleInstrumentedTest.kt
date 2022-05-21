@@ -1,4 +1,4 @@
-package com.yapp.android2.presentation
+package com.best.friends.home
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.yapp.android2.presentation.test", appContext.packageName)
+        assertEquals("com.best.friends.home.test", appContext.packageName)
     }
 }

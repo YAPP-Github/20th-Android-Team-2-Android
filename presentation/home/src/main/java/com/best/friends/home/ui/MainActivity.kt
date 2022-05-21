@@ -1,10 +1,10 @@
-package com.yapp.android2.presentation.ui
+package com.best.friends.home.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.yapp.android2.presentation.R
-import com.yapp.android2.presentation.base.BaseActivity
-import com.yapp.android2.presentation.databinding.ActivityMainBinding
+import com.best.friends.home.R
+import com.best.friends.home.base.BaseActivity
+import com.best.friends.home.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
