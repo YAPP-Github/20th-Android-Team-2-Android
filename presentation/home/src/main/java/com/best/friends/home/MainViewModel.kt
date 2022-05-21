@@ -1,6 +1,6 @@
-package com.best.friends.home.ui
+package com.best.friends.home
 
-import com.best.friends.home.base.BaseViewModel
+import com.best.friends.core.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

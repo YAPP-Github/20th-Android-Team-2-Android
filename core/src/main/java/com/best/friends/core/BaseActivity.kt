@@ -1,4 +1,4 @@
-package com.best.friends.home.base
+package com.best.friends.core
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
