@@ -5,7 +5,9 @@ import com.yapp.android2.domain.entity.Login
 import com.yapp.android2.domain.entity.base.ApiResponse
 import com.yapp.android2.domain.usecase.LoginType
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class LoginRemoteDataSourceImpl @Inject constructor(
     private val loginService: LoginService
 ) : LoginRemoteDataSource {

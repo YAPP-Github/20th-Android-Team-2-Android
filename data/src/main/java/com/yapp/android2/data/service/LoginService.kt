@@ -12,10 +12,4 @@ interface LoginService : Service {
     @GET("api/oauth/{socialLoginType}")
     suspend fun login(@Path("socialLoginType") loginType: LoginType): ApiResponse<Login>
 
-    companion object {
-        fun create(): LoginService {
-            return Service.retroBuilder()
-                .create()
-        }
-    }
 }

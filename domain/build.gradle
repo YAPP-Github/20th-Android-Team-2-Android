@@ -9,6 +9,5 @@ java {
 }
 
 dependencies {
-    implementation deps.hilt.core
-    kapt deps.hilt.compiler
+    implementation deps.inject
 }

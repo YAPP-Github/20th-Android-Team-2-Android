@@ -1,17 +1,23 @@
 package com.yapp.android2.domain.usecase
 
 import com.yapp.android2.domain.UseCase
+import com.yapp.android2.domain.entity.Login
 import com.yapp.android2.domain.entity.base.ApiResponse
 import com.yapp.android2.domain.repository.login.LoginRepository
 import javax.inject.Inject
 
-class LoginUseCase @Inject constructor(
+class LoginUseCaseImpl @Inject constructor(
     private val loginRepository: LoginRepository
-) : UseCase<LoginType, Result<ApiResponse>> {
-    override suspend fun execute(params: LoginType): Result<ApiResponse> {
-        return loginRepository.login()
+) : LoginUseCase {
+
+    override suspend fun execute(params: LoginUseCase.Params): ApiResponse<Login> {
+        return loginRepository.login(params.loginType)
     }
 
+}
+
+interface LoginUseCase : UseCase<LoginUseCase.Params, ApiResponse<Login>> {
+    data class Params(val loginType: LoginType)
 }
 
 enum class LoginType { KAKAO }
