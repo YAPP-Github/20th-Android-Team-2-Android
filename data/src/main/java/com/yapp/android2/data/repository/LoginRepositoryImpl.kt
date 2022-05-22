@@ -14,8 +14,6 @@ class LoginRepositoryImpl @Inject constructor(
     override suspend fun login(loginType: LoginType): ApiResponse<Login> {
         return try {
             loginRemoteDataSource.login(loginType)
-        } catch (exception: Exception) {
-            ApiResponse(data = Login.Error, statusCode = 404, message = exception.message.orEmpty())
         } catch (exception: HttpException) {
             ApiResponse(data = Login.Error, statusCode = exception.code(), message = exception.message())
         }
