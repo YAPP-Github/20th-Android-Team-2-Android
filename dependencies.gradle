@@ -60,7 +60,8 @@ ext {
             "network"                      : [
                     "core"                 : "com.squareup.retrofit2:retrofit:2.9.0",
                     "adapter"              : "com.squareup.retrofit2:converter-gson:2.9.0"
-            ]
+            ],
+            "inject"                       : "javax.inject:javax.inject:1"
     ]
 
     coroutines = [
