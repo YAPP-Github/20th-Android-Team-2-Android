@@ -4,4 +4,6 @@ data class Login(val redirectUrl: String) {
     companion object {
         val Error = Login("")
     }
+
+    enum class Type { KAKAO }
 }
