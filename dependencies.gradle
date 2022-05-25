@@ -61,7 +61,12 @@ ext {
                     "junit"                : "junit:junit:${versions.junit}",
                     "junitext"             : "androidx.test.ext:junit:${versions.junitext}",
                     "espressoCore"         : "androidx.test.espresso:espresso-core:${versions.espresso}"
-            ]
+            ],
+            "network"                      : [
+                    "core"                 : "com.squareup.retrofit2:retrofit:2.9.0",
+                    "adapter"              : "com.squareup.retrofit2:converter-gson:2.9.0"
+            ],
+            "inject"                       : "javax.inject:javax.inject:1"
     ]
 
     coroutines = [

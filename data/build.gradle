@@ -33,11 +33,16 @@ android {
 
 dependencies {
 
+    implementation(project(":domain"))
+
     implementation(jetpackDeps)
     implementation(coroutines)
 
     implementation deps.hilt.core
     kapt deps.hilt.compiler
+
+    implementation deps.network.core
+    implementation deps.network.adapter
 
     // testing
     testImplementation(testDeps)
