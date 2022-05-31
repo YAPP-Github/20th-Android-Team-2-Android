@@ -15,10 +15,11 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Android2Team"
         android:name=".BestFriendsApplication"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="UnusedAttribute">
 
         <activity
-            android:name="com.best.friends.home.MainActivity"
+            android:name="com.best.friends.login.KaKaoLoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
