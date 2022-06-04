@@ -10,13 +10,13 @@
 
         <ImageView
             android:id="@+id/iv_best_friends"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_marginTop="183dp"
+            android:src="@drawable/ic_best_friends"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_best_friends" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_best_friends"
@@ -24,8 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:text="@string/best_friends"
-            android:textAppearance="@style/Header1Bold"
-            android:textColor="@color/gray_4"
+            android:textAppearance="@style/Typography.H1.Bold"
             app:layout_constraintEnd_toEndOf="@+id/iv_best_friends"
             app:layout_constraintStart_toStartOf="@+id/iv_best_friends"
             app:layout_constraintTop_toBottomOf="@+id/iv_best_friends" />
@@ -36,9 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="@string/description"
-            android:textAppearance="@style/Body3Regular"
-            android:textColor="@color/gray_4"
-            android:textSize="16sp"
+            android:textAppearance="@style/Typography.Body3.Regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_best_friends" />
@@ -59,8 +56,8 @@
                 android:id="@+id/tv_kakao_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
                 android:text="@string/kakao_login"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"

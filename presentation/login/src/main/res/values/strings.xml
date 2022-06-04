@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="best_friends">절친</string>
-    <string name="description">소소한 지출을 막아\n절약의 습관을 잡아</string>
+    <string name="description">소소한 지출을 막아 \n절약의 습관을 잡아</string>
     <string name="kakao_login">카카오로 간편가입</string>
 </resources>
