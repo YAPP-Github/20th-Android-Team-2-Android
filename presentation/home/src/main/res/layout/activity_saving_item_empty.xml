@@ -43,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/saving_items_empty_title"
+                android:textAppearance="@style/Typography.Body1.Bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -55,19 +56,23 @@
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:text="@string/saving_items_empty_description"
+                android:textAppearance="@style/Typography.Body4.Regular"
                 app:layout_constraintTop_toBottomOf="@id/tv_empty_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
             <TextView
                 android:id="@+id/tv_saving_items_add"
-                android:layout_width="162dp"
-                android:layout_height="40dp"
-                android:background="@drawable/bg_rect_orange_r10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_rect_primary_r10"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="22dp"
                 android:layout_marginTop="60dp"
                 android:gravity="center"
                 android:text="@string/saving_items_add"
-                android:textColor="@android:color/white"
+                android:textColor="@color/white"
+                android:textAppearance="@style/Typography.Button1.Medium"
                 app:layout_constraintTop_toBottomOf="@id/tv_empty_description"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

@@ -4,8 +4,10 @@ import android.os.Bundle
 import com.best.friends.core.BaseActivity
 import com.best.friends.home.databinding.ActivitySavingItemEmptyBinding
 import com.best.friends.navigator.HomeNavigator
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class SavingItemEmptyActivity :
     BaseActivity<ActivitySavingItemEmptyBinding>(R.layout.activity_saving_item_empty)  {
 
