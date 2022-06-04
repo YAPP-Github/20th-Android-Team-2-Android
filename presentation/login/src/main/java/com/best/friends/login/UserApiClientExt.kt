@@ -1,12 +1,10 @@
-package com.best.friends.login.util
+package com.best.friends.login
 
 import android.content.Context
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import kotlinx.coroutines.CoroutineScope
-import timber.log.Timber
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -43,7 +41,7 @@ suspend fun UserApiClient.Companion.loginWithKakaoTalk(
                     continuation.resume(token)
                 }
                 else -> {
-                    continuation.resumeWithException(RuntimeException("kakao access token을 받아오는데 실패함, 이유는 명확하지 않음."))
+                    continuation.resumeWithException(RuntimeException("kakao access token 받기 실패"))
                 }
             }
         }
@@ -65,7 +63,7 @@ private suspend fun UserApiClient.Companion.loginWithKakaoAccount(
                     continuation.resume(token)
                 }
                 else -> {
-                    continuation.resumeWithException(RuntimeException("kakao access token을 받아오는데 실패함, 이유는 명확하지 않음."))
+                    continuation.resumeWithException(RuntimeException("kakao access token 받기 실패"))
                 }
             }
         }

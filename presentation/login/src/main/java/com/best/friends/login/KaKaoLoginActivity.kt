@@ -1,19 +1,13 @@
 package com.best.friends.login
 
 import android.os.Bundle
-import android.util.Log
-import androidx.activity.result.contract.ActivityResultContract
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.registerForActivityResult
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
 import com.best.friends.login.databinding.ActivityKakaoLoginBinding
-import com.best.friends.login.util.loginWithKakao
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
-import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -54,7 +48,7 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
         UserApiClient.instance.me { user, _ ->
             if (user != null){
                 user.kakaoAccount?.profile?.nickname?.let { viewModel.setNickName(it) }
-
+                Timber.d("--- 카카오 로그인 유저 명 : ${viewModel.nickname.value} ---")
                 if(user.kakaoAccount?.emailNeedsAgreement == true){
                     user.kakaoAccount?.email?.let { viewModel.setEmail(it) }
                 }

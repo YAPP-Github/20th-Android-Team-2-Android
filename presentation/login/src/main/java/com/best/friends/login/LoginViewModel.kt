@@ -2,13 +2,9 @@ package com.best.friends.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
-import com.yapp.android2.domain.entity.Login
 import com.yapp.android2.domain.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
-import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
