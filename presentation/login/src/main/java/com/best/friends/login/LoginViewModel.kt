@@ -15,23 +15,17 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase
 ) : BaseViewModel() {
+    private val _nickName = MutableLiveData<String>()
+    private val _email = MutableLiveData<String>()
 
-    private val _redirectUrl = MutableLiveData<String>()
-    val redirectUrl: LiveData<String> = _redirectUrl
-    private val _isAvailUrl = MutableLiveData(false)
-    val isAvailUrl: LiveData<Boolean> = _isAvailUrl
+    val nickname: LiveData<String> = _nickName
+    val email: LiveData<String> = _email
 
-    fun login(snsType: Login.Type = Login.Type.KAKAO) {
-        viewModelScope.launch {
-            try {
-                val response = loginUseCase.execute(LoginUseCase.Params(snsType))
+    fun setNickName(nickName: String){
+        _nickName.value = nickName
+    }
 
-                _redirectUrl.postValue(response.data)
-                _isAvailUrl.postValue(true)
-            }
-            catch (e: Exception){
-                Timber.d(e)
-            }
-        }
+    fun setEmail(email: String){
+        _email.value = email
     }
 }
