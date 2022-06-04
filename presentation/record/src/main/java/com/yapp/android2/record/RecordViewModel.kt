@@ -4,4 +4,6 @@ import com.best.friends.core.BaseViewModel
 
 class RecordViewModel : BaseViewModel() {
 
+
+
 }

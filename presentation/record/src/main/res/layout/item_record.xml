@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="item"
+            type="com.yapp.android2.domain.Record" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,8 +17,9 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{item.name}"
             android:layout_marginTop="14dp"
-            android:text="아메리카노"
+            tools:text="아메리카노"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/main_dark"
@@ -27,7 +31,8 @@
             android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00,000원"
+            android:text="@{String.format(@string/record_price, item.price)}"
+            tools:text="00,000원"
             android:layout_marginBottom="8dp"
             android:textColor="@color/main_dark"
             app:layout_constraintBottom_toTopOf="@+id/divider"

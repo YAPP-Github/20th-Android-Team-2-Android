@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.layout.fragment_record) {
 
     override val viewModel: RecordViewModel by viewModels()
+    private val recordAdapter = RecordAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,9 +26,16 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.viewInit()
+
         onBind {
             viewModel = this@RecordFragment.viewModel
             executePendingBindings()
         }
+
+    }
+
+    private fun FragmentRecordBinding.viewInit() {
+        viewPager.adapter = recordAdapter
     }
 }
