@@ -22,12 +22,13 @@
             android:includeFontPadding="false"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            tools:text="총 N번의 절약"
+            android:text="@{String.format(@string/record_title, viewModel.items.size)}"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="총 N번의 절약" />
 
         <TextView
             android:id="@+id/tv_total_price"
@@ -35,32 +36,35 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:includeFontPadding="false"
-            tools:text="000,000원 아꼈어요!"
             android:textColor="@color/main_dark"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_total_saving" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_saving"
+            app:totalSaving="@{viewModel.items}"
+            tools:text="000,000원 아꼈어요!" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/calendar"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_total_price" />
 
-        <CalendarView
-            android:id="@+id/calendarView"
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/calendar"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewPager"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

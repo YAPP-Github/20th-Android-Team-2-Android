@@ -4,8 +4,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.yapp.android2.domain.Record
+import com.yapp.android2.domain.repository.record.Item
 
-class RecordAdapter : ListAdapter<Record, RecordViewHolder>(DIFF_UTIL) {
+class RecordAdapter : ListAdapter<Item, RecordViewHolder>(DIFF_UTIL) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
@@ -20,12 +21,12 @@ class RecordAdapter : ListAdapter<Record, RecordViewHolder>(DIFF_UTIL) {
 
 
     companion object {
-        private val DIFF_UTIL = object : DiffUtil.ItemCallback<Record>() {
-            override fun areItemsTheSame(oldItem: Record, newItem: Record): Boolean {
+        private val DIFF_UTIL = object : DiffUtil.ItemCallback<Item>() {
+            override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
                 return false
             }
 
-            override fun areContentsTheSame(oldItem: Record, newItem: Record): Boolean {
+            override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
                 return false
             }
         }

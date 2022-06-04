@@ -6,7 +6,7 @@
     <data>
         <variable
             name="item"
-            type="com.yapp.android2.domain.Record" />
+            type="com.yapp.android2.domain.repository.record.Item" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{item.name}"
+            android:text="@{item.record.name}"
             android:layout_marginTop="14dp"
             tools:text="아메리카노"
             android:textSize="16sp"
@@ -31,7 +31,7 @@
             android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.format(@string/record_price, item.price)}"
+            android:text="@{String.format(@string/record_price, item.record.price)}"
             tools:text="00,000원"
             android:layout_marginBottom="8dp"
             android:textColor="@color/main_dark"
@@ -47,7 +47,8 @@
             android:textStyle="bold"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="8dp"
-            android:text="10번"
+            android:text="@{String.format(@string/record_count, item.totalCount)}"
+            tools:text="10번"
             android:textColor="@color/main_dark"
             android:textSize="26sp"
             app:layout_constraintBottom_toTopOf="@+id/divider"
