@@ -18,7 +18,7 @@
         tools:ignore="UnusedAttribute">
 
         <activity
-            android:name="com.best.friends.home.SavingItemEmptyActivity"
+            android:name="com.best.friends.home.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
