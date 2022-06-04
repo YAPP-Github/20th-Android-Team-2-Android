@@ -1,6 +1,7 @@
 package com.yapp.android2.data.di
 
 import com.yapp.android2.data.service.LoginService
+import com.yapp.android2.data.service.RecordService
 import com.yapp.android2.data.service.Service
 import dagger.Module
 import dagger.Provides
@@ -25,5 +26,13 @@ internal object ServiceModule {
     @Singleton
     fun provideRetrofit(): Retrofit {
         return Service.retroBuilder()
+    }
+
+    @Singleton
+    @Provides
+    fun providesRecordsService(
+        retrofit: Retrofit
+    ): RecordService {
+        return retrofit.create()
     }
 }

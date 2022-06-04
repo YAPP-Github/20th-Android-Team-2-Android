@@ -12,3 +12,13 @@ sealed interface ApiResponse<out T> {
 
 }
 
+data class TemporaryResponse<T>(
+    val data: T,
+    val message: String,
+    val statusCode: Int
+) {
+    val isSuccess: Boolean
+        get() {
+            return statusCode in 200..299
+        }
+}

@@ -8,7 +8,7 @@ data class Record(
     val productId: Int,
     val recordYmd: Date,
     private val resolution: String?
-) {
+): Entity {
     val promise: String
         get() = resolution.orEmpty().ifEmpty { "화이팅" }
 }
