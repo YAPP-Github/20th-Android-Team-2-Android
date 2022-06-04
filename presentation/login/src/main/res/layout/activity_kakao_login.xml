@@ -39,8 +39,8 @@
             android:textAppearance="@style/Body3Regular"
             android:textColor="@color/gray_4"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_best_friends"
-            app:layout_constraintStart_toStartOf="@+id/tv_best_friends"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_best_friends" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

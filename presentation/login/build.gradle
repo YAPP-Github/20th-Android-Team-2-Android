@@ -6,10 +6,16 @@ plugins {
 }
 
 android {
+    hilt {
+        enableAggregatingTask = true
+    }
+}
+
+android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 26
+        minSdk 23
         targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -29,6 +35,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -40,7 +50,16 @@ dependencies {
     implementation(coroutines)
 
     implementation deps.hilt.core
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     kapt deps.hilt.compiler
+
+    implementation deps.timber
+
+    implementation "com.kakao.sdk:v2-user:2.10.0"
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.1"
 
     // testing
     testImplementation(testDeps)
