@@ -6,6 +6,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
 
+    <!-- https://www.figma.com/file/SbR0McB7UHudksDHvoCAWH/%5BYAPP-20%EA%B8%B0%5D-Android-2?node-id=480%3A1414 -->
     <color name="color_primary">#FF8717</color>
     <color name="color_primary50">#80FF8717</color>
     <color name="color_sub">#A5C6FF</color>
