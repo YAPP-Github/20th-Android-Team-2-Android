@@ -13,12 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Android2Team"
+        android:theme="@style/Theme.BestFriends.NoActionBar"
         android:name=".BestFriendsApplication"
         tools:ignore="UnusedAttribute">
 
         <activity
-            android:name="com.best.friends.home.MainActivity"
+            android:name="com.best.friends.home.SavingItemEmptyActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
