@@ -1,6 +1,7 @@
 package com.yapp.android2.data.service.interceptor
 
 import android.content.SharedPreferences
+import com.yapp.android2.domain.key.AUTHORIZED
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
@@ -12,9 +13,5 @@ class HeaderInterceptor @Inject constructor(private val sharedPreferences: Share
 
 
         return chain.proceed(authorizedHeader.build())
-    }
-
-    companion object {
-        private const val AUTHORIZED = "Authorization"
     }
 }
