@@ -43,6 +43,9 @@ dependencies {
 
     implementation deps.network.core
     implementation deps.network.adapter
+    implementation deps.network.interceptor
+
+    implementation deps.timber
 
     // testing
     testImplementation(testDeps)
