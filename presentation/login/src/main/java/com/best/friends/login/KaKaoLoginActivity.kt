@@ -1,6 +1,8 @@
 package com.best.friends.login
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
@@ -27,7 +29,7 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
 
     private fun initKakaoSdk() = KakaoSdk.init(this, getString(R.string.kakao_native_app_key))
 
-    private fun setKakaoLogin(){
+    private fun setKakaoLogin() {
         val context = this
         binding.clKakaoLogin.setOnClickListener {
             lifecycleScope.launch {
@@ -37,21 +39,22 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         Timber.d("사용자가 명시적으로 카카오 로그인 취소")
                     } else {
-                        Timber.e("인증 에러 : $error")
+                        Timber.e("$error")
                     }
                 }
             }
         }
     }
 
-    private val callback:() -> Unit = {
+    private val callback: () -> Unit = {
         UserApiClient.instance.me { user, _ ->
-            if (user != null){
-                user.kakaoAccount?.profile?.nickname?.let { viewModel.setNickName(it) }
-                Timber.d("--- 카카오 로그인 유저 명 : ${viewModel.nickname.value} ---")
-                if(user.kakaoAccount?.emailNeedsAgreement == true){
-                    user.kakaoAccount?.email?.let { viewModel.setEmail(it) }
-                }
+            if (user != null) {
+                viewModel.setKakaoUser(
+                    user.kakaoAccount?.email ?: "",
+                    user.kakaoAccount?.profile?.nickname ?: "",
+                    user.id ?: 0
+                )
+                viewModel.user.value?.let { viewModel.addKakaoUser(it) }
             }
         }
     }

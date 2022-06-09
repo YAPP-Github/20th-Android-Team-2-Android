@@ -3,6 +3,7 @@ package com.yapp.android2.data.service
 import com.yapp.android2.data.service.convert.BestFriendResponseConvertFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 interface Service {
     companion object {
@@ -13,7 +14,7 @@ interface Service {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .client(getOkhttpClient())
-                .addConverterFactory(BestFriendResponseConvertFactory.create())
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
         }
 
