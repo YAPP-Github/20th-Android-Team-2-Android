@@ -7,4 +7,8 @@ import com.yapp.android2.domain.repository.Repository
 
 interface LoginRepository : Repository {
     suspend fun postLogin(request: LoginRequest, loginType: Login.Type): LoginResponse
+    fun saveAccessToken(token: String)
+    fun getAccessToken(): String
+    fun saveKakaoAccessToken(kakaoToken: String)
+    fun getKakaoAccessToken(): String
 }

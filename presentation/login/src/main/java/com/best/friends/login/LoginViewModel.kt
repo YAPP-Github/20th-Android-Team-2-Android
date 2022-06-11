@@ -22,6 +22,8 @@ class LoginViewModel @Inject constructor(
     var accessToken: LiveData<String> = _accessToken
     private var _kakaoAccessToken = MutableLiveData<String>()
     var kakaoAccessToken: LiveData<String> = _kakaoAccessToken
+    private val _isSuccess = MutableLiveData(false)
+    val isSuccess: LiveData<Boolean> = _isSuccess
 
     fun setKakaoUser(email: String, nickName: String, providerId: Long){
         val user = LoginRequest(
@@ -37,10 +39,17 @@ class LoginViewModel @Inject constructor(
             kotlin.runCatching {
                 loginUseCase.login(userData, loginType)
             }.onSuccess {
+                loginUseCase.saveAccessToken(requireNotNull(it.data.accessToken))
                 _accessToken.postValue(requireNotNull(it.data.accessToken))
+                _isSuccess.postValue(true)
             }.onFailure {
                 Timber.e("$it")
             }
         }
+    }
+
+    fun setKakaoAccessToken(token: String){
+        _kakaoAccessToken.value = token
+        loginUseCase.saveKakaoAccessToken(token)
     }
 }

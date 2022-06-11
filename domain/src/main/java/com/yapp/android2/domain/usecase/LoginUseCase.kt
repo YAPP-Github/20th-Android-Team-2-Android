@@ -14,4 +14,15 @@ class LoginUseCase @Inject constructor(
         return loginRepository.postLogin(request, loginType)
     }
 
+    fun saveAccessToken(token: String) {
+        loginRepository.saveAccessToken(token)
+    }
+
+    fun saveKakaoAccessToken(token: String){
+        loginRepository.saveKakaoAccessToken(token)
+    }
+
+    fun getAccessToken(): String = loginRepository.getAccessToken()
+
+    fun getKakaoAccessToken(): String = loginRepository.getKakaoAccessToken()
 }

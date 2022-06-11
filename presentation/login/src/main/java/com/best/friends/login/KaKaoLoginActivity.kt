@@ -1,8 +1,6 @@
 package com.best.friends.login
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
@@ -25,6 +23,7 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
 
         initKakaoSdk()
         setKakaoLogin()
+        isSuccessObserver()
     }
 
     private fun initKakaoSdk() = KakaoSdk.init(this, getString(R.string.kakao_native_app_key))
@@ -35,6 +34,7 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
             lifecycleScope.launch {
                 try {
                     val oAuthToken = UserApiClient.loginWithKakao(context, callback)
+                    viewModel.setKakaoAccessToken(oAuthToken.accessToken)
                 } catch (error: Throwable) {
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         Timber.d("사용자가 명시적으로 카카오 로그인 취소")
@@ -42,6 +42,14 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
                         Timber.e("$error")
                     }
                 }
+            }
+        }
+    }
+
+    private fun isSuccessObserver(){
+        viewModel.isSuccess.observe(this){
+            if(it){
+                // 메인 화면으로 이동
             }
         }
     }
