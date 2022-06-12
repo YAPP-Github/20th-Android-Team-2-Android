@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
     }
 }
 rootProject.name = "Android2Team"
@@ -21,4 +22,5 @@ include ':presentation:home'
 include ':core'
 include ':navigator'
 include ':presentation:example-second-screen'
+include ':presentation:login'
 include ':core-design-system'
