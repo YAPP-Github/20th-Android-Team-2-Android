@@ -18,10 +18,10 @@ class LoginViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val _user = MutableLiveData<LoginRequest>()
     val user: LiveData<LoginRequest> = _user
-    private var _accessToken = MutableLiveData<String>()
-    var accessToken: LiveData<String> = _accessToken
-    private var _kakaoAccessToken = MutableLiveData<String>()
-    var kakaoAccessToken: LiveData<String> = _kakaoAccessToken
+    private val _accessToken = MutableLiveData<String>()
+    val accessToken: LiveData<String> = _accessToken
+    private val _kakaoAccessToken = MutableLiveData<String>()
+    val kakaoAccessToken: LiveData<String> = _kakaoAccessToken
     private val _isSuccess = MutableLiveData(false)
     val isSuccess: LiveData<Boolean> = _isSuccess
 

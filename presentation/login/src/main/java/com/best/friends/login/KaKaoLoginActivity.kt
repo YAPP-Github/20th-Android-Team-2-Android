@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
+import com.best.friends.core.util.ToastUtil
 import com.best.friends.login.databinding.ActivityKakaoLoginBinding
-import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
@@ -21,24 +21,24 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initKakaoSdk()
         setKakaoLogin()
         isSuccessObserver()
     }
-
-    private fun initKakaoSdk() = KakaoSdk.init(this, getString(R.string.kakao_native_app_key))
 
     private fun setKakaoLogin() {
         val context = this
         binding.clKakaoLogin.setOnClickListener {
             lifecycleScope.launch {
                 try {
-                    val oAuthToken = UserApiClient.loginWithKakao(context, callback)
+                    val oAuthToken = UserApiClient.loginWithKakaoOrThrow(context)
+
                     viewModel.setKakaoAccessToken(oAuthToken.accessToken)
+                    registerUser()
                 } catch (error: Throwable) {
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         Timber.d("사용자가 명시적으로 카카오 로그인 취소")
                     } else {
+                        ToastUtil.showTextToast(context, "로그인에 실패하였습니다")
                         Timber.e("$error")
                     }
                 }
@@ -46,15 +46,7 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
         }
     }
 
-    private fun isSuccessObserver(){
-        viewModel.isSuccess.observe(this){
-            if(it){
-                // 메인 화면으로 이동
-            }
-        }
-    }
-
-    private val callback: () -> Unit = {
+    private fun registerUser() {
         UserApiClient.instance.me { user, _ ->
             if (user != null) {
                 viewModel.setKakaoUser(
@@ -63,6 +55,14 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
                     user.id ?: 0
                 )
                 viewModel.user.value?.let { viewModel.addKakaoUser(it) }
+            }
+        }
+    }
+
+    private fun isSuccessObserver() {
+        viewModel.isSuccess.observe(this) {
+            if (it) {
+                // 메인 화면으로 이동
             }
         }
     }

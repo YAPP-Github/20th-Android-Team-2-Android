@@ -9,7 +9,7 @@ internal fun createInterceptors(interceptors: List<Interceptor>): OkHttpClient {
         .addInterceptors(interceptors)
         .apply {
             hostnameVerifier { hostname, _ ->
-                hostname!!.contentEquals(Service.HOST_NAME)
+                hostname?.contentEquals(Service.HOST_NAME) == true
             }
         }
         .build()
