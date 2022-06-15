@@ -11,6 +11,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
+import org.joda.time.format.DateTimeParser
+import org.joda.time.format.DateTimePrinter
 import java.util.*
 import javax.inject.Inject
 
@@ -25,7 +30,7 @@ class RecordViewModel @Inject constructor(
                 name = "아이스크림",
                 price = 2000,
                 productId = 1,
-                recordYmd = Date(System.currentTimeMillis()),
+                recordYmd = Date(DateTime.parse("20220614", DateTimeFormat.forPattern("yyyyMMdd")).millis),
                 resolution = "안녕"
             ), 22
         ),
@@ -34,7 +39,7 @@ class RecordViewModel @Inject constructor(
                 name = "아이스크림",
                 price = 2000,
                 productId = 1,
-                recordYmd = Date(System.currentTimeMillis()),
+                recordYmd = Date(DateTime.parse("20220613", DateTimeFormat.forPattern("yyyyMMdd")).millis),
                 resolution = "안녕"
             ), 10
         ),
@@ -43,7 +48,7 @@ class RecordViewModel @Inject constructor(
                 name = "아이스크림",
                 price = 2000,
                 productId = 1,
-                recordYmd = Date(System.currentTimeMillis()),
+                recordYmd = Date(DateTime.parse("20220612", DateTimeFormat.forPattern("yyyyMMdd")).millis),
                 resolution = "안녕"
             ), 2
         ), Item(
@@ -51,7 +56,7 @@ class RecordViewModel @Inject constructor(
                 name = "아이스크림",
                 price = 2000,
                 productId = 1,
-                recordYmd = Date(System.currentTimeMillis()),
+                recordYmd = Date(DateTime.parse("20220611", DateTimeFormat.forPattern("yyyyMMdd")).millis),
                 resolution = "안녕"
             ), 4
         ), Item(
@@ -59,7 +64,7 @@ class RecordViewModel @Inject constructor(
                 name = "아이스크림",
                 price = 2000,
                 productId = 1,
-                recordYmd = Date(System.currentTimeMillis()),
+                recordYmd = Date(DateTime.parse("20220610", DateTimeFormat.forPattern("yyyyMMdd")).millis),
                 resolution = "안녕"
             ), 5
         )

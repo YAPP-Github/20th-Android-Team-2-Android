@@ -9,7 +9,7 @@ android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 21
+        minSdk 26
         targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -39,14 +39,16 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":navigator"))
     implementation(project(":domain"))
+    implementation(project(":core-design-system"))
 
     implementation(jetpackDeps)
     implementation(coroutines)
-//    implementation deps.calendarView
-    implementation 'com.prolificinteractive:material-calendarview:1.5.0'
 
     implementation deps.hilt.core
     kapt deps.hilt.compiler
+
+    implementation deps.jodaTime
+    implementation deps.calendar
 
     testImplementation(testDeps)
     androidTestImplementation(androidTestDeps)

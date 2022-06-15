@@ -1,10 +1,10 @@
-package com.yapp.android2.record
+package com.yapp.android2.record.adapter
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.yapp.android2.domain.Record
 import com.yapp.android2.domain.repository.record.Item
+import com.yapp.android2.record.RecordViewHolder
 
 class RecordAdapter : ListAdapter<Item, RecordViewHolder>(DIFF_UTIL) {
 

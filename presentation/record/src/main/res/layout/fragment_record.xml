@@ -49,22 +49,44 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/calendar"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/calendar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_total_price" />
 
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/calendar"
-            android:layout_width="0dp"
+        <ImageView
+            android:id="@+id/iv_prev_month"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:src="@drawable/icon_left_arrow"
+            app:layout_constraintBottom_toTopOf="@+id/calendar"
+            app:layout_constraintStart_toStartOf="@+id/calendar" />
+
+        <ImageView
+            android:id="@+id/iv_next_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_right_arrow"
+            app:layout_constraintBottom_toTopOf="@+id/calendar"
+            app:layout_constraintEnd_toEndOf="@+id/calendar" />
+
+        <com.kizitonwose.calendarview.CalendarView
+            android:id="@+id/calendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cv_dayViewResource="@layout/calendar_item"
+            app:cv_inDateStyle="allMonths"
+            app:cv_orientation="horizontal"
+            app:cv_outDateStyle="endOfRow"
+            app:cv_scrollMode="paged"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+            app:layout_constraintTop_toBottomOf="@+id/viewPager"
+            app:savingItems="@{viewModel.items}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
