@@ -26,7 +26,7 @@ internal class DayBind(private val savingRecords: List<Item>) : DayBinder<DayCon
         val savingDays = savingRecords.map { it.record.recordYmd }
 
         if(day.owner == DayOwner.THIS_MONTH) {
-            container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray4))
+            container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray5))
         } else {
             container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray2))
         }

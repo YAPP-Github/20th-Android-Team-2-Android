@@ -32,9 +32,6 @@ fun CalendarView.bindSavingItems(items: List<Item>?) {
     }
 
     dayBinder = DayBind.newInstance(items)
-    daySize = Size(context.dpToPx(50), context.dpToPx(50))
-    inDateStyle = InDateStyle.ALL_MONTHS
-    outDateStyle = OutDateStyle.END_OF_ROW
     setup(firstMonth, lastMonth, firstDayOfWeek)
     scrollToMonth(currentMonth)
 }

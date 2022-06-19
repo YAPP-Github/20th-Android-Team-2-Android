@@ -10,6 +10,8 @@ import com.best.friends.core.BaseFragment
 import com.yapp.android2.record.databinding.FragmentRecordBinding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.kizitonwose.calendarview.model.CalendarMonth
+import com.kizitonwose.calendarview.ui.MonthScrollListener
 import com.yapp.android2.record.adapter.RecordAdapter
 import com.yapp.android2.record.view.*
 import com.yapp.android2.record.view.DayBind
@@ -39,6 +41,7 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewInit()
+        binding.setListener()
         viewModel.setObserve()
         viewModel.fetchRecords()
 
@@ -52,6 +55,19 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
     private fun FragmentRecordBinding.viewInit() {
 //        viewPager.adapter = recordAdapter
 
+    }
+
+    private fun FragmentRecordBinding.setListener() {
+        ivNextMonth.setOnClickListener {  }
+
+        ivPrevMonth.setOnClickListener {  }
+
+        calendar.monthScrollListener = object : MonthScrollListener {
+            override fun invoke(calendar: CalendarMonth) {
+                calendarTitle.text = getString(R.string.calendar_title, calendar.yearMonth.year, calendar.yearMonth.month.value)
+            }
+
+        }
     }
 
     private fun RecordViewModel.setObserve() {

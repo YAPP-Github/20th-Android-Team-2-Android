@@ -1,10 +1,12 @@
 package com.best.friends.core.ui
 
 import android.content.Context
+import android.util.TypedValue
 import kotlin.math.round
 import kotlin.math.roundToInt
 
-fun Context.dpToPx(value: Int): Int {
-    val density = resources.displayMetrics.density
-    return round(value.toFloat() * density).roundToInt()
-}
+fun dpToPx(dp: Int, context: Context): Int =
+    TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(),
+        context.resources.displayMetrics
+    ).toInt()
