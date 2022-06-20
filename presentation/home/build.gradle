@@ -51,6 +51,9 @@ dependencies {
     implementation(jetpackDeps)
     implementation(coroutines)
 
+    implementation platform(deps.firebaseBom)
+    implementation(firebaseDeps)
+
     implementation deps.hilt.core
     kapt deps.hilt.compiler
 

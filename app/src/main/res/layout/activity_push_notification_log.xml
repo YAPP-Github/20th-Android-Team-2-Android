@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:text="FCM Title"
+            android:textAppearance="@style/Typography.H2.Bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title_content"
+            android:layout_width="0dp"
+            android:layout_height="152dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="32dp"
+            android:textAppearance="@style/Typography.Body2.Regular"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="절약과 친해지는 중!" />
+
+        <TextView
+            android:id="@+id/tv_body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:text="FCM Body"
+            android:textAppearance="@style/Typography.H2.Bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_content"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_body_content"
+            android:layout_width="0dp"
+            android:layout_height="152dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="32dp"
+            android:textAppearance="@style/Typography.Body2.Regular"
+            app:layout_constraintTop_toBottomOf="@id/tv_body"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="절약 리스트를 추가해보세요!" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
