@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
-import com.yapp.android2.domain.entity.Login
 import com.yapp.android2.domain.entity.LoginRequest
 import com.yapp.android2.domain.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,10 +33,10 @@ class LoginViewModel @Inject constructor(
         _user.value = user
     }
 
-    fun addKakaoUser(userData: LoginRequest, loginType: Login.Type = Login.Type.KAKAO){
+    fun addKakaoUser(userData: LoginRequest){
         viewModelScope.launch {
             kotlin.runCatching {
-                loginUseCase.login(userData, loginType)
+                loginUseCase.login(userData)
             }.onSuccess {
                 loginUseCase.saveAccessToken(requireNotNull(it.data.accessToken))
                 _accessToken.postValue(requireNotNull(it.data.accessToken))
