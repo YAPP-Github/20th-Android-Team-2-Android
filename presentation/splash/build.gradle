@@ -1,25 +1,25 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'kotlin-parcelize'
+    id "kotlin-kapt"
     id 'dagger.hilt.android.plugin'
-    id 'com.google.gms.google-services'
-    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    hilt {
+        enableAggregatingTask = true
+    }
 }
 
 android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.yapp.android2"
         minSdk 23
         targetSdk 32
-        versionCode 1
-        versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
@@ -35,6 +35,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures {
         dataBinding true
     }
@@ -42,33 +43,21 @@ android {
 
 dependencies {
 
-    //modules
-    implementation(project(":domain"))
-    implementation(project(":data"))
     implementation(project(":core"))
+    implementation(project(":core-design-system"))
     implementation(project(":navigator"))
-    implementation(project(":presentation:home"))
-    implementation(project(":presentation:example-second-screen"))
-    implementation(project(":presentation:login"))
-    implementation(project(":presentation:splash"))
+    implementation(project(":domain"))
 
     implementation(jetpackDeps)
     implementation(coroutines)
 
-    implementation platform(deps.firebaseBom)
-    implementation(firebaseDeps)
-
     implementation deps.hilt.core
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     kapt deps.hilt.compiler
 
-    implementation deps.glide.core
-    implementation deps.glide.okhttp
-    kapt deps.glide.compiler
-
     implementation deps.timber
-    implementation deps.gson
-
-    implementation "com.kakao.sdk:v2-user:2.10.0"
 
     // testing
     testImplementation(testDeps)
