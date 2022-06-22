@@ -34,6 +34,7 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
 
                     viewModel.setKakaoAccessToken(oAuthToken.accessToken)
                     registerUser()
+
                 } catch (error: Throwable) {
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         Timber.d("사용자가 명시적으로 카카오 로그인 취소")
