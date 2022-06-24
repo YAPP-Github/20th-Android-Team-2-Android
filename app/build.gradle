@@ -48,7 +48,6 @@ dependencies {
     implementation(project(":core"))
     implementation(project(":navigator"))
     implementation(project(":presentation:home"))
-    implementation(project(":presentation:example-second-screen"))
     implementation(project(":presentation:login"))
     implementation(project(":presentation:splash"))
 
