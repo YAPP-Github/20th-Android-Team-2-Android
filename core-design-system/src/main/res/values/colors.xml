@@ -23,4 +23,6 @@
     <color name="gray4">#A6A6A6</color>
     <color name="gray5">#252525</color>
 
+    <color name="transparent">#00000000</color>
+
 </resources>

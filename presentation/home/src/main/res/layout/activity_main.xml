@@ -9,48 +9,38 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <ImageView
-            android:id="@+id/iv_notifications"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:padding="6dp"
-            android:layout_marginEnd="12dp"
-            app:srcCompat="@drawable/icon_notifications"
-            app:layout_constraintTop_toTopOf="@id/iv_settings"
-            app:layout_constraintEnd_toStartOf="@id/iv_settings"
-            app:layout_constraintBottom_toBottomOf="@id/iv_settings" />
-
-        <ImageView
-            android:id="@+id/iv_settings"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:padding="6dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="16dp"
-            app:srcCompat="@drawable/icon_settings"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_pager"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="6dp"
-            app:layout_constraintTop_toBottomOf="@id/iv_settings"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tab_layout"
+        <androidx.cardview.widget.CardView
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginBottom="30dp"
             android:layout_marginHorizontal="70dp"
-            android:elevation="10dp"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="100dp"
+            app:cardBackgroundColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:tabBackground="@color/white"
+                app:tabIndicator="@null"
+                app:tabRippleColor="@color/transparent"
+                app:tabTextAppearance="@style/Typography.Calender3.Regular" />
+
+        </androidx.cardview.widget.CardView>
 
         <include
             android:id="@+id/empty_view"
@@ -58,10 +48,11 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/iv_settings"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

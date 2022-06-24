@@ -1,11 +1,11 @@
 package com.best.friends.home
 
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.best.friends.core.BaseActivity
-import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.home.databinding.ActivityMainBinding
 import com.best.friends.home.databinding.LayoutCustomTabBinding
 import com.google.android.material.tabs.TabLayout
@@ -21,25 +21,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initView()
         setupViewPager()
-    }
-
-    private fun initView() {
-        binding.ivNotifications.setOnSingleClickListener {
-            // TODO 알림 화면으로 이동
-        }
-
-        binding.ivSettings.setOnSingleClickListener {
-            // TODO 설정 화면으로 이동
-        }
     }
 
     private fun setupViewPager() {
         binding.viewPager.adapter = fragmentStateAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             val tabBinding = LayoutCustomTabBinding.inflate(layoutInflater)
-            tabBinding.ivIcon.setImageResource(designR.drawable.icon_home_inactive)
+            val icon = fragmentStateAdapter.getTabUnSelectedResource(position)
+
+            tabBinding.ivIcon.setImageDrawable(icon)
             tabBinding.tvTitle.text = fragmentStateAdapter.getTabTitle(position)
             tab.customView = tabBinding.root
         }.attach()
@@ -47,31 +38,30 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.tabLayout.addOnTabSelectedListener(object : AbstractTabSelectedListener() {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 tab.customView?.let { view ->
-                    val position: Int = tab.position
-                    val tabBinding = LayoutCustomTabBinding.bind(view)
-                    val textColor = ContextCompat.getColor(view.context, designR.color.gray4)
-                    val drawable = fragmentStateAdapter.getTabSelectedResource(position)
+                    val textColor =
+                        ContextCompat.getColor(view.context, designR.color.color_primary)
+                    val drawable = fragmentStateAdapter.getTabSelectedResource(tab.position)
+                    val tvTitle = view.findViewById<TextView>(R.id.tv_title)
+                    val ivIcon = view.findViewById<ImageView>(R.id.iv_icon)
 
-                    tabBinding.tvTitle.setTextColor(textColor)
-                    tabBinding.ivIcon.setImageDrawable(drawable)
-
-                    view.findViewById<TextView>(R.id.tv_title).setTextColor(textColor)
+                    tvTitle.setTextColor(textColor)
+                    ivIcon.setImageDrawable(drawable)
                 }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
                 tab.customView?.let { view ->
-                    val position: Int = tab.position
-                    val tabBinding = LayoutCustomTabBinding.bind(view)
                     val textColor = ContextCompat.getColor(view.context, designR.color.gray4)
-                    val drawable = fragmentStateAdapter.getTabUnSelectedResource(position)
+                    val drawable = fragmentStateAdapter.getTabUnSelectedResource(tab.position)
+                    val tvTitle = view.findViewById<TextView>(R.id.tv_title)
+                    val ivIcon = view.findViewById<ImageView>(R.id.iv_icon)
 
-                    tabBinding.tvTitle.setTextColor(textColor)
-                    tabBinding.ivIcon.setImageDrawable(drawable)
-
-                    view.findViewById<TextView>(R.id.tv_title).setTextColor(textColor)
+                    tvTitle.setTextColor(textColor)
+                    ivIcon.setImageDrawable(drawable)
                 }
             }
         })
+
+        binding.tabLayout.getTabAt(0)?.select()
     }
 }

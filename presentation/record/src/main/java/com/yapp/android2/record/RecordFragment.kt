@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.best.friends.core.BaseFragment
+import com.best.friends.core.setOnSingleClickListener
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.MonthScrollListener
 import com.kizitonwose.calendarview.utils.next
@@ -69,13 +70,13 @@ class RecordFragment :
     }
 
     private fun FragmentRecordBinding.setListener() {
-        ivNextMonth.setOnClickListener {
+        ivNextMonth.setOnSingleClickListener {
             calendar.findFirstVisibleMonth()?.let {
                 calendar.smoothScrollToMonth(it.yearMonth.next)
             }
         }
 
-        ivPrevMonth.setOnClickListener {
+        ivPrevMonth.setOnSingleClickListener {
             calendar.findFirstVisibleMonth()?.let {
                 calendar.smoothScrollToMonth(it.yearMonth.previous)
             }
@@ -89,7 +90,6 @@ class RecordFragment :
                     calendar.yearMonth.month.value
                 )
             }
-
         }
     }
 
@@ -99,6 +99,12 @@ class RecordFragment :
                 recordAdapter.submitList(it)
             }
         }
+    }
 
+    companion object {
+
+        fun newInstance(): RecordFragment {
+            return RecordFragment()
+        }
     }
 }
