@@ -25,6 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun setupViewPager() {
+        binding.viewPager.isUserInputEnabled = false
         binding.viewPager.adapter = fragmentStateAdapter
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             val tabBinding = LayoutCustomTabBinding.inflate(layoutInflater)
@@ -36,32 +37,44 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         }.attach()
 
         binding.tabLayout.addOnTabSelectedListener(object : AbstractTabSelectedListener() {
-            override fun onTabSelected(tab: TabLayout.Tab) {
-                tab.customView?.let { view ->
-                    val textColor =
-                        ContextCompat.getColor(view.context, designR.color.color_primary)
-                    val drawable = fragmentStateAdapter.getTabSelectedResource(tab.position)
-                    val tvTitle = view.findViewById<TextView>(R.id.tv_title)
-                    val ivIcon = view.findViewById<ImageView>(R.id.iv_icon)
+            override fun onTabReselected(tab: TabLayout.Tab) {
+                setTabSelected(tab)
+            }
 
-                    tvTitle.setTextColor(textColor)
-                    ivIcon.setImageDrawable(drawable)
-                }
+            override fun onTabSelected(tab: TabLayout.Tab) {
+                setTabSelected(tab)
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {
-                tab.customView?.let { view ->
-                    val textColor = ContextCompat.getColor(view.context, designR.color.gray4)
-                    val drawable = fragmentStateAdapter.getTabUnSelectedResource(tab.position)
-                    val tvTitle = view.findViewById<TextView>(R.id.tv_title)
-                    val ivIcon = view.findViewById<ImageView>(R.id.iv_icon)
-
-                    tvTitle.setTextColor(textColor)
-                    ivIcon.setImageDrawable(drawable)
-                }
+                setTabUnSelected(tab)
             }
         })
 
-        binding.tabLayout.getTabAt(0)?.select()
+        binding.tabLayout.selectTab(binding.tabLayout.getTabAt(0))
+    }
+
+    private fun setTabSelected(tab: TabLayout.Tab) {
+        tab.customView?.let { view ->
+            val textColor =
+                ContextCompat.getColor(view.context, designR.color.color_primary)
+            val drawable = fragmentStateAdapter.getTabSelectedResource(tab.position)
+            val tvTitle = view.findViewById<TextView>(R.id.tv_title)
+            val ivIcon = view.findViewById<ImageView>(R.id.iv_icon)
+
+            tvTitle.setTextColor(textColor)
+            ivIcon.setImageDrawable(drawable)
+        }
+    }
+
+    private fun setTabUnSelected(tab: TabLayout.Tab) {
+        tab.customView?.let { view ->
+            val textColor = ContextCompat.getColor(view.context, designR.color.gray4)
+            val drawable = fragmentStateAdapter.getTabUnSelectedResource(tab.position)
+            val tvTitle = view.findViewById<TextView>(R.id.tv_title)
+            val ivIcon = view.findViewById<ImageView>(R.id.iv_icon)
+
+            tvTitle.setTextColor(textColor)
+            ivIcon.setImageDrawable(drawable)
+        }
     }
 }
