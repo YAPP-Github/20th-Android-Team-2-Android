@@ -13,15 +13,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
-import org.joda.time.format.DateTimeFormatter
-import org.joda.time.format.DateTimeParser
-import org.joda.time.format.DateTimePrinter
 import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class RecordViewModel @Inject constructor(
-    private val getRecordUseCase: RecordUseCase
+    private val getRecordUseCase: GetRecordUseCase
 ) : BaseViewModel() {
 
     private val dummy = listOf(
@@ -78,7 +75,6 @@ class RecordViewModel @Inject constructor(
 
     fun fetchRecords() {
         recordJob?.cancel()
-        items.value.sumOf { it.record.price }
 
         recordJob = viewModelScope.launch {
             try {

@@ -1,31 +1,35 @@
 package com.yapp.android2.record
 
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import com.best.friends.core.BaseFragment
-import com.yapp.android2.record.databinding.FragmentRecordBinding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.viewpager2.widget.ViewPager2
+import com.best.friends.core.BaseFragment
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.MonthScrollListener
+import com.kizitonwose.calendarview.utils.next
+import com.kizitonwose.calendarview.utils.previous
 import com.yapp.android2.record.adapter.RecordAdapter
-import com.yapp.android2.record.view.*
-import com.yapp.android2.record.view.DayBind
-import com.yapp.android2.record.view.firstDayOfWeek
-import com.yapp.android2.record.view.firstMonth
-import com.yapp.android2.record.view.lastMonth
+import com.yapp.android2.record.databinding.FragmentRecordBinding
+import com.yapp.android2.record.view.setOffsetTransformer
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.layout.fragment_record) {
+class RecordFragment :
+    BaseFragment<FragmentRecordBinding, RecordViewModel>(R.layout.fragment_record) {
 
     override val viewModel: RecordViewModel by viewModels()
     private val recordAdapter = RecordAdapter()
+    private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+            super.onPageSelected(position)
+            viewModel.fetchRecords()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,30 +56,49 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
 
     }
 
-    private fun FragmentRecordBinding.viewInit() {
-//        viewPager.adapter = recordAdapter
+    override fun onDestroyView() {
+        binding.viewPager.unregisterOnPageChangeCallback(pageChangeCallback)
+        super.onDestroyView()
+    }
 
+    private fun FragmentRecordBinding.viewInit() {
+        viewPager.adapter = recordAdapter
+        viewPager.offscreenPageLimit = 3
+        viewPager.setOffsetTransformer()
+        viewPager.registerOnPageChangeCallback(pageChangeCallback)
     }
 
     private fun FragmentRecordBinding.setListener() {
-        ivNextMonth.setOnClickListener {  }
+        ivNextMonth.setOnClickListener {
+            calendar.findFirstVisibleMonth()?.let {
+                calendar.smoothScrollToMonth(it.yearMonth.next)
+            }
+        }
 
-        ivPrevMonth.setOnClickListener {  }
+        ivPrevMonth.setOnClickListener {
+            calendar.findFirstVisibleMonth()?.let {
+                calendar.smoothScrollToMonth(it.yearMonth.previous)
+            }
+        }
 
         calendar.monthScrollListener = object : MonthScrollListener {
             override fun invoke(calendar: CalendarMonth) {
-                calendarTitle.text = getString(R.string.calendar_title, calendar.yearMonth.year, calendar.yearMonth.month.value)
+                calendarTitle.text = getString(
+                    R.string.calendar_title,
+                    calendar.yearMonth.year,
+                    calendar.yearMonth.month.value
+                )
             }
 
         }
     }
 
     private fun RecordViewModel.setObserve() {
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            items.collect {
-//                recordAdapter.submitList(it)
-//            }
-//        }
+        viewLifecycleOwner.lifecycleScope.launch {
+            items.collect {
+                recordAdapter.submitList(it)
+            }
+        }
 
     }
 }

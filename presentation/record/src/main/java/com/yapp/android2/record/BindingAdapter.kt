@@ -21,7 +21,7 @@ fun TextView.bindTotalSaving(items: List<Item>?) {
     if(items != null) {
         val totalSaving = items.sumOf { it.record.price }
 
-        text = context.getString(R.string.record_title, NumberFormat.getInstance(Locale.KOREAN).format(totalSaving))
+        text = context.getString(R.string.record_total_price, NumberFormat.getInstance(Locale.KOREAN).format(totalSaving))
     }
 }
 

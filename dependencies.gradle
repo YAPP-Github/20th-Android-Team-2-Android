@@ -73,7 +73,7 @@ ext {
             ],
             "inject"                       : "javax.inject:javax.inject:1",
             "jodaTime"                     : "joda-time:joda-time:${versions.jodaTime}",
-            "calendar"                     : "com.github.kizitonwose:CalendarView:${versions.calendar}"
+            "calendar"                     : "com.github.kizitonwose:CalendarView:${versions.calendar}",
             "kakao"                        : "com.kakao.sdk:v2-user:${versions.kakao}",
     ]
 

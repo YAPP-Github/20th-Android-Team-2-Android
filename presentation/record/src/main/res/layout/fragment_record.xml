@@ -20,14 +20,16 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_corner15_bg_ff8717"
             android:includeFontPadding="false"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="18dp"
             android:text="@{String.format(@string/record_title, viewModel.items.size)}"
+            android:textAppearance="@style/Typography.Pill.Bold"
             android:textColor="@android:color/white"
-            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_total_price"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed"
             tools:text="총 N번의 절약" />
 
         <TextView
@@ -36,8 +38,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:includeFontPadding="false"
-            android:textColor="@color/main_dark"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@color/gray5"
             android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/calendar_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_total_saving"
@@ -46,12 +50,12 @@
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="16dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             android:orientation="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/calendar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_total_price" />
@@ -61,43 +65,57 @@
             android:id="@+id/iv_prev_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:src="@drawable/icon_left_arrow"
+            android:layout_marginTop="32dp"
             android:padding="10dp"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintStart_toStartOf="@+id/calendar" />
+            android:src="@drawable/icon_left_arrow"
+            app:layout_constraintStart_toStartOf="@+id/calendar"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
         <TextView
             android:id="@+id/calendar_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:gravity="center"
             android:textAppearance="@style/Typography.Calender1.Bold"
-            android:textColor="@color/main_dark"
+            android:textColor="@color/gray5"
             app:layout_constraintBottom_toBottomOf="@+id/iv_prev_month"
             app:layout_constraintEnd_toStartOf="@+id/iv_next_month"
             app:layout_constraintStart_toEndOf="@+id/iv_prev_month"
-            app:layout_constraintTop_toTopOf="@+id/iv_prev_month"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager"
             tools:text="2022년 5월" />
 
         <ImageView
             android:id="@+id/iv_next_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="32dp"
             android:padding="10dp"
             android:src="@drawable/icon_right_arrow"
-            app:layout_constraintBottom_toTopOf="@+id/divider"
-            app:layout_constraintEnd_toEndOf="@+id/calendar" />
+            app:layout_constraintEnd_toEndOf="@+id/calendar"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
         <View
             android:id="@+id/divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
+            android:layout_marginTop="17dp"
             android:background="@color/gray3"
-            app:layout_constraintBottom_toTopOf="@+id/calendar"
+            app:layout_constraintBottom_toTopOf="@+id/legendLayout"
             app:layout_constraintEnd_toEndOf="@+id/calendar"
-            app:layout_constraintStart_toStartOf="@+id/calendar" />
+            app:layout_constraintStart_toStartOf="@+id/calendar"
+            app:layout_constraintTop_toBottomOf="@+id/calendar_title"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <include
+            android:id="@+id/legendLayout"
+            layout="@layout/calendar_header_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            app:layout_constraintEnd_toEndOf="@+id/divider"
+            app:layout_constraintStart_toStartOf="@+id/divider"
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
 
 
         <com.kizitonwose.calendarview.CalendarView
@@ -110,10 +128,9 @@
             app:cv_orientation="horizontal"
             app:cv_outDateStyle="endOfRow"
             app:cv_scrollMode="paged"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewPager"
+            app:layout_constraintTop_toBottomOf="@+id/legendLayout"
             app:savingItems="@{viewModel.items}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

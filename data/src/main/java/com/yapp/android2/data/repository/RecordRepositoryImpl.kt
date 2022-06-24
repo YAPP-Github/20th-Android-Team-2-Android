@@ -11,7 +11,7 @@ class RecordRepositoryImpl @Inject constructor(
 
     override suspend fun fetchRecords(recordMM: String): List<Item> {
 
-        val totalCount = recordRemoteDataSource.fetchRecords(recordMM).groupBy { record -> record.productId }
+        val totalCount = recordRemoteDataSource.fetchRecords(recordMM).groupBy { record -> record.name }
 
         return recordRemoteDataSource.fetchRecords(recordMM).map {
             Item(it, totalCount = totalCount.values.flatten().size)

@@ -27,6 +27,12 @@ internal object ServiceModule {
         retrofit: Retrofit
     ): LoginService = retrofit.create()
 
+    @Singleton
+    @Provides
+    fun providesRecordService(
+        retrofit: Retrofit
+    ): RecordService = retrofit.create()
+
 
     @Provides
     @Singleton
