@@ -49,6 +49,8 @@ dependencies {
     implementation(project(":navigator"))
     implementation(project(":presentation:home"))
     implementation(project(":presentation:example-second-screen"))
+    implementation(project(":presentation:login"))
+    implementation(project(":presentation:splash"))
 
     implementation(jetpackDeps)
     implementation(coroutines)
@@ -65,6 +67,8 @@ dependencies {
 
     implementation deps.timber
     implementation deps.gson
+
+    implementation "com.kakao.sdk:v2-user:2.10.0"
 
     // testing
     testImplementation(testDeps)

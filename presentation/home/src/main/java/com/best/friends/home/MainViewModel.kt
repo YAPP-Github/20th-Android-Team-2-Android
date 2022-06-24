@@ -14,21 +14,4 @@ class MainViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase
 ) : BaseViewModel() {
 
-
-    //FIXME just temporary code
-    fun login(snsType: Login.Type = Login.Type.KAKAO) {
-        viewModelScope.launch {
-            val response = loginUseCase.execute(LoginUseCase.Params(snsType))
-
-            when(response) {
-                is ApiResponse.Success -> {
-
-                }
-
-                is ApiResponse.Error -> {
-
-                }
-            }
-        }
-    }
 }
