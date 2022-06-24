@@ -2,6 +2,7 @@ package com.yapp.android2.data.di
 
 import android.content.Context
 import com.yapp.android2.data.service.LoginService
+import com.yapp.android2.data.service.ProductsService
 import com.yapp.android2.data.service.RecordService
 import com.yapp.android2.data.service.Service
 import com.yapp.android2.data.service.interceptor.HeaderInterceptor
@@ -32,6 +33,12 @@ internal object ServiceModule {
     fun providesRecordService(
         retrofit: Retrofit
     ): RecordService = retrofit.create()
+
+    @Singleton
+    @Provides
+    fun providesProductsService(
+        retrofit: Retrofit
+    ): ProductsService = retrofit.create()
 
 
     @Provides

@@ -6,7 +6,9 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
-class HeaderInterceptor @Inject constructor(private val sharedPreferences: SharedPreferences) : Interceptor {
+class HeaderInterceptor @Inject constructor(
+    private val sharedPreferences: SharedPreferences
+) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val authorizedHeader = chain.request().newBuilder()
             .addHeader(AUTHORIZED, sharedPreferences.getString(AUTHORIZED,"").orEmpty())

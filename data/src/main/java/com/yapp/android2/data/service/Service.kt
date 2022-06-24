@@ -8,7 +8,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 interface Service {
     companion object {
         private const val BASE_URL = "https://jeol-chin.com"
-        const val HOST_NAME = "61.79.96.183"
 
         internal fun retroBuilder(vararg interceptor: Interceptor): Retrofit {
             return Retrofit.Builder()
