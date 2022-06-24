@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
+import com.best.friends.navigator.HomeNavigator
 import com.best.friends.navigator.LoginNavigator
 import com.best.friends.splash.databinding.ActivitySplashBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,16 +21,19 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     @Inject
     lateinit var loginNavigator: LoginNavigator
 
+    @Inject
+    lateinit var homeNavigator: HomeNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch(Dispatchers.Main) {
+        lifecycleScope.launch() {
             delay(2000)
 
-            if (viewModel.isAlreadyUser()){
+            if (viewModel.isAlreadyUser()) {
                 //메인 화면으로 이동
-            }
-            else {
+                startActivity(homeNavigator.intent(this@SplashActivity))
+            } else {
                 startActivity(loginNavigator.intent(this@SplashActivity))
             }
             finish()

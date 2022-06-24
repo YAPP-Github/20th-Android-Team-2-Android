@@ -31,6 +31,6 @@ internal abstract class RemoteModule {
     @Binds
     @Singleton
     abstract fun bindProductsRemoteDataSource(
-        dataSource: ProductsRemoteDataSource
-    ): ProductsRemoteDataSourceImpl
+        dataSource: ProductsRemoteDataSourceImpl
+    ): ProductsRemoteDataSource
 }

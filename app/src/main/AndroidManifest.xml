@@ -47,6 +47,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name="com.best.friends.home.MainActivity"
+            android:exported="true"/>
+
     </application>
 
 </manifest>
