@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url "https://jitpack.io" }
         maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
     }
 }
@@ -24,4 +25,5 @@ include ':navigator'
 include ':presentation:example-second-screen'
 include ':presentation:login'
 include ':core-design-system'
+include ':presentation:record'
 include ':presentation:splash'

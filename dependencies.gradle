@@ -9,13 +9,15 @@ ext {
             "recyclerView"          : "1.2.1",
             "timber"                : "5.0.1",
             "coroutines"            : "1.6.1",
+            "calendar"              : "1.0.4",
             "hilt"                  : "2.42",
             "glide"                 : "4.13.2",
             "gson"                  : "2.9.0",
             "lifecycle"             : "2.4.1",
-            "playServices"         : "4.3.10",
+            "playServices"          : "4.3.10",
             "junit"                 : "4.13.2",
             "junitext"              : "1.1.3",
+            "jodaTime"              : "2.10.6",
             "espresso"              : "3.4.0",
             "interceptor"           : "4.9.3",
             "kakao"                 : "2.10.0"
@@ -70,6 +72,8 @@ ext {
                     "interceptor"          : "com.squareup.okhttp3:logging-interceptor:${versions.interceptor}"
             ],
             "inject"                       : "javax.inject:javax.inject:1",
+            "jodaTime"                     : "joda-time:joda-time:${versions.jodaTime}",
+            "calendar"                     : "com.github.kizitonwose:CalendarView:${versions.calendar}",
             "kakao"                        : "com.kakao.sdk:v2-user:${versions.kakao}",
     ]
 

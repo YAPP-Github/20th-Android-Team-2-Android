@@ -2,6 +2,7 @@ package com.yapp.android2.data.di
 
 import android.content.Context
 import com.yapp.android2.data.service.LoginService
+import com.yapp.android2.data.service.RecordService
 import com.yapp.android2.data.service.Service
 import com.yapp.android2.data.service.interceptor.HeaderInterceptor
 import com.yapp.android2.domain.key.SHARED_PREFERENCE_KEY
@@ -25,6 +26,12 @@ internal object ServiceModule {
     fun providesLoginService(
         retrofit: Retrofit
     ): LoginService = retrofit.create()
+
+    @Singleton
+    @Provides
+    fun providesRecordService(
+        retrofit: Retrofit
+    ): RecordService = retrofit.create()
 
 
     @Provides

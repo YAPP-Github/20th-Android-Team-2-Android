@@ -6,16 +6,10 @@ plugins {
 }
 
 android {
-    hilt {
-        enableAggregatingTask = true
-    }
-}
-
-android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 23
+        minSdk 26
         targetSdk 32
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,7 +29,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
     buildFeatures {
         dataBinding true
     }
@@ -44,10 +37,9 @@ android {
 dependencies {
 
     implementation(project(":core"))
-    implementation(project(":core-design-system"))
     implementation(project(":navigator"))
     implementation(project(":domain"))
-    implementation(project(":presentation:record"))
+    implementation(project(":core-design-system"))
 
     implementation(jetpackDeps)
     implementation(coroutines)
@@ -55,7 +47,9 @@ dependencies {
     implementation deps.hilt.core
     kapt deps.hilt.compiler
 
-    // testing
+    implementation deps.jodaTime
+    implementation deps.calendar
+
     testImplementation(testDeps)
     androidTestImplementation(androidTestDeps)
 }
