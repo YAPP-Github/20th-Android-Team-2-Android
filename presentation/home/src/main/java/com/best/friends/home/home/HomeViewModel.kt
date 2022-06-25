@@ -4,6 +4,8 @@ import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
 import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.repository.ProductsRepository
+import com.yapp.android2.domain.repository.login.LoginRepository
+import com.yapp.android2.domain.repository.record.RecordRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,7 +17,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val productsRepository: ProductsRepository
+    private val productsRepository: ProductsRepository,
+    private val recordRepository: RecordRepository,
+    private val loginRepository: LoginRepository
 ) : BaseViewModel() {
 
     private val _state = MutableStateFlow(State())
@@ -43,6 +47,18 @@ class HomeViewModel @Inject constructor(
             }
 
             _loading.value = false
+        }
+    }
+
+    fun checkSavingItem(product: Product) {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                val user = loginRepository.getUser()
+                recordRepository.updateRecords(product, user)
+            }.onFailure { throwable ->
+                Timber.e("--- HomeViewModel error: ${throwable.message}")
+                sendErrorMessage(throwable.message)
+            }
         }
     }
 

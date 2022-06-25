@@ -2,6 +2,7 @@ package com.best.friends.home.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,7 +17,8 @@ import com.yapp.android2.domain.entity.Product
  */
 internal class SavingsListAdapter(
     private val onItemClick: (product: Product) -> Unit,
-    private val onAddClick: () -> Unit
+    private val onAddClick: () -> Unit,
+    private val onItemChecked: (product: Product) -> Unit
 ) : ListAdapter<Savings, AbstractViewHolder<Savings>>(CALLBACK) {
 
     enum class ViewType {
@@ -37,7 +39,8 @@ internal class SavingsListAdapter(
                     parent,
                     false
                 ),
-                onItemClick = onItemClick
+                onItemClick = onItemClick,
+                onItemChecked = onItemChecked
             )
             ViewType.ADD -> SavingAddViewHolder(
                 binding = LayoutSavingAddBinding.inflate(
@@ -66,15 +69,21 @@ internal class SavingsListAdapter(
 
     class SavingsItemViewHolder(
         private val binding: LayoutSavingItemBinding,
-        private val onItemClick: (product: Product) -> Unit
+        private val onItemClick: (product: Product) -> Unit,
+        private val onItemChecked: (product: Product) -> Unit
     ) : AbstractViewHolder<Savings.Item>(binding.root) {
 
         override fun bind(data: Savings.Item) {
             val product = data.product
+            binding.product = product
             binding.root.setOnSingleClickListener {
                 onItemClick.invoke(product)
             }
-            binding.product = product
+            binding.checkbox.setOnCheckedChangeListener(null)
+            binding.checkbox.isChecked = (product.checked == true)
+            binding.checkbox.setOnCheckedChangeListener { _, _ ->
+                onItemChecked.invoke(product)
+            }
             binding.executePendingBindings()
         }
     }

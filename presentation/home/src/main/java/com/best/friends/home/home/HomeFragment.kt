@@ -40,7 +40,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     private val adapter by lazy {
         SavingsListAdapter(
             onItemClick = { product -> startSavingUpdateActivity(product) },
-            onAddClick = { startSavingAddActivity() }
+            onAddClick = { startSavingAddActivity() },
+            onItemChecked = { product -> viewModel.checkSavingItem(product) }
         )
     }
 
