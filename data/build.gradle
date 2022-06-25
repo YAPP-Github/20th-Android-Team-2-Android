@@ -50,4 +50,8 @@ dependencies {
     // testing
     testImplementation(testDeps)
     androidTestImplementation(androidTestDeps)
+
+    // chucker
+    debugImplementation deps.chucker.library
+    releaseImplementation deps.chucker.noOp
 }
