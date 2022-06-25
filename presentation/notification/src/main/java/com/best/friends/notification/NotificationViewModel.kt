@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
-import com.best.friends.core.util.ToastUtil
 import com.yapp.android2.domain.entity.NotificationRequest
 import com.yapp.android2.domain.usecase.NotificationUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

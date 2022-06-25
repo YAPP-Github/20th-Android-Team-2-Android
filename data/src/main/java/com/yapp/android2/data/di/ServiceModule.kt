@@ -38,6 +38,8 @@ internal object ServiceModule {
         retrofit: Retrofit
     ): NotificationService = retrofit.create()
 
+    @Singleton
+    @Provides
     fun providesRecordService(
         retrofit: Retrofit
     ): RecordService = retrofit.create()
