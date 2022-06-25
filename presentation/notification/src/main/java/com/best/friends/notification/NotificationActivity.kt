@@ -54,13 +54,12 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
     override fun onNewIntent(intent: Intent?) {
         super.onNewIntent(intent)
 
-        Timber.d("----------------onNewIntent----------------")
         val message = intent?.getParcelableExtra<RemoteMessage>("RemoteMessage")
         val data = NotificationResponse.Data(
-            message?.notification?.title.orEmpty(),
-            message?.notification?.body.orEmpty()
+            message?.data?.get("title").orEmpty(),
+            message?.data?.get("body").orEmpty()
         )
-        Timber.tag("onNewIntent").i("$data")
+        Timber.i("onMessageReceived-onNewIntent: $data")
         adapter.notificationList.add(data)
         adapter.notifyItemInserted(adapter.notificationList.size - 1)
     }

@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.best.friends.notification.NotificationActivity
@@ -29,7 +30,7 @@ class FCMService : FirebaseMessagingService() {
 
         val intent = Intent(this, NotificationActivity::class.java)
             .putExtra("RemoteMessage", message)
-            .addFlags(FLAG_ACTIVITY_NEW_TASK)
+            .addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_SINGLE_TOP)
 
         startActivity(intent)
 
@@ -52,11 +53,10 @@ class FCMService : FirebaseMessagingService() {
         }
 
         val builder = NotificationCompat.Builder(this, channelId).apply {
-            setSmallIcon(R.drawable.ic_launcher_background)
+            setSmallIcon(com.best.friend.design.R.drawable.app_logo)
             setAutoCancel(true)
             setDefaults(Notification.DEFAULT_ALL)
             setWhen(System.currentTimeMillis())
-            setSmallIcon(R.mipmap.ic_launcher)
             setContentTitle(title)
             setContentText(body)
         }
