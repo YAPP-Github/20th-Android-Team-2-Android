@@ -1,11 +1,15 @@
 package com.best.friends.home
 
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import androidx.core.view.updateLayoutParams
 import com.best.friends.core.BaseActivity
+import com.best.friends.core.ui.dp
+import com.best.friends.core.ui.dpToPx
 import com.best.friends.home.databinding.ActivityMainBinding
 import com.best.friends.home.databinding.LayoutCustomTabBinding
 import com.google.android.material.tabs.TabLayout
@@ -50,6 +54,15 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         })
 
+        // 탭 사이 간격을 50으로 설정
+        for (index in 0 until binding.tabLayout.tabCount) {
+            val tab = (binding.tabLayout.getChildAt(0) as ViewGroup).getChildAt(index)
+            tab.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                setMargins(0, 0, 50, 0)
+            }
+            tab.requestLayout()
+        }
+
         binding.tabLayout.selectTab(binding.tabLayout.getTabAt(0))
     }
 
@@ -68,7 +81,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private fun setTabUnSelected(tab: TabLayout.Tab) {
         tab.customView?.let { view ->
-            val textColor = ContextCompat.getColor(view.context, designR.color.gray4)
+            val textColor = ContextCompat.getColor(view.context, designR.color.gray3)
             val drawable = fragmentStateAdapter.getTabUnSelectedResource(tab.position)
             val tvTitle = view.findViewById<TextView>(R.id.tv_title)
             val ivIcon = view.findViewById<ImageView>(R.id.iv_icon)

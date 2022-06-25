@@ -4,7 +4,7 @@
     <style name="Typography">
         <item name="android:fontFamily">@font/spoqa_han_sans_regular</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/gray5</item>
+        <item name="android:textColor">@color/gray4</item>
         <item name="android:letterSpacing">-0.05</item>
         <item name="android:includeFontPadding">false</item>
     </style>
