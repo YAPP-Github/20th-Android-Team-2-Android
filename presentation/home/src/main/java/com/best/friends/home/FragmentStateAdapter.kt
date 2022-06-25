@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.best.friends.home.home.HomeFragment
 import com.yapp.android2.record.RecordFragment
 
 class FragmentStateAdapter(

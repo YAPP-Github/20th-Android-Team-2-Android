@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.best.friends.home.HomeViewModel" />
+            type="com.best.friends.home.home.HomeViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

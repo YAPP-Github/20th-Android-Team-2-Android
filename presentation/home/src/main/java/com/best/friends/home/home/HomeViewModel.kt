@@ -1,18 +1,16 @@
-package com.best.friends.home
+package com.best.friends.home.home
 
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
 import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.repository.ProductsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.time.ZoneId
 import java.time.ZonedDateTime
-import java.util.Locale
 import javax.inject.Inject
 
 @HiltViewModel

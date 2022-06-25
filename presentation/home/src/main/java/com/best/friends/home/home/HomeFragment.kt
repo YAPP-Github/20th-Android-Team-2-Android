@@ -1,11 +1,10 @@
-package com.best.friends.home
+package com.best.friends.home.home
 
 import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -14,6 +13,7 @@ import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.ui.showToast
 import com.best.friends.core.ui.visible
 import com.best.friends.core.ui.visibleOrGone
+import com.best.friends.home.R
 import com.best.friends.home.databinding.FragmentHomeBinding
 import com.best.friends.home.register.SavingItemAddActivity
 import dagger.hilt.android.AndroidEntryPoint
