@@ -5,11 +5,11 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.yapp.android2.data.service.LoginService
+import com.yapp.android2.data.service.NotificationService
 import com.yapp.android2.data.service.ProductsService
 import com.yapp.android2.data.service.RecordService
 import com.yapp.android2.data.service.Service
 import com.yapp.android2.data.service.interceptor.HeaderInterceptor
-import com.yapp.android2.domain.key.SHARED_PREFERENCE_KEY
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,6 +33,12 @@ internal object ServiceModule {
 
     @Singleton
     @Provides
+    fun providesNotificationService(
+        retrofit: Retrofit
+    ): NotificationService = retrofit.create()
+
+    @Singleton
+    @Provides
     fun providesRecordService(
         retrofit: Retrofit
     ): RecordService = retrofit.create()
@@ -42,7 +48,6 @@ internal object ServiceModule {
     fun providesProductsService(
         retrofit: Retrofit
     ): ProductsService = retrofit.create()
-
 
     @Provides
     @Singleton

@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "238291040120",
-    "project_id": "yapp-best-friends",
-    "storage_bucket": "yapp-best-friends.appspot.com"
+    "project_number": "522638532719",
+    "project_id": "best-friends-e953f",
+    "storage_bucket": "best-friends-e953f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:238291040120:android:e62fa7005170f31945fa8d",
+        "mobilesdk_app_id": "1:522638532719:android:cf806f770bc63113a82d9a",
         "android_client_info": {
           "package_name": "com.yapp.android2"
         }
       },
       "oauth_client": [
         {
-          "client_id": "238291040120-h9nbrlvabterqpuurrnbbhj4r2d1gc6c.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.yapp.android2",
-            "certificate_hash": "80810157709f76df0057f95b77dce304291c68ec"
-          }
-        },
-        {
-          "client_id": "238291040120-0hc84ta4jv65nvqvdrqge02peol4bj43.apps.googleusercontent.com",
+          "client_id": "522638532719-an68ide0k4ca0c5hiah8hie880f1nlqr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCQ59bC7SzzuZzLS0jK3IDCcn_qK7DPg6Y"
+          "current_key": "AIzaSyDqNw4ck4UVDI5042ZZopQUQdpGJeFpdYg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "238291040120-0hc84ta4jv65nvqvdrqge02peol4bj43.apps.googleusercontent.com",
+              "client_id": "522638532719-an68ide0k4ca0c5hiah8hie880f1nlqr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -8,24 +8,24 @@
     <uses-sdk tools:overrideLibrary="com.yapp.android2.record"/>
 
     <application
+        android:name=".BestFriendsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.BestFriends.NoActionBar"
-        android:name=".BestFriendsApplication"
+        android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
 
         <activity
             android:name="com.best.friends.login.KaKaoLoginActivity"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:launchMode="singleTask"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -47,6 +47,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+<!--        <activity-->
+<!--            android:name="com.best.friends.notification.NotificationActivity"-->
+<!--            android:launchMode="singleTask"-->
+<!--            android:exported="true">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
+        <service
+            android:name=".FCMService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <activity
             android:name="com.best.friends.home.MainActivity"
