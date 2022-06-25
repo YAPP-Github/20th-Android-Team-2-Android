@@ -15,6 +15,7 @@ import com.yapp.android2.domain.entity.Product
  * 홈탭 화면에서 사용할 절약기록 리스트 adapter
  */
 internal class SavingsListAdapter(
+    private val onItemClick: (product: Product) -> Unit,
     private val onAddClick: () -> Unit
 ) : ListAdapter<Savings, AbstractViewHolder<Savings>>(CALLBACK) {
 
@@ -35,7 +36,8 @@ internal class SavingsListAdapter(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ),
+                onItemClick = onItemClick
             )
             ViewType.ADD -> SavingAddViewHolder(
                 binding = LayoutSavingAddBinding.inflate(
@@ -63,11 +65,16 @@ internal class SavingsListAdapter(
     }
 
     class SavingsItemViewHolder(
-        private val binding: LayoutSavingItemBinding
+        private val binding: LayoutSavingItemBinding,
+        private val onItemClick: (product: Product) -> Unit
     ) : AbstractViewHolder<Savings.Item>(binding.root) {
 
         override fun bind(data: Savings.Item) {
-            binding.product = data.product
+            val product = data.product
+            binding.root.setOnSingleClickListener {
+                onItemClick.invoke(product)
+            }
+            binding.product = product
             binding.executePendingBindings()
         }
     }

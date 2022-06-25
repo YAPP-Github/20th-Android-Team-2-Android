@@ -35,7 +35,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     }
 
     private val adapter by lazy {
-        SavingsListAdapter(onAddClick = { startSavingAddActivity() })
+        SavingsListAdapter(
+            onItemClick = { product -> },
+            onAddClick = { startSavingAddActivity() }
+        )
     }
 
     override fun onCreateView(

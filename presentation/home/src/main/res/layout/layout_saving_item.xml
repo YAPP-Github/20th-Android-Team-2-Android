@@ -19,10 +19,11 @@
 
         <CheckBox
             android:id="@+id/checkbox"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:padding="5dp"
-            android:layout_marginStart="5dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="16dp"
+            android:button="@null"
+            android:background="@drawable/selector_checkbox"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
