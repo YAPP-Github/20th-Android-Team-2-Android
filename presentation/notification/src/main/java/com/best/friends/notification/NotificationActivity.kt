@@ -14,12 +14,16 @@ import com.yapp.android2.domain.entity.NotificationResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.activity_notification) {
 
     private lateinit var adapter: NotificationAdapter
     private val viewModel by viewModels<NotificationViewModel>()
+
+    @Inject
+    lateinit var firebaseMessaging: FirebaseMessaging
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +33,7 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
     }
 
     private fun initFirebase(){
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+        firebaseMessaging.token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 Timber.e(task.exception)
                 return@OnCompleteListener
