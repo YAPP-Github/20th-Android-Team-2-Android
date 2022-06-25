@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":presentation:home"))
     implementation(project(":presentation:login"))
     implementation(project(":presentation:splash"))
+    implementation(project(":presentation:settings"))
 
     implementation(jetpackDeps)
     implementation(coroutines)
