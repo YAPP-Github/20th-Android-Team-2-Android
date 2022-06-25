@@ -80,6 +80,9 @@
             android:name="com.best.friends.home.update.SavingItemUpdateActivity"
             android:launchMode="singleTask"
             android:exported="true"/>
+		
+		<activity android:name=".settings.SettingsActivity"/>
+
 
     </application>
 
