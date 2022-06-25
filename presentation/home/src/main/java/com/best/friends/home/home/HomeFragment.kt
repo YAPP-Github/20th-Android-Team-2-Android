@@ -18,6 +18,8 @@ import com.best.friends.home.databinding.FragmentHomeBinding
 import com.best.friends.home.register.SavingItemAddActivity
 import com.best.friends.home.update.SavingItemUpdateActivity
 import com.best.friends.home.update.SavingItemUpdateModule
+import com.best.friends.navigator.Navigator
+import com.best.friends.navigator.NotificationNavigator
 import com.best.friends.navigator.SettingNavigator
 import com.yapp.android2.domain.entity.Product
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +37,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     @Inject
     lateinit var settingNavigator: SettingNavigator
+
+    @Inject
+    lateinit var notificationNavigator: NotificationNavigator
 
     private val addResultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -69,7 +74,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     private fun initView() {
         binding.ivNotifications.setOnSingleClickListener {
-            // TODO 알림 화면으로 이동
+            startActivity(notificationNavigator.intent(requireContext()))
         }
 
         binding.ivSettings.setOnSingleClickListener {

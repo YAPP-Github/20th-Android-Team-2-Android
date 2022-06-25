@@ -5,7 +5,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-sdk tools:overrideLibrary="com.yapp.android2.record"/>
+
+    <uses-sdk tools:overrideLibrary="com.yapp.android2.record" />
 
     <application
         android:name=".BestFriendsApplication"
@@ -48,16 +49,10 @@
             </intent-filter>
         </activity>
 
-<!--        <activity-->
-<!--            android:name="com.best.friends.notification.NotificationActivity"-->
-<!--            android:launchMode="singleTask"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
+        <activity
+            android:name="com.best.friends.notification.NotificationActivity"
+            android:exported="true"
+            android:launchMode="singleTask" />
 
         <service
             android:name=".FCMService"
@@ -69,19 +64,19 @@
 
         <activity
             android:name="com.best.friends.home.MainActivity"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name="com.best.friends.home.register.SavingItemAddActivity"
-            android:launchMode="singleTask"
-            android:exported="true"/>
+            android:exported="true"
+            android:launchMode="singleTask" />
 
         <activity
             android:name="com.best.friends.home.update.SavingItemUpdateActivity"
-            android:launchMode="singleTask"
-            android:exported="true"/>
-		
-		<activity android:name=".settings.SettingsActivity"/>
+            android:exported="true"
+            android:launchMode="singleTask" />
+
+        <activity android:name=".settings.SettingsActivity" />
 
 
     </application>
