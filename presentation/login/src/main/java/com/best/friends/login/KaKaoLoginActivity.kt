@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
-import com.best.friends.core.util.ToastUtil
+import com.best.friends.core.ui.showToast
 import com.best.friends.login.databinding.ActivityKakaoLoginBinding
 import com.best.friends.navigator.HomeNavigator
 import com.kakao.sdk.common.model.ClientError
@@ -44,7 +44,7 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
                     if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
                         Timber.d("사용자가 명시적으로 카카오 로그인 취소")
                     } else {
-                        ToastUtil.showTextToast(context, "로그인에 실패하였습니다")
+                        showToast( "로그인에 실패하였습니다")
                         Timber.e("$error")
                     }
                 }

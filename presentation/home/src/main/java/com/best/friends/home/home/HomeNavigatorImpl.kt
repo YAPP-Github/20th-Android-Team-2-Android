@@ -1,7 +1,8 @@
-package com.best.friends.home
+package com.best.friends.home.home
 
 import android.content.Context
 import android.content.Intent
+import com.best.friends.home.MainActivity
 import com.best.friends.navigator.HomeNavigator
 import javax.inject.Inject
 

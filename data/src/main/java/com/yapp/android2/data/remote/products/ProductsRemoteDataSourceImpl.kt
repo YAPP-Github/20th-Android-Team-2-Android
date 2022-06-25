@@ -4,6 +4,7 @@ import com.yapp.android2.data.remote.request.PostProductsRequest
 import com.yapp.android2.data.remote.request.UpdateProductsRequest
 import com.yapp.android2.data.service.ProductsService
 import com.yapp.android2.domain.entity.Product
+import java.lang.Exception
 import javax.inject.Inject
 
 class ProductsRemoteDataSourceImpl @Inject constructor(
@@ -11,7 +12,7 @@ class ProductsRemoteDataSourceImpl @Inject constructor(
 ) : ProductsRemoteDataSource {
 
     override suspend fun getProductsByYmd(recordYmd: String): List<Product> {
-        return productsService.getProducts(recordYmd)
+        return productsService.getProducts(recordYmd).data ?: emptyList()
     }
 
     override suspend fun postProducts(request: PostProductsRequest) {

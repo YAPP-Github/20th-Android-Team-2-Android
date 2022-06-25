@@ -40,6 +40,7 @@ class LoginViewModel @Inject constructor(
             }.onSuccess {
                 loginUseCase.saveAccessToken(requireNotNull(it.data.accessToken))
                 Timber.i("액세스 토큰 : ${it.data.accessToken}")
+                loginUseCase.saveUser(it.data.userId ?: 0, it.data.nickName.orEmpty())
                 _accessToken.postValue(requireNotNull(it.data.accessToken))
                 _isSuccess.postValue(true)
             }.onFailure {

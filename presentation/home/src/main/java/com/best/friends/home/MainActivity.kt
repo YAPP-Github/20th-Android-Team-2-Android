@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import com.best.friends.core.BaseActivity
+import com.best.friends.core.ui.showToast
 import com.best.friends.home.databinding.ActivityMainBinding
 import com.best.friends.home.databinding.LayoutCustomTabBinding
 import com.google.android.material.tabs.TabLayout
@@ -24,9 +25,20 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     private val viewModel by viewModels<MainViewModel>()
     private val fragmentStateAdapter = FragmentStateAdapter(this)
 
+    private var backPressedTime = 0L
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setupViewPager()
+    }
+
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() - backPressedTime >= 2000) {
+            backPressedTime = System.currentTimeMillis()
+            showToast(getString(R.string.back_pressed_in_cool_time))
+        } else {
+            super.onBackPressed()
+        }
     }
 
     private fun setupViewPager() {
@@ -59,7 +71,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         for (index in 0 until binding.tabLayout.tabCount) {
             val tab = (binding.tabLayout.getChildAt(0) as ViewGroup).getChildAt(index)
             tab.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                setMargins(0, 0, 50, 0)
+                if (index == 0) {
+                    setMargins(0, 0, 25, 0)
+                } else {
+                    setMargins(25, 0, 0, 0)
+                }
             }
             tab.requestLayout()
         }
