@@ -6,6 +6,8 @@ import com.yapp.android2.data.remote.products.ProductsRemoteDataSource
 import com.yapp.android2.data.remote.products.ProductsRemoteDataSourceImpl
 import com.yapp.android2.data.remote.record.RecordRemoteDataSource
 import com.yapp.android2.data.remote.record.RecordRemoteDataSourceImpl
+import com.yapp.android2.data.remote.version.AppVersionCheckDataSource
+import com.yapp.android2.data.remote.version.AppVersionCheckDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -33,4 +35,10 @@ internal abstract class RemoteModule {
     abstract fun bindProductsRemoteDataSource(
         dataSource: ProductsRemoteDataSourceImpl
     ): ProductsRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideAppVersionDataSource(
+        dataSource: AppVersionCheckDataSourceImpl
+    ): AppVersionCheckDataSource
 }

@@ -8,7 +8,6 @@ import com.best.friends.navigator.HomeNavigator
 import com.best.friends.navigator.LoginNavigator
 import com.best.friends.splash.databinding.ActivitySplashBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject

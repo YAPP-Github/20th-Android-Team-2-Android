@@ -13,16 +13,21 @@ import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.ui.visibleOrGone
 import com.best.friends.home.HomeViewModel.State
 import com.best.friends.home.databinding.FragmentHomeBinding
+import com.best.friends.navigator.SettingNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
 /**
  * 홈탭 화면 Fragment
  */
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
+
+    @Inject
+    lateinit var settingNavigator: SettingNavigator
 
     override val viewModel by viewModels<HomeViewModel>()
 
@@ -47,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         }
 
         binding.ivSettings.setOnSingleClickListener {
-            // TODO 설정 화면으로 이동
+            startActivity(settingNavigator.intent(requireContext()))
         }
 
         binding.emptyView.tvSavingItemsAdd.setOnSingleClickListener {
