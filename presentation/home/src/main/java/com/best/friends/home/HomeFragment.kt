@@ -5,17 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.ui.showToast
+import com.best.friends.core.ui.visible
 import com.best.friends.core.ui.visibleOrGone
-import com.best.friends.home.HomeViewModel.State
 import com.best.friends.home.databinding.FragmentHomeBinding
+import com.best.friends.home.register.SavingItemAddActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
@@ -54,7 +52,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         }
 
         binding.emptyView.tvSavingItemsAdd.setOnSingleClickListener {
-            // TODO 절약 추가 화면으로 이동
+            val intent = SavingItemAddActivity.intent(requireContext())
+            startActivity(intent)
         }
     }
 
@@ -65,6 +64,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                 binding.tvDay.text = String.format("%d월 %d일", day.monthValue, day.dayOfMonth)
 
                 if (state.isInitialized) {
+                    binding.layout.visible()
                     binding.emptyView.root.visibleOrGone(products.isEmpty())
                 }
             }

@@ -1,5 +1,7 @@
 package com.best.friends.home.register
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import com.best.friends.core.BaseActivity
 import com.best.friends.home.R
@@ -20,8 +22,15 @@ class SavingItemAddActivity :
 
     private fun setToolbar() {
         setSupportActionBar(binding.toolbar)
-        binding.toolbar.setNavigationIcon(com.best.friend.design.R.drawable.icon_chevron_left)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(com.best.friend.design.R.drawable.icon_chevron_left)
         supportActionBar?.title = getString(R.string.saving_item_activity_toolbar_title)
+    }
+
+    companion object {
+
+        fun intent(context: Context): Intent {
+            return Intent(context, SavingItemAddActivity::class.java)
+        }
     }
 }

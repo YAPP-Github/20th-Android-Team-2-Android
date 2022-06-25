@@ -12,6 +12,7 @@
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -77,7 +78,8 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_rect_gray1_r10"
-                    android:hint="@string/saving_items_content_hint"
+                    android:maxLength="6"
+                    android:hint="@string/saving_items_price_hint"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
                     android:paddingHorizontal="24dp"
