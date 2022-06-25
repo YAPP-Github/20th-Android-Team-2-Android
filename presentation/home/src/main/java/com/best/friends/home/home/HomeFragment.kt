@@ -27,12 +27,15 @@ import kotlinx.coroutines.flow.onEach
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     override val viewModel by viewModels<HomeViewModel>()
-    private val adapter by lazy { SavingsListAdapter() }
 
     private val addResultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             viewModel.getProductsToday()
         }
+    }
+
+    private val adapter by lazy {
+        SavingsListAdapter(onAddClick = { startSavingAddActivity() })
     }
 
     override fun onCreateView(
@@ -62,8 +65,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         }
 
         binding.emptyView.tvSavingItemsAdd.setOnSingleClickListener {
-            val intent = SavingItemAddActivity.intent(requireContext())
-            addResultLauncher.launch(intent)
+            startSavingAddActivity()
         }
 
         binding.recyclerView.adapter = adapter
@@ -89,6 +91,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         viewModel.error
             .onEach { errorMessage -> showToast(errorMessage) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun startSavingAddActivity() {
+        val intent = SavingItemAddActivity.intent(requireContext())
+        addResultLauncher.launch(intent)
     }
 
     companion object {

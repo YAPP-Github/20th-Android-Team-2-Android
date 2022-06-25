@@ -6,6 +6,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.best.friends.core.AbstractViewHolder
+import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.home.databinding.LayoutSavingAddBinding
 import com.best.friends.home.databinding.LayoutSavingItemBinding
 import com.yapp.android2.domain.entity.Product
@@ -13,8 +14,9 @@ import com.yapp.android2.domain.entity.Product
 /**
  * 홈탭 화면에서 사용할 절약기록 리스트 adapter
  */
-internal class SavingsListAdapter :
-    ListAdapter<Savings, AbstractViewHolder<Savings>>(CALLBACK) {
+internal class SavingsListAdapter(
+    private val onAddClick: () -> Unit
+) : ListAdapter<Savings, AbstractViewHolder<Savings>>(CALLBACK) {
 
     enum class ViewType {
         ITEM, ADD
@@ -40,7 +42,8 @@ internal class SavingsListAdapter :
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ),
+                onAddClick = onAddClick
             )
         }
 
@@ -70,8 +73,15 @@ internal class SavingsListAdapter :
     }
 
     class SavingAddViewHolder(
-        private val binding: ViewDataBinding
+        private val binding: LayoutSavingAddBinding,
+        onAddClick: () -> Unit
     ) : AbstractViewHolder<Savings.Add>(binding.root) {
+
+        init {
+            binding.root.setOnSingleClickListener {
+                onAddClick.invoke()
+            }
+        }
 
         override fun bind(data: Savings.Add) {
             binding.executePendingBindings()
