@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.viewpager2.widget.ViewPager2
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -20,17 +19,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class RecordFragment :
-    BaseFragment<FragmentRecordBinding, RecordViewModel>(R.layout.fragment_record) {
+class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.layout.fragment_record) {
 
     override val viewModel: RecordViewModel by viewModels()
     private val recordAdapter = RecordAdapter()
-    private val pageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
-        override fun onPageSelected(position: Int) {
-            super.onPageSelected(position)
-            viewModel.fetchRecords()
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,16 +49,15 @@ class RecordFragment :
 
     }
 
-    override fun onDestroyView() {
-        binding.viewPager.unregisterOnPageChangeCallback(pageChangeCallback)
-        super.onDestroyView()
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchRecords()
     }
 
     private fun FragmentRecordBinding.viewInit() {
         viewPager.adapter = recordAdapter
         viewPager.offscreenPageLimit = 3
         viewPager.setOffsetTransformer()
-        viewPager.registerOnPageChangeCallback(pageChangeCallback)
     }
 
     private fun FragmentRecordBinding.setListener() {
