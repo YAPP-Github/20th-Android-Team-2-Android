@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="record_price">%1$d원</string>
+    <string name="record_count">%1$d번</string>
+    <string name="record_title">총 %1$s번의 절약</string>
+    <string name="record_total_price">%1$s원 아꼈어요!</string>
+
+    <string name="calendar_title">%1$d년 %2$d월</string>
+</resources>

@@ -12,5 +12,4 @@ class SplashViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     fun isAlreadyUser() = loginUseCase.getAccessToken().isNotEmpty()
-
 }

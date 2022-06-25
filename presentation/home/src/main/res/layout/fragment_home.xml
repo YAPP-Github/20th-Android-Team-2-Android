@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="ContentDescription, HardcodedText" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/iv_notifications"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@id/iv_settings"
+            app:layout_constraintEnd_toStartOf="@id/iv_settings"
+            app:layout_constraintTop_toTopOf="@id/iv_settings"
+            app:srcCompat="@drawable/icon_notifications" />
+
+        <ImageView
+            android:id="@+id/iv_settings"
+            android:layout_width="41dp"
+            android:layout_height="41dp"
+            android:layout_marginEnd="10dp"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/icon_settings" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_chevron_left"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="46dp"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_description"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_day"
+            app:srcCompat="@drawable/icon_chevron_left" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_chevron_right"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="46dp"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_day"
+            app:srcCompat="@drawable/icon_chevron_right" />
+
+        <TextView
+            android:id="@+id/tv_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textAppearance="@style/Typography.Body1.Bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_notifications"
+            tools:text="5월 14일" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_calendar"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:padding="6dp"
+            app:layout_constraintBottom_toBottomOf="@id/tv_day"
+            app:layout_constraintStart_toEndOf="@id/tv_day"
+            app:layout_constraintTop_toTopOf="@id/tv_day"
+            app:srcCompat="@drawable/icon_calendar" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="절약과 좀 더 친해지는 오늘!"
+            android:textAppearance="@style/Typography.Body4.Regular"
+            app:layout_constraintEnd_toEndOf="@id/tv_day"
+            app:layout_constraintStart_toStartOf="@id/tv_day"
+            app:layout_constraintTop_toBottomOf="@id/tv_day" />
+
+        <include
+            android:id="@+id/empty_view"
+            layout="@layout/layout_saving_item_empty"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/iv_notifications"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

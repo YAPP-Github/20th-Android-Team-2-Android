@@ -6,17 +6,22 @@ import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.util.ToastUtil
 import com.best.friends.login.databinding.ActivityKakaoLoginBinding
+import com.best.friends.navigator.HomeNavigator
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.activity_kakao_login) {
 
     private val viewModel by viewModels<LoginViewModel>()
+
+    @Inject
+    lateinit var homeNavigator: HomeNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +69,8 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
         viewModel.isSuccess.observe(this) {
             if (it) {
                 // 메인 화면으로 이동
+                val intent = homeNavigator.intent(this)
+                startActivity(intent)
             }
         }
     }

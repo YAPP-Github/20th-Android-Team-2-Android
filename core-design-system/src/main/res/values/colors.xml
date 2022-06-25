@@ -9,7 +9,9 @@
     <!-- https://www.figma.com/file/SbR0McB7UHudksDHvoCAWH/%5BYAPP-20%EA%B8%B0%5D-Android-2?node-id=480%3A1414 -->
     <color name="color_primary">#FF8717</color>
     <color name="color_primary50">#80FF8717</color>
+    <color name="main_skyblue">#659dff</color>
     <color name="color_sub">#A5C6FF</color>
+    <color name="color_sub_25">#32A5C6FF</color>
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
@@ -19,5 +21,8 @@
     <color name="gray2">#C6C6C6</color>
     <color name="gray3">#A6A6A6</color>
     <color name="gray4">#252525</color>
+
+    <color name="color_divider">#BDBDBD</color>
+    <color name="transparent">#00000000</color>
 
 </resources>

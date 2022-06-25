@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/my_best_friends"
                 android:textAppearance="@style/Typography.Body3.Regular"
-                android:textColor="@color/gray4"
+                android:textColor="@color/gray3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/best_friends"
                 android:textAppearance="@style/Typography.Body3.Bold"
-                android:textColor="@color/gray4"
+                android:textColor="@color/gray3"
                 app:layout_constraintStart_toEndOf="@id/tv_splash_description"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
