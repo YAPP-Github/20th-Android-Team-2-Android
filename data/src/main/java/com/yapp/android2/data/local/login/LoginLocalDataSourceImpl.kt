@@ -1,6 +1,7 @@
 package com.yapp.android2.data.local.login
 
 import com.yapp.android2.data.local.BestFriendSharedPreferenceProviderImpl
+import com.yapp.android2.domain.entity.User
 import com.yapp.android2.domain.key.ACCESS_TOKEN_KEY
 import com.yapp.android2.domain.key.KAKAO_ACCESS_TOKEN_KEY
 import javax.inject.Inject
@@ -22,5 +23,13 @@ class LoginLocalDataSourceImpl @Inject constructor(
 
     override fun getKakaoAccessToken(): String {
         return preference.getString(KAKAO_ACCESS_TOKEN_KEY)
+    }
+
+    override fun saveUser(user: User) {
+        preference.user = user
+    }
+
+    override fun getUser(): User {
+        return preference.user
     }
 }

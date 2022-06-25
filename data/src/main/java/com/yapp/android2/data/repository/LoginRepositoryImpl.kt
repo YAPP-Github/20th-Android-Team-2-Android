@@ -5,6 +5,7 @@ import com.yapp.android2.data.remote.login.LoginRemoteDataSource
 import com.yapp.android2.domain.entity.Login
 import com.yapp.android2.domain.entity.LoginRequest
 import com.yapp.android2.domain.entity.LoginResponse
+import com.yapp.android2.domain.entity.User
 import com.yapp.android2.domain.repository.login.LoginRepository
 import javax.inject.Inject
 
@@ -28,4 +29,12 @@ class LoginRepositoryImpl @Inject constructor(
     }
 
     override fun getKakaoAccessToken(): String = loginLocalDataSource.getKakaoAccessToken()
+
+    override fun saveUser(user: User) {
+        loginLocalDataSource.saveUser(user)
+    }
+
+    override fun getUser(): User {
+        return loginLocalDataSource.getUser()
+    }
 }

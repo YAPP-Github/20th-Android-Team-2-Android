@@ -1,9 +1,13 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="Theme.BestFriends.NoActionBar" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/color_sub</item>
+        <item name="colorOnSecondary">@color/color_sub</item>
         <item name="colorAccent">@color/color_primary</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@android:color/white</item>
+        <item name="android:statusBarColor">@android:color/white</item>
     </style>
 
 </resources>

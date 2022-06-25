@@ -7,7 +7,6 @@ import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.repository.ProductsRepository
 import timber.log.Timber
 import java.time.LocalDateTime
-import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
@@ -31,14 +30,13 @@ class ProductsRepositoryImpl @Inject constructor(
     override suspend fun postProducts(
         userId: Long,
         name: String,
-        price: String,
-        resolution: String
+        price: String
     ) {
         val request = PostProductsRequest(
             userId = userId,
             name = name,
             price = price,
-            resolution = resolution
+            resolution = "화이팅!"
         )
         return remoteDataSource.postProducts(request)
     }
@@ -47,15 +45,14 @@ class ProductsRepositoryImpl @Inject constructor(
         productId: Long,
         userId: Long,
         name: String,
-        price: String,
-        resolution: String
+        price: String
     ) {
         val request = UpdateProductsRequest(
             productId = productId,
             userId = userId,
             name = name,
             price = price,
-            resolution = resolution
+            resolution = "화이팅!"
         )
         return remoteDataSource.updateProducts(request)
     }

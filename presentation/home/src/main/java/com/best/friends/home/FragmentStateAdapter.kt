@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.best.friends.home.home.HomeFragment
 import com.yapp.android2.record.RecordFragment
 
 class FragmentStateAdapter(
@@ -33,8 +34,8 @@ class FragmentStateAdapter(
 
     fun getTabTitle(position: Int): String {
         return when (TabKind.values()[position]) {
-            TabKind.HOME -> context.getString(R.string.tab_name_home)
-            TabKind.RECORD -> context.getString(R.string.tab_name_record)
+            TabKind.HOME -> context.getString(com.best.friend.design.R.string.common_home)
+            TabKind.RECORD -> context.getString(com.best.friend.design.R.string.common_record)
         }
     }
 

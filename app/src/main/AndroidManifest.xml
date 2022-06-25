@@ -52,7 +52,18 @@
             android:name="com.best.friends.home.MainActivity"
             android:exported="true"/>
 
-        <activity android:name=".settings.SettingsActivity"/>
+        <activity
+            android:name="com.best.friends.home.register.SavingItemAddActivity"
+            android:launchMode="singleTask"
+            android:exported="true"/>
+
+        <activity
+            android:name="com.best.friends.home.update.SavingItemUpdateActivity"
+            android:launchMode="singleTask"
+            android:exported="true"/>
+		
+		<activity android:name=".settings.SettingsActivity"/>
+
 
     </application>
 
