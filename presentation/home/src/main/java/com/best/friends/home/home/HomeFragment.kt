@@ -16,6 +16,9 @@ import com.best.friends.core.ui.visibleOrGone
 import com.best.friends.home.R
 import com.best.friends.home.databinding.FragmentHomeBinding
 import com.best.friends.home.register.SavingItemAddActivity
+import com.best.friends.home.update.SavingItemUpdateActivity
+import com.best.friends.home.update.SavingItemUpdateModule
+import com.yapp.android2.domain.entity.Product
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -36,7 +39,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     private val adapter by lazy {
         SavingsListAdapter(
-            onItemClick = { product -> },
+            onItemClick = { product -> startSavingUpdateActivity(product) },
             onAddClick = { startSavingAddActivity() }
         )
     }
@@ -94,6 +97,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         viewModel.error
             .onEach { errorMessage -> showToast(errorMessage) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun startSavingUpdateActivity(product: Product) {
+        val intent = SavingItemUpdateActivity.intent(requireContext(), product)
+        addResultLauncher.launch(intent)
     }
 
     private fun startSavingAddActivity() {

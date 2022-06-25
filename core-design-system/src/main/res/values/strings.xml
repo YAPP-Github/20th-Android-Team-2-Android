@@ -4,5 +4,7 @@
     <string name="common_home">홈</string>
     <string name="common_record">기록</string>
     <string name="common_register">등록</string>
+    <string name="common_delete">삭제</string>
+    <string name="common_update">수정</string>
 
 </resources>

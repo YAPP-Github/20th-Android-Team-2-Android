@@ -1,4 +1,4 @@
-package com.best.friends.home.register
+package com.best.friends.home.update
 
 import android.app.Activity
 import android.content.Context
@@ -12,10 +12,12 @@ import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
+import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.ui.showToast
 import com.best.friends.home.R
-import com.best.friends.home.databinding.ActivitySavingItemAddBinding
-import com.best.friends.home.register.SavingItemAddViewModel.Action.ItemAdded
+import com.best.friends.home.databinding.ActivitySavingItemUpdateBinding
+import com.best.friends.home.update.SavingItemUpdateViewModel.Action.*
+import com.yapp.android2.domain.entity.Product
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -23,19 +25,20 @@ import java.text.DecimalFormat
 
 
 /**
- * 절약 추가 화면 Activity
+ * 절약 수정 화면 Activity
  */
 @AndroidEntryPoint
-class SavingItemAddActivity :
-    BaseActivity<ActivitySavingItemAddBinding>(R.layout.activity_saving_item_add) {
+class SavingItemUpdateActivity :
+    BaseActivity<ActivitySavingItemUpdateBinding>(R.layout.activity_saving_item_update) {
 
-    private val viewModel by viewModels<SavingItemAddViewModel>()
+    private val viewModel by viewModels<SavingItemUpdateViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.viewModel = viewModel
+        initView()
         setToolbar()
         observe()
+        binding.viewModel = viewModel
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
@@ -55,29 +58,7 @@ class SavingItemAddActivity :
         return super.dispatchTouchEvent(event)
     }
 
-    private fun setToolbar() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(com.best.friend.design.R.drawable.icon_chevron_left)
-        supportActionBar?.title = getString(R.string.saving_item_activity_toolbar_title)
-    }
-
-    private fun observe() {
-        viewModel.error
-            .onEach { errorMessage -> showToast(errorMessage) }
-            .launchIn(lifecycleScope)
-
-        viewModel.action
-            .onEach { action ->
-                when (action) {
-                    ItemAdded -> {
-                        setResult(Activity.RESULT_OK)
-                        finish()
-                    }
-                }
-            }
-            .launchIn(lifecycleScope)
-
+    private fun initView() {
         binding.etItemPrice.setOnFocusChangeListener { view, hasFocus ->
             val editText = binding.etItemPrice
             val price = viewModel.price.value
@@ -101,10 +82,32 @@ class SavingItemAddActivity :
         }
     }
 
-    companion object {
+    private fun setToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(com.best.friend.design.R.drawable.icon_chevron_left)
+        supportActionBar?.title = getString(R.string.saving_item_activity_toolbar_title)
+    }
 
-        fun intent(context: Context): Intent {
-            return Intent(context, SavingItemAddActivity::class.java)
+    private fun observe() {
+        viewModel.error
+            .onEach { errorMessage -> showToast(errorMessage) }
+            .launchIn(lifecycleScope)
+
+        viewModel.action
+            .onEach { _ ->
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
+            .launchIn(lifecycleScope)
+    }
+
+    companion object {
+        internal const val EXTRA_PRODUCT = "extra_product"
+
+        fun intent(context: Context, product: Product): Intent {
+            return Intent(context, SavingItemUpdateActivity::class.java)
+                .putExtra(EXTRA_PRODUCT, product)
         }
     }
 }

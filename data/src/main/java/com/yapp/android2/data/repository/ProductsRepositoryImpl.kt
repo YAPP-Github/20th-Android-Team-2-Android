@@ -51,7 +51,8 @@ class ProductsRepositoryImpl @Inject constructor(
             productId = productId,
             userId = userId,
             name = name,
-            price = price
+            price = price,
+            resolution = "화이팅!"
         )
         return remoteDataSource.updateProducts(request)
     }
