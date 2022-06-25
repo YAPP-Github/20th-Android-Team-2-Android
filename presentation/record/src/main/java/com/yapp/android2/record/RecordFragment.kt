@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
@@ -16,7 +18,8 @@ import com.yapp.android2.record.adapter.RecordAdapter
 import com.yapp.android2.record.databinding.FragmentRecordBinding
 import com.yapp.android2.record.view.setOffsetTransformer
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.layout.fragment_record) {
@@ -85,11 +88,9 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
     }
 
     private fun RecordViewModel.setObserve() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            items.collect {
-                recordAdapter.submitList(it)
-            }
-        }
+        items.flowWithLifecycle(this@RecordFragment.lifecycle, Lifecycle.State.RESUMED)
+            .onEach(recordAdapter::submitList)
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     companion object {
