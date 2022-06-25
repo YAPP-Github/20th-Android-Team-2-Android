@@ -27,6 +27,7 @@ import kotlinx.coroutines.flow.onEach
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     override val viewModel by viewModels<HomeViewModel>()
+    private val adapter by lazy { SavingsListAdapter() }
 
     private val addResultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
@@ -64,6 +65,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             val intent = SavingItemAddActivity.intent(requireContext())
             addResultLauncher.launch(intent)
         }
+
+        binding.recyclerView.adapter = adapter
     }
 
     private fun observe() {
@@ -75,6 +78,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                 if (state.isInitialized) {
                     binding.layout.visible()
                     binding.emptyView.root.visibleOrGone(products.isEmpty())
+
+                    if (products.isNotEmpty()) {
+                        adapter.submit(products)
+                    }
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)

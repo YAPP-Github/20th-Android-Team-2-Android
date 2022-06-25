@@ -1,6 +1,8 @@
 package com.yapp.android2.domain.entity
 
 import com.yapp.android2.domain.Entity
+import java.lang.Exception
+import java.text.DecimalFormat
 
 data class Product(
     val productId: Long,
@@ -9,4 +11,12 @@ data class Product(
     val resolution: String?,
     val today: String?,
     val checked: Boolean?
-) : Entity
+) : Entity {
+
+    val formattedPrice: String
+        get() = try {
+            DecimalFormat("###,###").format(price?.toInt())
+        } catch (e: Exception) {
+            ""
+        }
+}
