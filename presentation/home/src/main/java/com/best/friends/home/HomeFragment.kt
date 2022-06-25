@@ -1,9 +1,12 @@
 package com.best.friends.home
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
@@ -24,6 +27,12 @@ import kotlinx.coroutines.flow.onEach
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     override val viewModel by viewModels<HomeViewModel>()
+
+    private val addResultLauncher = registerForActivityResult(StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            viewModel.getProductsToday()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +62,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
         binding.emptyView.tvSavingItemsAdd.setOnSingleClickListener {
             val intent = SavingItemAddActivity.intent(requireContext())
-            startActivity(intent)
+            addResultLauncher.launch(intent)
         }
     }
 

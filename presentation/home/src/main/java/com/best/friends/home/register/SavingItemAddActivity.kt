@@ -1,5 +1,6 @@
 package com.best.friends.home.register
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -69,7 +70,10 @@ class SavingItemAddActivity :
         viewModel.action
             .onEach { action ->
                 when (action) {
-                    ItemAdded -> onBackPressed()
+                    ItemAdded -> {
+                        setResult(Activity.RESULT_OK)
+                        finish()
+                    }
                 }
             }
             .launchIn(lifecycleScope)

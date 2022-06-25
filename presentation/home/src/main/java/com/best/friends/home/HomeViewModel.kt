@@ -25,6 +25,10 @@ class HomeViewModel @Inject constructor(
         get() = _state
 
     init {
+        getProductsToday()
+    }
+
+    fun getProductsToday() {
         viewModelScope.launch {
             _loading.value = true
             kotlin.runCatching {
