@@ -1,6 +1,8 @@
 package com.yapp.android2.data.di
 
 import com.yapp.android2.data.repository.LoginRepositoryImpl
+import com.yapp.android2.data.repository.NotificationRepositoryImpl
+import com.yapp.android2.domain.repository.Notification.NotificationRepository
 import com.yapp.android2.domain.repository.login.LoginRepository
 import dagger.Binds
 import dagger.Module
@@ -15,4 +17,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindsLoginRepository(repository: LoginRepositoryImpl): LoginRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindsNotificationRepository(repository: NotificationRepositoryImpl): NotificationRepository
 }

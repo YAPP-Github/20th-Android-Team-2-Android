@@ -2,6 +2,8 @@ package com.yapp.android2.data.di
 
 import com.yapp.android2.data.remote.login.LoginRemoteDataSource
 import com.yapp.android2.data.remote.login.LoginRemoteDataSourceImpl
+import com.yapp.android2.data.remote.notification.NotificationRemoteDataSource
+import com.yapp.android2.data.remote.notification.NotificationRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,4 +17,8 @@ internal abstract class RemoteModule {
     @Binds
     @Singleton
     abstract fun provideLoginDataModule(remoteData: LoginRemoteDataSourceImpl) : LoginRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideNotificationDataModule(remoteData: NotificationRemoteDataSourceImpl) : NotificationRemoteDataSource
 }
