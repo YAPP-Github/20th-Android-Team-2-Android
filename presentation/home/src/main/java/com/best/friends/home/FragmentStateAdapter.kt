@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.yapp.android2.record.RecordFragment
 
 class FragmentStateAdapter(
     private val fragmentActivity: FragmentActivity
@@ -15,8 +16,10 @@ class FragmentStateAdapter(
         HOME, RECORD
     }
 
-    // TODO fragment 생성하는 코드 추가 필요. 
-    private val fragments = arrayListOf<Fragment>()
+    private val fragments = arrayListOf<Fragment>(
+        HomeFragment.newInstance(),
+        RecordFragment.newInstance()
+    )
     private val context: Context
         get() = fragmentActivity
 

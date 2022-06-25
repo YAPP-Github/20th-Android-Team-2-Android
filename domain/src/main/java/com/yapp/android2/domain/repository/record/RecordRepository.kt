@@ -1,6 +1,6 @@
 package com.yapp.android2.domain.repository.record
 
-import com.yapp.android2.domain.Record
+import com.yapp.android2.domain.entity.base.Record
 import com.yapp.android2.domain.repository.Repository
 
 interface RecordRepository : Repository {
@@ -9,5 +9,5 @@ interface RecordRepository : Repository {
 
 data class Item(
     val record: Record,
-    val totalCount: Int,
+    val totalCount: Int
 )

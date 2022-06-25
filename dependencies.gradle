@@ -20,7 +20,9 @@ ext {
             "jodaTime"              : "2.10.6",
             "espresso"              : "3.4.0",
             "interceptor"           : "4.9.3",
-            "kakao"                 : "2.10.0"
+            "kakao"                 : "2.10.0",
+            "leakcanary"            : "2.9.1",
+            "chucker"               : "3.5.2"
     ]
     deps = [
             "kotlin"          : [
@@ -70,6 +72,11 @@ ext {
                     "core"                 : "com.squareup.retrofit2:retrofit:2.9.0",
                     "adapter"              : "com.squareup.retrofit2:converter-gson:2.9.0",
                     "interceptor"          : "com.squareup.okhttp3:logging-interceptor:${versions.interceptor}"
+            ],
+            "leakcanary"                   : "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}",
+            "chucker"                      : [
+                    "library"              : "com.github.chuckerteam.chucker:library:${versions.chucker}",
+                    "noOp"                 : "com.github.chuckerteam.chucker:library-no-op:${versions.chucker}"
             ],
             "inject"                       : "javax.inject:javax.inject:1",
             "jodaTime"                     : "joda-time:joda-time:${versions.jodaTime}",

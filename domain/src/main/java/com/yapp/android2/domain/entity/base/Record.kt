@@ -1,5 +1,6 @@
-package com.yapp.android2.domain
+package com.yapp.android2.domain.entity.base
 
+import com.yapp.android2.domain.Entity
 import java.util.Date
 
 data class Record(

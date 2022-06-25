@@ -1,7 +1,11 @@
 package com.yapp.android2.data.di
 
 import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerCollector
+import com.chuckerteam.chucker.api.ChuckerInterceptor
+import com.chuckerteam.chucker.api.RetentionManager
 import com.yapp.android2.data.service.LoginService
+import com.yapp.android2.data.service.ProductsService
 import com.yapp.android2.data.service.RecordService
 import com.yapp.android2.data.service.Service
 import com.yapp.android2.data.service.interceptor.HeaderInterceptor
@@ -33,19 +37,36 @@ internal object ServiceModule {
         retrofit: Retrofit
     ): RecordService = retrofit.create()
 
+    @Singleton
+    @Provides
+    fun providesProductsService(
+        retrofit: Retrofit
+    ): ProductsService = retrofit.create()
+
 
     @Provides
     @Singleton
     fun provideRetrofit(
         @ApplicationContext context: Context
     ): Retrofit {
-        val sharedPreference = context.getSharedPreferences(SHARED_PREFERENCE_KEY, Context.MODE_PRIVATE)
-        val authorization = HeaderInterceptor(sharedPreference)
-
-        val log = HttpLoggingInterceptor { message ->
+        val headerInterceptor = HeaderInterceptor(context)
+        val logInterceptor = HttpLoggingInterceptor { message ->
             Timber.tag("OKHttp").d(message)
         }
 
-        return Service.retroBuilder(authorization, log)
+        val chuckerInterceptor = ChuckerInterceptor
+            .Builder(context = context)
+            .collector(
+                ChuckerCollector(
+                    context = context,
+                    showNotification = true,
+                    retentionPeriod = RetentionManager.Period.ONE_HOUR,
+                )
+            )
+            .maxContentLength(250_000L)
+            .alwaysReadResponseBody(true)
+            .build()
+
+        return Service.retroBuilder(headerInterceptor, logInterceptor, chuckerInterceptor)
     }
 }

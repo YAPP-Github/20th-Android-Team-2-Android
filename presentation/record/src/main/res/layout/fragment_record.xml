@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/shape_corner15_bg_ff8717"
-            android:includeFontPadding="false"
+            android:layout_marginTop="58dp"
             android:paddingVertical="5dp"
             android:paddingHorizontal="18dp"
             android:text="@{String.format(@string/record_title, viewModel.items.size)}"
@@ -39,9 +39,8 @@
             android:layout_marginTop="4dp"
             android:includeFontPadding="false"
             android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-            android:textColor="@color/gray5"
+            android:textColor="@color/gray4"
             android:textSize="14sp"
-            app:layout_constraintBottom_toTopOf="@+id/calendar_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_total_saving"
@@ -61,7 +60,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_total_price" />
 
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_prev_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,14 +77,14 @@
             android:layout_marginTop="32dp"
             android:gravity="center"
             android:textAppearance="@style/Typography.Calender1.Bold"
-            android:textColor="@color/gray5"
+            android:textColor="@color/gray4"
             app:layout_constraintBottom_toBottomOf="@+id/iv_prev_month"
             app:layout_constraintEnd_toStartOf="@+id/iv_next_month"
             app:layout_constraintStart_toEndOf="@+id/iv_prev_month"
             app:layout_constraintTop_toBottomOf="@+id/viewPager"
             tools:text="2022년 5월" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_next_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +99,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="17dp"
-            android:background="@color/gray3"
+            android:background="@color/color_divider"
             app:layout_constraintBottom_toTopOf="@+id/legendLayout"
             app:layout_constraintEnd_toEndOf="@+id/calendar"
             app:layout_constraintStart_toStartOf="@+id/calendar"

@@ -13,7 +13,6 @@ class GetRecordUseCase @Inject constructor(
     override suspend fun execute(params: RecordUseCase.Params): List<Item> {
         return recordRepository.fetchRecords(params.date)
     }
-
 }
 
 interface RecordUseCase : UseCase<RecordUseCase.Params, List<Item>> {

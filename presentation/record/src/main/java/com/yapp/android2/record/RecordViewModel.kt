@@ -2,7 +2,7 @@ package com.yapp.android2.record
 
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
-import com.yapp.android2.domain.Record
+import com.yapp.android2.domain.entity.base.Record
 import com.yapp.android2.domain.repository.record.Item
 import com.yapp.android2.domain.usecase.GetRecordUseCase
 import com.yapp.android2.domain.usecase.RecordUseCase

@@ -13,10 +13,8 @@ import com.yapp.android2.domain.repository.record.Item
 import com.yapp.android2.record.databinding.CalendarItemBinding
 import java.time.YearMonth
 import java.time.ZoneId
-import java.time.ZoneOffset
 import java.time.temporal.WeekFields
 import java.util.*
-import kotlin.time.Duration.Companion.milliseconds
 
 internal class DayBind(private val savingRecords: List<Item>) : DayBinder<DayContainer> {
 
@@ -26,7 +24,7 @@ internal class DayBind(private val savingRecords: List<Item>) : DayBinder<DayCon
         val savingDays = savingRecords.map { it.record.recordYmd }
 
         if(day.owner == DayOwner.THIS_MONTH) {
-            container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray5))
+            container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray4))
         } else {
             container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray2))
         }
