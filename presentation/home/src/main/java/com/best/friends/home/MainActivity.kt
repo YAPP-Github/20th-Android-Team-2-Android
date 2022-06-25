@@ -8,8 +8,6 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import com.best.friends.core.BaseActivity
-import com.best.friends.core.ui.dp
-import com.best.friends.core.ui.dpToPx
 import com.best.friends.home.databinding.ActivityMainBinding
 import com.best.friends.home.databinding.LayoutCustomTabBinding
 import com.google.android.material.tabs.TabLayout
@@ -17,6 +15,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import com.best.friend.design.R as designR
 
+/**
+ * 홈탭, 기록탭 TabLayout 이 있는 메인화면 Activity
+ */
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 

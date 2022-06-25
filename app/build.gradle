@@ -72,4 +72,7 @@ dependencies {
     // testing
     testImplementation(testDeps)
     androidTestImplementation(androidTestDeps)
+
+    // leak-canary
+    debugImplementation deps.leakcanary
 }
