@@ -10,7 +10,6 @@ import com.yapp.android2.data.service.ProductsService
 import com.yapp.android2.data.service.RecordService
 import com.yapp.android2.data.service.Service
 import com.yapp.android2.data.service.interceptor.HeaderInterceptor
-import com.yapp.android2.domain.key.SHARED_PREFERENCE_KEY
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -38,6 +37,8 @@ internal object ServiceModule {
         retrofit: Retrofit
     ): NotificationService = retrofit.create()
 
+    @Singleton
+    @Provides
     fun providesRecordService(
         retrofit: Retrofit
     ): RecordService = retrofit.create()
