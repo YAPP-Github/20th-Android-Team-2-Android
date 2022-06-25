@@ -14,6 +14,7 @@ import com.best.friends.core.BaseActivity
 import com.best.friends.core.ui.showToast
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemAddBinding
+import com.best.friends.home.register.SavingItemAddViewModel.Action.ItemAdded
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -63,6 +64,14 @@ class SavingItemAddActivity :
     private fun observe() {
         viewModel.error
             .onEach { errorMessage -> showToast(errorMessage) }
+            .launchIn(lifecycleScope)
+
+        viewModel.action
+            .onEach { action ->
+                when (action) {
+                    ItemAdded -> onBackPressed()
+                }
+            }
             .launchIn(lifecycleScope)
 
         binding.etItemPrice.setOnFocusChangeListener { _, hasFocus ->

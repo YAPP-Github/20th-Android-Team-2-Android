@@ -8,15 +8,13 @@ interface ProductsRepository {
     suspend fun postProducts(
         userId: Long,
         name: String,
-        price: String,
-        resolution: String
+        price: String
     )
     suspend fun updateProducts(
         productId: Long,
         userId: Long,
         name: String,
-        price: String,
-        resolution: String
+        price: String
     )
     suspend fun deleteProduct(productId: Long)
 }

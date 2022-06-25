@@ -4,6 +4,5 @@ data class UpdateProductsRequest(
     val productId: Long,
     val userId: Long,
     val name: String,
-    val price: String,
-    val resolution: String
+    val price: String
 )
