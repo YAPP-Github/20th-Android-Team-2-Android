@@ -33,8 +33,8 @@ class FragmentStateAdapter(
 
     fun getTabTitle(position: Int): String {
         return when (TabKind.values()[position]) {
-            TabKind.HOME -> context.getString(R.string.tab_name_home)
-            TabKind.RECORD -> context.getString(R.string.tab_name_record)
+            TabKind.HOME -> context.getString(com.best.friend.design.R.string.common_home)
+            TabKind.RECORD -> context.getString(com.best.friend.design.R.string.common_record)
         }
     }
 

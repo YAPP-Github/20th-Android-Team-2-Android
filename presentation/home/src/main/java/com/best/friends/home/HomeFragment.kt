@@ -10,6 +10,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
+import com.best.friends.core.ui.showToast
 import com.best.friends.core.ui.visibleOrGone
 import com.best.friends.home.HomeViewModel.State
 import com.best.friends.home.databinding.FragmentHomeBinding
@@ -37,6 +38,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.viewModel = viewModel
         initView()
         observe()
     }
@@ -57,13 +60,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     private fun observe() {
         viewModel.state
-            .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.RESUMED)
-            .filter { it != State.Default }
             .onEach { state ->
-                val (day, products) = state
+                val (_, day, products) = state
                 binding.tvDay.text = String.format("%d월 %d일", day.monthValue, day.dayOfMonth)
-                binding.emptyView.root.visibleOrGone(products.isEmpty())
+
+                if (state.isInitialized) {
+                    binding.emptyView.root.visibleOrGone(products.isEmpty())
+                }
             }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.error
+            .onEach { errorMessage -> showToast(errorMessage) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 

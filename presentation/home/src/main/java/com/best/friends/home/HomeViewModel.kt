@@ -9,6 +9,7 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.util.Locale
@@ -25,21 +26,27 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
+            _loading.value = true
             kotlin.runCatching {
                 productsRepository.getProductsToday()
-
             }.onSuccess { products ->
-                _state.value = _state.value.copy(products = products)
+                _state.value = _state.value.copy(
+                    isInitialized = true,
+                    products = products
+                )
+            }.onFailure { throwable ->
+                Timber.e("--- HomeViewModel error: ${throwable.message}")
+                _state.value = _state.value.copy(isInitialized = true)
+                sendErrorMessage(throwable.message)
             }
+
+            _loading.value = false
         }
     }
 
     data class State(
+        val isInitialized: Boolean = false,
         val day: ZonedDateTime = ZonedDateTime.now(ZoneId.systemDefault()),
         val products: List<Product> = emptyList()
-    ) {
-        companion object {
-            val Default = State()
-        }
-    }
+    )
 }

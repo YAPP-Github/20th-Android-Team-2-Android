@@ -9,7 +9,7 @@ class RecordRemoteDataSourceImpl @Inject constructor(
 ) : RecordRemoteDataSource {
 
     override suspend fun fetchRecords(recordMM: String): List<Record> {
-        return recordService.fetchRecords(recordMM).data
+        return recordService.fetchRecords(recordMM).data ?: emptyList()
     }
 
 }

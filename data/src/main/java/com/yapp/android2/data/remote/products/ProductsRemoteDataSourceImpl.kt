@@ -11,7 +11,7 @@ class ProductsRemoteDataSourceImpl @Inject constructor(
 ) : ProductsRemoteDataSource {
 
     override suspend fun getProductsByYmd(recordYmd: String): List<Product> {
-        return productsService.getProducts(recordYmd)
+        return productsService.getProducts(recordYmd).data ?: emptyList()
     }
 
     override suspend fun postProducts(request: PostProductsRequest) {

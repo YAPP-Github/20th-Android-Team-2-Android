@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="common_home">홈</string>
+    <string name="common_record">기록</string>
+    <string name="common_register">등록</string>
+
+</resources>
