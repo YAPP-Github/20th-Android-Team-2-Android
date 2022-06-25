@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.best.friends.home.register.SavingItemAddViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -48,6 +55,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_rect_gray1_r10"
+                    android:text="@={viewModel.content}"
                     android:hint="@string/saving_items_content_hint"
                     android:importantForAutofill="no"
                     android:inputType="text"
@@ -79,6 +87,7 @@
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_rect_gray1_r10"
                     android:maxLength="6"
+                    android:text="@={viewModel.price}"
                     android:hint="@string/saving_items_price_hint"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
@@ -92,7 +101,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         </androidx.core.widget.NestedScrollView>
 
         <TextView
@@ -102,7 +110,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/selector_saving_add_button"
-            android:enabled="false"
+            android:enabled="@{!viewModel.content.empty &amp;&amp; !viewModel.price.empty, default=false}"
             android:gravity="center"
             android:text="@string/common_register"
             android:textAppearance="@style/Typography.Button1.Medium"
