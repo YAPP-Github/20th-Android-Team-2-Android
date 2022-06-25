@@ -27,7 +27,9 @@
     <style name="Typography.H2">
         <item name="android:textSize" tools:ignore="SpUsage">20dp</item>
     </style>
-
+    <style name="Typography.H2.Bold">
+        <item name="fontFamily">@font/spoqa_han_sans_bold</item>
+    </style>
     <style name="Typography.H2.Regular">
         <item name="fontFamily">@font/spoqa_han_sans_regular</item>
     </style>

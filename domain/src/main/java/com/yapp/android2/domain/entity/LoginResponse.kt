@@ -7,6 +7,6 @@ data class LoginResponse(override val data: Data) : BaseResponse<LoginResponse.D
         val accessToken: String?,
         val nickName: String?,
         val refreshToken: String?,
-        val userId: Int?
+        val userId: Long?
     )
 }

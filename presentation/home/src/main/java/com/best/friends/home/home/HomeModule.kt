@@ -1,4 +1,4 @@
-package com.best.friends.home
+package com.best.friends.home.home
 
 import com.best.friends.navigator.HomeNavigator
 import dagger.Binds
