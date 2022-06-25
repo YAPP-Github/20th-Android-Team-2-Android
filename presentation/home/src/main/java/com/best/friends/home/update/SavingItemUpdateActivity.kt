@@ -13,10 +13,10 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
+import com.best.friends.core.ui.Empty
 import com.best.friends.core.ui.showToast
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemUpdateBinding
-import com.best.friends.home.update.SavingItemUpdateViewModel.Action.*
 import com.yapp.android2.domain.entity.Product
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -49,8 +49,7 @@ class SavingItemUpdateActivity :
                 v.getGlobalVisibleRect(outRect)
                 if (!outRect.contains(event.rawX.toInt(), event.rawY.toInt())) {
                     v.clearFocus()
-                    val imm: InputMethodManager =
-                        getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+                    val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(v.getWindowToken(), 0)
                 }
             }
@@ -79,6 +78,22 @@ class SavingItemUpdateActivity :
                 val wonText = String.format("%s원", formatText)
                 viewModel.setPriceText(wonText)
             }
+        }
+
+        binding.ivClearContent.setOnSingleClickListener {
+            viewModel.setContentText(String.Empty)
+            val editText = binding.etItemContent
+            editText.requestFocus()
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(editText, 0)
+        }
+
+        binding.ivClearPrice.setOnSingleClickListener {
+            viewModel.setPriceText(String.Empty)
+            val editText = binding.etItemPrice
+            editText.requestFocus()
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(editText, 0)
         }
     }
 

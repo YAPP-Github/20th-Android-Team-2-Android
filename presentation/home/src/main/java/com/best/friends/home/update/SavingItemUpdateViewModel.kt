@@ -27,16 +27,12 @@ class SavingItemUpdateViewModel @Inject constructor(
     val action: SharedFlow<Action>
         get() = _action
 
+    fun setContentText(text: String) {
+        content.value = text
+    }
+
     fun setPriceText(text: String) {
         price.value = text
-    }
-
-    fun onClearContentClick() {
-        content.value = String.Empty
-    }
-
-    fun onClearPriceClick() {
-        price.value = String.Empty
     }
 
     fun onUpdateClick() {

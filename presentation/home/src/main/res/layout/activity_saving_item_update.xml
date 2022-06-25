@@ -69,7 +69,7 @@
                     tools:text="아메리카노" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:onClick="@{() -> viewModel.onClearContentClick()}"
+                    android:id="@+id/iv_clear_content"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="14dp"
@@ -111,7 +111,7 @@
                     tools:text="4,500원" />
 
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:onClick="@{() -> viewModel.onClearPriceClick()}"
+                    android:id="@+id/iv_clear_price"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginEnd="14dp"
