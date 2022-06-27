@@ -9,14 +9,19 @@ import javax.inject.Inject
 
 class RecordRepositoryImpl @Inject constructor(
     private val recordRemoteDataSource: RecordRemoteDataSource
-): RecordRepository {
+) : RecordRepository {
 
     override suspend fun fetchRecords(recordMM: String): List<Item> {
 
-        val totalCount = recordRemoteDataSource.fetchRecords(recordMM).groupBy { record -> record.name }
+        val savingList = recordRemoteDataSource.fetchRecords(recordMM)
+        val summaryList = recordRemoteDataSource.fetchSummaryRecord(recordMM)
 
-        return recordRemoteDataSource.fetchRecords(recordMM).map {
-            Item(it, totalCount = totalCount.values.flatten().size)
+        return savingList.map { response ->
+            Item(
+                response,
+                totalCount = summaryList.first { response.name == it.name }.baseTimes,
+                timesComparedToPrev = summaryList.first { response.name == it.name }.timesComparedToPrev
+            )
         }
     }
 

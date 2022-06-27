@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                app:itemSavingMessage="@{item.record}"
+                app:itemSavingMessage="@{item.timesComparedToPrev}"
                 android:textAppearance="@style/Typography.Calender2.Medium"
                 android:textColor="@color/gray4"
                 app:layout_constraintBottom_toBottomOf="parent"

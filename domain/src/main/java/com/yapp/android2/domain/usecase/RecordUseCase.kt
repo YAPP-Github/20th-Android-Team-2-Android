@@ -9,13 +9,16 @@ import javax.inject.Inject
 
 class GetRecordUseCase @Inject constructor(
     private val recordRepository: RecordRepository
-): RecordUseCase {
+) : RecordUseCase {
 
     override suspend fun execute(params: Unit): List<Item> {
         val now = LocalDate.now()
         val reformatDate = DateTimeFormatter.ofPattern("yyyyMM").format(now)
 
-        return recordRepository.fetchRecords(reformatDate)
+        return runCatching { recordRepository.fetchRecords(reformatDate) }
+            .getOrElse { it.printStackTrace()
+                emptyList()
+            }
     }
 }
 
