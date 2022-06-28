@@ -7,6 +7,8 @@ import com.best.friends.core.BaseActivity
 import com.best.friends.core.ui.showToast
 import com.best.friends.login.databinding.ActivityKakaoLoginBinding
 import com.best.friends.navigator.HomeNavigator
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
@@ -23,29 +25,47 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
     @Inject
     lateinit var homeNavigator: HomeNavigator
 
+    @Inject
+    lateinit var firebaseMessaging: FirebaseMessaging
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        initFirebase()
         setKakaoLogin()
+        isRegisterUserObserver()
         isSuccessObserver()
+    }
+
+    private fun initFirebase() {
+        firebaseMessaging.token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Timber.e(task.exception)
+                return@OnCompleteListener
+            }
+
+            // Get new FCM registration token
+            val token = task.result
+            viewModel.setFCMToken(token)
+            Timber.i("FCM Token: $token")
+        })
     }
 
     private fun setKakaoLogin() {
         val context = this
         binding.clKakaoLogin.setOnClickListener {
             lifecycleScope.launch {
-                try {
-                    val oAuthToken = UserApiClient.loginWithKakaoOrThrow(context)
-
-                    viewModel.setKakaoAccessToken(oAuthToken.accessToken)
+                kotlin.runCatching {
+                    UserApiClient.loginWithKakaoOrThrow(context)
+                }.onSuccess {
+                    viewModel.setKakaoAccessToken(it.accessToken)
                     registerUser()
-
-                } catch (error: Throwable) {
-                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                }.onFailure {
+                    if (it is ClientError && it.reason == ClientErrorCause.Cancelled) {
                         Timber.d("사용자가 명시적으로 카카오 로그인 취소")
                     } else {
-                        showToast( "로그인에 실패하였습니다")
-                        Timber.e("$error")
+                        showToast("로그인에 실패하였습니다")
+                        Timber.e("$it")
                     }
                 }
             }
@@ -61,6 +81,14 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
                     user.id ?: 0
                 )
                 viewModel.user.value?.let { viewModel.addKakaoUser(it) }
+            }
+        }
+    }
+
+    private fun isRegisterUserObserver(){
+        viewModel.isRegisterUser.observe(this){
+            if (it) {
+                viewModel.addFCMToken()
             }
         }
     }

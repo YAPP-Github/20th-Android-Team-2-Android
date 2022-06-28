@@ -5,6 +5,4 @@ import com.yapp.android2.domain.entity.NotificationResponse
 
 interface NotificationRepository {
 
-    suspend fun postFCMToken(request: NotificationRequest): NotificationResponse
-
 }
