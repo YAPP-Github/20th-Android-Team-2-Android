@@ -22,9 +22,15 @@ class LoginUseCase @Inject constructor(
         loginRepository.saveKakaoAccessToken(token)
     }
 
+    fun saveRefreshToken(token: String){
+        loginRepository.saveRefreshToken(token)
+    }
+
     fun getAccessToken(): String = loginRepository.getAccessToken()
 
     fun getKakaoAccessToken(): String = loginRepository.getKakaoAccessToken()
+
+    fun getRefreshToken(): String = loginRepository.getRefreshToken()
 
     fun saveUser(userId: Long, nickname: String) {
         val user = User(userId, nickname)

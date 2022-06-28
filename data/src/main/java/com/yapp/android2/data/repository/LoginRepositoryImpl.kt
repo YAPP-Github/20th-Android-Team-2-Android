@@ -30,6 +30,12 @@ class LoginRepositoryImpl @Inject constructor(
 
     override fun getKakaoAccessToken(): String = loginLocalDataSource.getKakaoAccessToken()
 
+    override fun saveRefreshToken(refreshToken: String) {
+        loginLocalDataSource.saveRefreshToken(refreshToken)
+    }
+
+    override fun getRefreshToken(): String = loginLocalDataSource.getRefreshToken()
+
     override fun saveUser(user: User) {
         loginLocalDataSource.saveUser(user)
     }

@@ -11,6 +11,8 @@ interface LoginRepository : Repository {
     fun getAccessToken(): String
     fun saveKakaoAccessToken(kakaoToken: String)
     fun getKakaoAccessToken(): String
+    fun saveRefreshToken(refreshToken: String)
+    fun getRefreshToken(): String
     fun saveUser(user: User)
     fun getUser(): User
 }
