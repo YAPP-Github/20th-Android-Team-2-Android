@@ -2,6 +2,7 @@ package com.yapp.android2.data.service.interceptor
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.core.content.edit
 import com.best.friends.login.KaKaoLoginActivity
 import com.google.gson.Gson
@@ -41,7 +42,9 @@ class HeaderInterceptor @Inject constructor(
         when (response.code) {
             401 -> {
                 val refreshToken = preference.getString(REFRESH_TOKEN_KEY, "").orEmpty()
+
                 for (i in 1..REPEAT_NUM) {
+                    response.close()
                     val renewalTokenRequest = chain.request().newBuilder().get().url("${BASE_URL}/api/token")
                         .addHeader(AUTHORIZED, authorization(refreshToken)).build()
                     val renewalTokenResponse = chain.proceed(renewalTokenRequest)
@@ -53,14 +56,18 @@ class HeaderInterceptor @Inject constructor(
                         )
 
                         accessToken = newAccessTokenData.data.accessToken.toString()
+                        renewalTokenResponse.close()
                         val newRequest = chain.request().newBuilder().addHeader(AUTHORIZED, authorization(accessToken)).build()
                         return chain.proceed(newRequest)
+                    }
+                    else {
+                        renewalTokenResponse.close()
                     }
                 }
 
                 // 리프레시 토큰 만료
                 removeTokens()
-                val intent = Intent(context, KaKaoLoginActivity::class.java)
+                val intent = Intent(context, KaKaoLoginActivity::class.java).addFlags(FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
             }
         }
