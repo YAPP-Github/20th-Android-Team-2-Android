@@ -9,8 +9,10 @@ import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.DayOwner
 import com.kizitonwose.calendarview.ui.DayBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
+import com.kizitonwose.calendarview.utils.yearMonth
 import com.yapp.android2.domain.repository.record.Item
 import com.yapp.android2.record.databinding.CalendarItemBinding
+import org.joda.time.DateTime
 import java.time.YearMonth
 import java.time.ZoneId
 import java.time.temporal.WeekFields
@@ -29,7 +31,7 @@ internal class DayBind(private val savingRecords: List<Item>) : DayBinder<DayCon
             container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray2))
         }
 
-        if(savingDays.find { it == Date.from(day.date.atStartOfDay(ZoneId.systemDefault()).toInstant()) } != null) {
+        if(savingDays.any { DateTime.parse(it).dayOfMonth().get() == day.date.dayOfMonth }) {
             container.textView.background = ContextCompat.getDrawable(container.view.context, design.drawable.bg_oval_color_sub)
         }
     }

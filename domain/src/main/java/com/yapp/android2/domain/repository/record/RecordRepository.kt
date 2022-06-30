@@ -2,7 +2,7 @@ package com.yapp.android2.domain.repository.record
 
 import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.entity.User
-import com.yapp.android2.domain.entity.base.Record
+import com.yapp.android2.domain.entity.base.Response
 import com.yapp.android2.domain.repository.Repository
 
 interface RecordRepository : Repository {
@@ -11,6 +11,7 @@ interface RecordRepository : Repository {
 }
 
 data class Item(
-    val record: Record,
-    val totalCount: Int
+    val record: Response,
+    val totalCount: Int,
+    val timesComparedToPrev: Int
 )

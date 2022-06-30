@@ -8,6 +8,8 @@
         <variable
             name="viewModel"
             type="com.yapp.android2.record.RecordViewModel" />
+
+        <import type="android.view.View" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,16 +20,17 @@
             android:id="@+id/tv_total_saving"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_corner15_bg_ff8717"
             android:layout_marginTop="58dp"
+            android:background="@drawable/shape_corner15_bg_ff8717"
+            android:paddingHorizontal="25dp"
             android:paddingVertical="5dp"
-            android:paddingHorizontal="18dp"
             android:text="@{String.format(@string/record_title, viewModel.items.size)}"
             android:textAppearance="@style/Typography.Pill.Bold"
             android:textColor="@android:color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tv_total_price"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_total_price"
+            app:layout_constraintStart_toStartOf="@+id/tv_total_price"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="총 N번의 절약" />
@@ -55,9 +58,11 @@
             android:clipChildren="false"
             android:clipToPadding="false"
             android:orientation="horizontal"
+            android:visibility="@{viewModel.items.empty ? View.GONE : View.VISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_total_price" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_total_price"
+            tools:visibility="gone" />
 
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -68,7 +73,8 @@
             android:padding="10dp"
             android:src="@drawable/icon_left_arrow"
             app:layout_constraintStart_toStartOf="@+id/calendar"
-            app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+            app:layout_constraintTop_toBottomOf="@+id/viewPager"
+            app:layout_goneMarginTop="100dp" />
 
         <TextView
             android:id="@+id/calendar_title"
@@ -82,6 +88,7 @@
             app:layout_constraintEnd_toStartOf="@+id/iv_next_month"
             app:layout_constraintStart_toEndOf="@+id/iv_prev_month"
             app:layout_constraintTop_toBottomOf="@+id/viewPager"
+            app:layout_goneMarginTop="100dp"
             tools:text="2022년 5월" />
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -92,7 +99,8 @@
             android:padding="10dp"
             android:src="@drawable/icon_right_arrow"
             app:layout_constraintEnd_toEndOf="@+id/calendar"
-            app:layout_constraintTop_toBottomOf="@+id/viewPager" />
+            app:layout_constraintTop_toBottomOf="@+id/viewPager"
+            app:layout_goneMarginTop="100dp" />
 
         <View
             android:id="@+id/divider"
@@ -122,6 +130,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="47.9dp"
+            android:layout_marginTop="6dp"
             app:cv_dayViewResource="@layout/calendar_item"
             app:cv_inDateStyle="allMonths"
             app:cv_orientation="horizontal"
