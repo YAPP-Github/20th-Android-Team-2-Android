@@ -2,19 +2,14 @@ package com.yapp.android2.record
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import com.best.friends.core.ui.dpToPx
 import com.kizitonwose.calendarview.CalendarView
-import com.kizitonwose.calendarview.model.InDateStyle
-import com.kizitonwose.calendarview.model.OutDateStyle
-import com.kizitonwose.calendarview.utils.Size
 import com.yapp.android2.domain.repository.record.Item
-import com.yapp.android2.record.view.DayBind
-import com.yapp.android2.record.view.currentMonth
-import com.yapp.android2.record.view.firstDayOfWeek
-import com.yapp.android2.record.view.firstMonth
-import com.yapp.android2.record.view.lastMonth
+import com.yapp.android2.record.view.*
 import java.text.NumberFormat
-import java.util.Locale
+import java.time.LocalDateTime
+import java.time.Month
+import java.time.Year
+import java.util.*
 
 @BindingAdapter("app:totalSaving")
 fun TextView.bindTotalSaving(items: List<Item>?) {
@@ -27,11 +22,33 @@ fun TextView.bindTotalSaving(items: List<Item>?) {
 
 @BindingAdapter("app:savingItems")
 fun CalendarView.bindSavingItems(items: List<Item>?) {
-    if(items.isNullOrEmpty()) {
+    if(items == null) {
         return
     }
 
     dayBinder = DayBind.newInstance(items)
     setup(firstMonth, lastMonth, firstDayOfWeek)
     scrollToMonth(currentMonth)
+}
+
+@BindingAdapter("app:itemSavingMessage")
+fun TextView.bindItemSavingMessage(timesComparedToPrev: Int?) {
+    if(timesComparedToPrev == null) { return }
+
+    val now = LocalDateTime.now()
+
+    val prevMonth = if(now.month == Month.JANUARY) {
+        Month.DECEMBER.value
+    } else {
+        now.monthValue.minus(1)
+    }
+
+    text = context.getString(R.string.record_saving, prevMonth, timesComparedToPrev)
+}
+
+@BindingAdapter("app:price")
+fun TextView.bindingPrice(price: Int?) {
+    if(price != null) {
+        text = context.getString(R.string.record_price, NumberFormat.getInstance(Locale.KOREAN).format(price))
+    }
 }
