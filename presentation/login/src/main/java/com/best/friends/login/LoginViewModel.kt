@@ -22,6 +22,9 @@ class LoginViewModel @Inject constructor(
     private val _accessToken = MutableLiveData<String>()
     val accessToken: LiveData<String> = _accessToken
 
+    private val _refreshToken = MutableLiveData<String>()
+    val refreshToken: LiveData<String> = _refreshToken
+
     private val _kakaoAccessToken = MutableLiveData<String>()
     val kakaoAccessToken: LiveData<String> = _kakaoAccessToken
 
@@ -48,11 +51,16 @@ class LoginViewModel @Inject constructor(
             kotlin.runCatching {
                 loginUseCase.login(userData)
             }.onSuccess {
+                Timber.i("액세스 토큰 : ${it.data.accessToken}")
                 loginUseCase.saveAccessToken(requireNotNull(it.data.accessToken))
+                loginUseCase.saveRefreshToken(requireNotNull(it.data.refreshToken))
                 loginUseCase.saveUser(it.data.userId ?: 0, it.data.nickName.orEmpty())
-                _accessToken.postValue(requireNotNull(it.data.accessToken))
 
+                _accessToken.postValue(requireNotNull(it.data.accessToken))
+                _refreshToken.postValue(requireNotNull(it.data.refreshToken))
+                _isSuccess.postValue(true)
                 _isRegisterUser.postValue(true)
+                
             }.onFailure {
                 Timber.e("$it")
             }

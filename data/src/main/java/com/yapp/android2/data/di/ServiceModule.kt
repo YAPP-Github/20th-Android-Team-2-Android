@@ -4,6 +4,7 @@ import android.content.Context
 import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
+import com.google.gson.Gson
 import com.yapp.android2.data.service.LoginService
 import com.yapp.android2.data.service.NotificationService
 import com.yapp.android2.data.service.ProductsService
@@ -52,9 +53,10 @@ internal object ServiceModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        gson: Gson
     ): Retrofit {
-        val headerInterceptor = HeaderInterceptor(context)
+        val headerInterceptor = HeaderInterceptor(context, gson)
         val logInterceptor = HttpLoggingInterceptor { message ->
             Timber.tag("OKHttp").d(message)
         }
