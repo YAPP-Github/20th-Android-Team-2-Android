@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
 import com.yapp.android2.domain.entity.LoginRequest
+import com.yapp.android2.domain.entity.NotificationRequest
 import com.yapp.android2.domain.usecase.LoginUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -17,12 +18,21 @@ class LoginViewModel @Inject constructor(
 ) : BaseViewModel() {
     private val _user = MutableLiveData<LoginRequest>()
     val user: LiveData<LoginRequest> = _user
+
     private val _accessToken = MutableLiveData<String>()
     val accessToken: LiveData<String> = _accessToken
+
     private val _kakaoAccessToken = MutableLiveData<String>()
     val kakaoAccessToken: LiveData<String> = _kakaoAccessToken
+
+    private val _fcmToken = MutableLiveData<String>()
+    val fcmToken: LiveData<String> = _fcmToken
+
     private val _isSuccess = MutableLiveData(false)
     val isSuccess: LiveData<Boolean> = _isSuccess
+
+    private val _isRegisterUser = MutableLiveData(false)
+    val isRegisterUser: LiveData<Boolean> = _isRegisterUser
 
     fun setKakaoUser(email: String, nickName: String, providerId: Long){
         val user = LoginRequest(
@@ -39,10 +49,10 @@ class LoginViewModel @Inject constructor(
                 loginUseCase.login(userData)
             }.onSuccess {
                 loginUseCase.saveAccessToken(requireNotNull(it.data.accessToken))
-                Timber.i("액세스 토큰 : ${it.data.accessToken}")
                 loginUseCase.saveUser(it.data.userId ?: 0, it.data.nickName.orEmpty())
                 _accessToken.postValue(requireNotNull(it.data.accessToken))
-                _isSuccess.postValue(true)
+
+                _isRegisterUser.postValue(true)
             }.onFailure {
                 Timber.e("$it")
             }
@@ -52,5 +62,23 @@ class LoginViewModel @Inject constructor(
     fun setKakaoAccessToken(token: String){
         _kakaoAccessToken.value = token
         loginUseCase.saveKakaoAccessToken(token)
+    }
+
+
+    fun setFCMToken(token: String){
+        _fcmToken.value = token
+    }
+
+    fun addFCMToken(){
+        viewModelScope.launch {
+            kotlin.runCatching {
+                loginUseCase.postFCMToken(NotificationRequest(requireNotNull(fcmToken.value)))
+            }.onSuccess {
+                Timber.tag("FCM-Server-Connect").d("$it")
+                _isSuccess.postValue(true)
+            }.onFailure {
+                Timber.tag("FCM-Server-Connect").e("$it")
+            }
+        }
     }
 }

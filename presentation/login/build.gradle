@@ -55,6 +55,9 @@ dependencies {
 
     implementation deps.kakao
 
+    implementation platform(deps.firebaseBom)
+    implementation(firebaseDeps)
+
     // testing
     testImplementation(testDeps)
     androidTestImplementation(androidTestDeps)
