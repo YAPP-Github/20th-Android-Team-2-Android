@@ -28,12 +28,6 @@ class FCMService : FirebaseMessagingService() {
         val title = message.data["title"].orEmpty()
         val body= message.data["body"].orEmpty()
 
-        val intent = Intent(this, NotificationActivity::class.java)
-            .putExtra("RemoteMessage", message)
-            .addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_SINGLE_TOP)
-
-        startActivity(intent)
-
         val channelId = "ChannelID"
         val mManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
