@@ -21,17 +21,17 @@
             android:id="@+id/checkbox_click_sections"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="256:80"
-            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintHorizontal_weight="2"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@id/price_click_sections" />
 
         <View
             android:id="@+id/price_click_sections"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/checkbox_click_sections"
