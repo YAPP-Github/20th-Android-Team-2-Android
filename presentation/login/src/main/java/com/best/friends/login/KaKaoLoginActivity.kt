@@ -99,6 +99,7 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
                 // 메인 화면으로 이동
                 val intent = homeNavigator.intent(this)
                 startActivity(intent)
+                finish()
             }
         }
     }

@@ -22,6 +22,7 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
         initAdapter()
         getNotificationList()
         observeNotificationList()
+
     }
 
     private fun initAdapter() {
