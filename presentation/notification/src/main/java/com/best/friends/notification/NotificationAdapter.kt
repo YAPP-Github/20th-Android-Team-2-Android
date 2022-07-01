@@ -8,10 +8,10 @@ import com.yapp.android2.domain.entity.Notification
 
 class NotificationAdapter: RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
 
-    val notificationList = mutableListOf<Notification.Data>()
+    val notificationList = mutableListOf<Notification>()
 
     class NotificationViewHolder(private val binding: ItemNotificationBinding): RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: Notification.Data){
+        fun onBind(data: Notification){
             binding.data = data
         }
     }

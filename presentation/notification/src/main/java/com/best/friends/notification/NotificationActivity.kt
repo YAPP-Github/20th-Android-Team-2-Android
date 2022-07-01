@@ -20,6 +20,23 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
         super.onCreate(savedInstanceState)
 
         initAdapter()
+        getNotificationList()
+        observeNotificationList()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        val message = intent?.getParcelableExtra<RemoteMessage>("RemoteMessage")
+        val data = Notification(
+            message?.data?.get("title").orEmpty(),
+            message?.data?.get("body").orEmpty(),
+            message?.data?.get("elapsedTime").orEmpty(),
+            message?.data?.get("createdAt").orEmpty()
+        )
+        Timber.i("onMessageReceived-onNewIntent: $data")
+        adapter.notificationList.add(data)
+        adapter.notifyItemInserted(adapter.notificationList.size - 1)
     }
 
     private fun initAdapter() {
@@ -27,16 +44,13 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
         binding.rvNotification.adapter = adapter
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
+    private fun getNotificationList() = viewModel.getNotificationList()
 
-        val message = intent?.getParcelableExtra<RemoteMessage>("RemoteMessage")
-        val data = Notification.Data(
-            message?.data?.get("title").orEmpty(),
-            message?.data?.get("body").orEmpty()
-        )
-        Timber.i("onMessageReceived-onNewIntent: $data")
-        adapter.notificationList.add(data)
-        adapter.notifyItemInserted(adapter.notificationList.size - 1)
+    private fun observeNotificationList() {
+        viewModel.notificationList.observe(this) {
+            adapter.notificationList.clear()
+            adapter.notificationList.addAll(it)
+            adapter.notifyDataSetChanged()
+        }
     }
 }
