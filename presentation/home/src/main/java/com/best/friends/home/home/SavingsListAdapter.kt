@@ -23,9 +23,9 @@ internal class SavingsListAdapter(
         ITEM, ADD
     }
 
-    fun submit(products: List<Product>) {
+    fun submit(products: List<Product>, callback: () -> Unit = {}) {
         val list = products.map { it.toSavings() } + Savings.Add
-        submitList(list)
+        submitList(list, callback)
     }
 
     @Suppress("UNCHECKED_CAST")

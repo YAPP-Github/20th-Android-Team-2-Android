@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
@@ -92,7 +90,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     private fun observe() {
         viewModel.state
-            .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.RESUMED)
             .onEach { state ->
                 val (_, day, products) = state
                 binding.tvDay.text = String.format("%d월 %d일", day.monthValue, day.dayOfMonth)

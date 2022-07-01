@@ -42,7 +42,7 @@ class SavingItemUpdateViewModel @Inject constructor(
                 productsRepository.updateProducts(
                     productId = params.product.productId,
                     userId = user.userId,
-                    name = content.value,
+                    name = content.value.trim(),
                     price = price.value
                         .replace(",", "")
                         .replace("원", "")

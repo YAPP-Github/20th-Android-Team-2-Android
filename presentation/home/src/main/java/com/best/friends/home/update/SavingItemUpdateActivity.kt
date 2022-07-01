@@ -69,6 +69,17 @@ class SavingItemUpdateActivity :
     }
 
     private fun initView() {
+        val filter = InputFilter { source, start, end, _, _, _ ->
+            for (i in start until end) {
+                if (Character.isWhitespace(source[i])) {
+                    return@InputFilter ""
+                }
+            }
+            null
+        }
+
+        binding.etItemContent.filters = arrayOf(filter)
+
         binding.etItemPrice.setOnFocusChangeListener { view, hasFocus ->
             val editText = binding.etItemPrice
             val price = viewModel.price.value

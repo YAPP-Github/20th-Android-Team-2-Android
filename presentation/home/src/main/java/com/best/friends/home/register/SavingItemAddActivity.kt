@@ -36,6 +36,7 @@ class SavingItemAddActivity :
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         setToolbar()
+        initView()
         observe()
     }
 
@@ -71,6 +72,19 @@ class SavingItemAddActivity :
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(com.best.friend.design.R.drawable.icon_chevron_left)
         supportActionBar?.title = getString(R.string.saving_item_activity_toolbar_title)
+    }
+
+    private fun initView() {
+        val filter = InputFilter { source, start, end, _, _, _ ->
+            for (i in start until end) {
+                if (Character.isWhitespace(source[i])) {
+                    return@InputFilter ""
+                }
+            }
+            null
+        }
+
+        binding.etItemContent.filters = arrayOf(filter)
     }
 
     private fun observe() {
