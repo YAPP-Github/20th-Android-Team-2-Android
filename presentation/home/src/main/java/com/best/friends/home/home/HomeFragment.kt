@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
@@ -25,6 +27,7 @@ import com.yapp.android2.domain.entity.Product
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import java.text.NumberFormat
 import javax.inject.Inject
 
 /**
@@ -85,11 +88,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             startSavingAddActivity()
         }
 
+        binding.recyclerView.itemAnimator = null
         binding.recyclerView.adapter = adapter
     }
 
     private fun observe() {
         viewModel.state
+            .flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.RESUMED)
             .onEach { state ->
                 val (_, day, products) = state
                 binding.tvDay.text = String.format("%d월 %d일", day.monthValue, day.dayOfMonth)
@@ -101,6 +106,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                     if (products.isNotEmpty()) {
                         adapter.submit(products)
                     }
+
+                    val descriptionText = if (state.priceSum == 0) {
+                        getString(R.string.saving_items_price_sum_default)
+                    } else {
+                        String.format(
+                            getString(R.string.saving_items_price_sum_format),
+                            NumberFormat.getInstance().format(state.priceSum)
+                        )
+                    }
+
+                    binding.tvDescription.text = descriptionText
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)

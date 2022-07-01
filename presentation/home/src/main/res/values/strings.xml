@@ -6,6 +6,8 @@
     <string name="saving_items_empty_title">아직 절약할 항목이 없어요</string>
     <string name="saving_items_empty_description">소소한 지출도 모이면 꽤나 큰 금액이니까.\n평소에 술술 나가는 지출을 잡아보세요! </string>
     <string name="saving_items_add">절약 리스트 추가</string>
+    <string name="saving_items_price_sum_default">절약과 좀 더 친해지는 오늘!</string>
+    <string name="saving_items_price_sum_format">총 %s 원을 아꼈어요!</string>
 
 
     <!-- 절약 추가 -->

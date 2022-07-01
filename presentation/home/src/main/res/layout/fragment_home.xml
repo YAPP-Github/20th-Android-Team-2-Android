@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="절약과 좀 더 친해지는 오늘!"
+                android:text="@string/saving_items_price_sum_default"
                 android:textAppearance="@style/Typography.Body4.Regular"
                 app:layout_constraintEnd_toEndOf="@id/tv_day"
                 app:layout_constraintStart_toStartOf="@id/tv_day"

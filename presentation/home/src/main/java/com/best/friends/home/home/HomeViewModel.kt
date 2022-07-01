@@ -55,6 +55,11 @@ class HomeViewModel @Inject constructor(
             kotlin.runCatching {
                 val user = loginRepository.getUser()
                 recordRepository.updateRecords(product, user)
+            }.onSuccess {
+                val mutableList = _state.value.products.toMutableList()
+                val index = mutableList.indexOfFirst { it.productId == product.productId }
+                mutableList[index] = product.copy(checked = !product.checked)
+                _state.value = _state.value.copy(products = mutableList)
             }.onFailure { throwable ->
                 Timber.e("--- HomeViewModel error: ${throwable.message}")
                 sendErrorMessage(throwable.message)
@@ -66,5 +71,11 @@ class HomeViewModel @Inject constructor(
         val isInitialized: Boolean = false,
         val day: ZonedDateTime = ZonedDateTime.now(ZoneId.systemDefault()),
         val products: List<Product> = emptyList()
-    )
+    ) {
+
+        val priceSum: Int
+            get() = products
+                .filter { it.checked && it.price.isNotBlank() }
+                .sumOf { it.price.toInt() }
+    }
 }
