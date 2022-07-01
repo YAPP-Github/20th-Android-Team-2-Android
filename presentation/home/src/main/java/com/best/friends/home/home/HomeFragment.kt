@@ -19,8 +19,6 @@ import com.best.friends.home.R
 import com.best.friends.home.databinding.FragmentHomeBinding
 import com.best.friends.home.register.SavingItemAddActivity
 import com.best.friends.home.update.SavingItemUpdateActivity
-import com.best.friends.home.update.SavingItemUpdateModule
-import com.best.friends.navigator.Navigator
 import com.best.friends.navigator.NotificationNavigator
 import com.best.friends.navigator.SettingNavigator
 import com.yapp.android2.domain.entity.Product

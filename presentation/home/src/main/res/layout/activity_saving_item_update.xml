@@ -56,12 +56,12 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_rect_gray1_r10"
-                    android:text="@={viewModel.content}"
                     android:hint="@string/saving_items_content_hint"
                     android:importantForAutofill="no"
                     android:inputType="text"
-                    android:maxLength="8"
+                    android:maxLines="1"
                     android:paddingHorizontal="24dp"
+                    android:text="@={viewModel.content}"
                     android:textAppearance="@style/Typography.Body3.Bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -75,10 +75,10 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="14dp"
                     android:padding="6dp"
-                    app:srcCompat="@drawable/icon_close"
-                    app:layout_constraintTop_toTopOf="@id/et_item_content"
                     app:layout_constraintBottom_toBottomOf="@id/et_item_content"
-                    app:layout_constraintEnd_toEndOf="@id/et_item_content" />
+                    app:layout_constraintEnd_toEndOf="@id/et_item_content"
+                    app:layout_constraintTop_toTopOf="@id/et_item_content"
+                    app:srcCompat="@drawable/icon_close" />
 
                 <TextView
                     android:id="@+id/tv_price_title"
@@ -98,12 +98,13 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_rect_gray1_r10"
-                    android:maxLength="6"
-                    android:text="@={viewModel.price}"
                     android:hint="@string/saving_items_price_hint"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:maxLines="1"
                     android:paddingHorizontal="24dp"
+                    android:text="@={viewModel.price}"
                     android:textAppearance="@style/Typography.Body3.Bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -117,10 +118,10 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="14dp"
                     android:padding="6dp"
-                    app:srcCompat="@drawable/icon_close"
-                    app:layout_constraintTop_toTopOf="@id/et_item_price"
                     app:layout_constraintBottom_toBottomOf="@id/et_item_price"
-                    app:layout_constraintEnd_toEndOf="@id/et_item_price" />
+                    app:layout_constraintEnd_toEndOf="@id/et_item_price"
+                    app:layout_constraintTop_toTopOf="@id/et_item_price"
+                    app:srcCompat="@drawable/icon_close" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -128,23 +129,22 @@
 
         <TextView
             android:id="@+id/tv_delete"
-            android:onClick="@{() -> viewModel.onDeleteClick()}"
             android:layout_width="118dp"
             android:layout_height="46dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/bg_rect_gray2_r10"
             android:gravity="center"
+            android:onClick="@{() -> viewModel.onDeleteClick()}"
             android:text="@string/common_delete"
             android:textAppearance="@style/Typography.Button1.Medium"
             android:textColor="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_add" />
+            app:layout_constraintEnd_toStartOf="@id/tv_add"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/tv_add"
-            android:onClick="@{() -> viewModel.onUpdateClick()}"
             android:layout_width="0dp"
             android:layout_height="46dp"
             android:layout_marginStart="10dp"
@@ -153,6 +153,7 @@
             android:background="@drawable/selector_saving_add_button"
             android:enabled="@{!viewModel.content.empty &amp;&amp; !viewModel.price.empty, default=false}"
             android:gravity="center"
+            android:onClick="@{() -> viewModel.onUpdateClick()}"
             android:text="@string/common_update"
             android:textAppearance="@style/Typography.Button1.Medium"
             android:textColor="@color/white"
