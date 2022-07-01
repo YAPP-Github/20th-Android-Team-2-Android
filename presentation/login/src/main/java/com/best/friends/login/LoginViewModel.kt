@@ -51,7 +51,8 @@ class LoginViewModel @Inject constructor(
             kotlin.runCatching {
                 loginUseCase.login(userData)
             }.onSuccess {
-                Timber.i("액세스 토큰 : ${it.data.accessToken}")
+                Timber.i("access token : ${it.data.accessToken}")
+                Timber.i("refresh token : ${it.data.refreshToken}")
                 loginUseCase.saveAccessToken(requireNotNull(it.data.accessToken))
                 loginUseCase.saveRefreshToken(requireNotNull(it.data.refreshToken))
                 loginUseCase.saveUser(it.data.userId ?: 0, it.data.nickName.orEmpty())

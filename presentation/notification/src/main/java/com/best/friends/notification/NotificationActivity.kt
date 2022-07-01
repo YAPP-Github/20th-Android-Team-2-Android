@@ -6,7 +6,7 @@ import androidx.activity.viewModels
 import com.best.friends.core.BaseActivity
 import com.best.friends.notification.databinding.ActivityNotificationBinding
 import com.google.firebase.messaging.RemoteMessage
-import com.yapp.android2.domain.entity.NotificationResponse
+import com.yapp.android2.domain.entity.Notification
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -31,7 +31,7 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
         super.onNewIntent(intent)
 
         val message = intent?.getParcelableExtra<RemoteMessage>("RemoteMessage")
-        val data = NotificationResponse.Data(
+        val data = Notification.Data(
             message?.data?.get("title").orEmpty(),
             message?.data?.get("body").orEmpty()
         )

@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.yapp.android2.domain.entity.NotificationResponse.Data" />
+            type="com.yapp.android2.domain.entity.Notification.Data" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
