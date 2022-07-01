@@ -127,7 +127,7 @@ class SavingItemUpdateActivity :
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(com.best.friend.design.R.drawable.icon_chevron_left)
-        supportActionBar?.title = getString(R.string.saving_item_activity_toolbar_title)
+        supportActionBar?.title = getString(R.string.saving_item_udpate_activity_toolbar_title)
     }
 
     private fun observe() {
