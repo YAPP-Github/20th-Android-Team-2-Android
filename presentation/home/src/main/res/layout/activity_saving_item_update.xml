@@ -101,7 +101,6 @@
                     android:hint="@string/saving_items_price_hint"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
-                    android:maxLength="6"
                     android:maxLines="1"
                     android:paddingHorizontal="24dp"
                     android:text="@={viewModel.price}"

@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.InputFilter
-import android.text.InputType
 import android.text.InputType.TYPE_CLASS_NUMBER
 import android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
 import android.view.MenuItem
@@ -82,10 +81,10 @@ class SavingItemUpdateActivity :
         }
 
         binding.etItemContent.filters = arrayOf(filter)
+
         binding.etItemPrice.inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
         binding.etItemPrice.transformationMethod = null
-
-        binding.etItemPrice.setOnFocusChangeListener { view, hasFocus ->
+        binding.etItemPrice.setOnFocusChangeListener { _, hasFocus ->
             val editText = binding.etItemPrice
             val price = viewModel.price.value
             if (price.isBlank()) {
