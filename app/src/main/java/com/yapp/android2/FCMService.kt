@@ -29,9 +29,7 @@ class FCMService : FirebaseMessagingService() {
         val title = message.data["title"].orEmpty()
         val body= message.data["body"].orEmpty()
 
-        val intent = Intent(this, MainActivity::class.java)
-            .putExtra("RemoteMessage", message)
-            .addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+        val intent = Intent(this, MainActivity::class.java).addFlags(FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
 
         val channelId = "ChannelID"
