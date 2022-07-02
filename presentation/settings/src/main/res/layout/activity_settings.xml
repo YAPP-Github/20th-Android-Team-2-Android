@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -45,16 +41,16 @@
             android:textAppearance="@style/Typography.Body3.Bold"
             android:textColor="@color/gray4"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/tv_when"
+            app:layout_constraintEnd_toStartOf="@+id/tv_created_at"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <TextView
-            android:id="@+id/tv_when"
+            android:id="@+id/tv_created_at"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            android:text="22.05.20 간편가입"
+            tools:text="22.05.20 간편가입"
             android:textAppearance="@style/Typography.Caption2.Medium"
             android:textColor="@color/gray3"
             android:textSize="12sp"
