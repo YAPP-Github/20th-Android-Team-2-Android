@@ -2,10 +2,15 @@ package com.yapp.android2.settings
 
 import android.os.Bundle
 import com.best.friends.core.BaseActivity
+import com.best.friends.navigator.PolicyNavigator
 import com.yapp.android2.settings.databinding.ActivitySettingsBinding
+import javax.inject.Inject
 
 
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity_settings) {
+
+    @Inject
+    lateinit var navigator: PolicyNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -13,7 +18,11 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
         overridePendingTransition(R.anim.activity_in_transition, R.anim.activity_stay_transition)
     }
 
-
+    private fun ActivitySettingsBinding.setOnClickListener() {
+        tvPolicy.setOnClickListener {
+            this@SettingsActivity.startActivity(navigator.intent(this@SettingsActivity))
+        }
+    }
 
     override fun onDestroy() {
         overridePendingTransition(R.anim.activity_out_transition, R.anim.activity_stay_transition)
