@@ -114,6 +114,17 @@ class HomeViewModel @Inject constructor(
             get() = products
                 .filter { it.checked && it.price.isNotBlank() }
                 .sumOf { it.price.toInt() }
+
+        val isPastDate: Boolean
+            get() {
+                val now = ZonedDateTime.now()
+                val todayMidnight = ZonedDateTime.of(
+                    now.year,
+                    now.monthValue,
+                    now.dayOfMonth, 0, 0, 0, 0, ZoneId.systemDefault()
+                )
+                return day.isBefore(todayMidnight)
+            }
     }
 
     sealed class Action {

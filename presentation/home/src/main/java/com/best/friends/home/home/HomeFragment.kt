@@ -99,8 +99,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                 binding.tvDay.text = String.format("%d월 %d일", day.monthValue, day.dayOfMonth)
 
                 if (state.isInitialized) {
-                    binding.layout.visible()
-                    binding.emptyView.root.visibleOrGone(products.isEmpty())
+                    binding.recyclerView.visibleOrGone(products.isNotEmpty())
+                    binding.emptyView.root.visibleOrGone(!state.isPastDate && products.isEmpty())
+                    binding.tvEmptyTitle.visibleOrGone(state.isPastDate && products.isEmpty())
+
 
                     if (products.isNotEmpty()) {
                         adapter.submit(products)
