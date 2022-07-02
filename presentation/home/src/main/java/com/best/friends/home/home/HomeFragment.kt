@@ -12,11 +12,10 @@ import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.ui.showToast
-import com.best.friends.core.ui.visible
 import com.best.friends.core.ui.visibleOrGone
 import com.best.friends.home.R
 import com.best.friends.home.databinding.FragmentHomeBinding
-import com.best.friends.home.home.HomeViewModel.Action.*
+import com.best.friends.home.home.HomeViewModel.Action.CalendarClick
 import com.best.friends.home.register.SavingItemAddActivity
 import com.best.friends.home.update.SavingItemUpdateActivity
 import com.best.friends.navigator.NotificationNavigator
@@ -102,7 +101,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                     binding.recyclerView.visibleOrGone(products.isNotEmpty())
                     binding.emptyView.root.visibleOrGone(!state.isPastDate && products.isEmpty())
                     binding.tvEmptyTitle.visibleOrGone(state.isPastDate && products.isEmpty())
-
 
                     if (products.isNotEmpty()) {
                         adapter.submit(products)
