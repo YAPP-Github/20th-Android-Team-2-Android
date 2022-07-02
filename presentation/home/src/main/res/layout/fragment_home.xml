@@ -28,10 +28,9 @@
 
             <ImageView
                 android:id="@+id/iv_notifications"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginEnd="8dp"
-                android:padding="6dp"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:padding="4dp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_settings"
                 app:layout_constraintEnd_toStartOf="@id/iv_settings"
                 app:layout_constraintTop_toTopOf="@id/iv_settings"
@@ -39,10 +38,10 @@
 
             <ImageView
                 android:id="@+id/iv_settings"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
                 android:layout_marginEnd="16dp"
-                android:padding="6dp"
+                android:padding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/icon_settings" />
@@ -97,7 +96,7 @@
                 android:id="@+id/tv_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
+                android:layout_marginStart="6dp"
                 android:layout_marginTop="4dp"
                 android:text="@string/saving_items_price_sum_default"
                 android:textAppearance="@style/Typography.Body4.Regular"
