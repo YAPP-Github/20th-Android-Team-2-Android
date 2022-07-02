@@ -10,10 +10,10 @@
 
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="192dp"
-            android:src="@drawable/app_logo"
+            android:src="@drawable/icon_splash"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/my_best_friends"
                 android:textAppearance="@style/Typography.Body3.Regular"
-                android:textColor="@color/gray3"
+                android:textColor="@color/gray4"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/best_friends"
                 android:textAppearance="@style/Typography.Body3.Bold"
-                android:textColor="@color/gray3"
+                android:textColor="@color/gray4"
                 app:layout_constraintStart_toEndOf="@id/tv_splash_description"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
