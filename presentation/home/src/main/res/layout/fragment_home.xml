@@ -19,15 +19,12 @@
         android:background="@color/white">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/iv_notifications"
@@ -52,6 +49,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_chevron_left"
+                android:onClick="@{() -> viewModel.onPrevArrowClick()}"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="46dp"
@@ -63,6 +61,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_chevron_right"
+                android:onClick="@{() -> viewModel.onNextArrowClick()}"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="46dp"
@@ -87,6 +86,7 @@
                 android:id="@+id/iv_calendar"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
+                android:onClick="@{() -> viewModel.onCalendarClick()}"
                 android:padding="6dp"
                 app:layout_constraintBottom_toBottomOf="@id/tv_day"
                 app:layout_constraintStart_toEndOf="@id/tv_day"
@@ -112,6 +112,7 @@
                 android:overScrollMode="never"
                 android:paddingTop="18dp"
                 android:scrollbars="none"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -127,8 +128,21 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_notifications"
+                app:layout_constraintTop_toBottomOf="@id/tv_description"
                 tools:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_empty_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saving_items_empty_title"
+                android:textAppearance="@style/Typography.Body1.Bold"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

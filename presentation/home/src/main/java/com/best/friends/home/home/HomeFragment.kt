@@ -1,6 +1,7 @@
 package com.best.friends.home.home
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.best.friends.core.ui.visible
 import com.best.friends.core.ui.visibleOrGone
 import com.best.friends.home.R
 import com.best.friends.home.databinding.FragmentHomeBinding
+import com.best.friends.home.home.HomeViewModel.Action.*
 import com.best.friends.home.register.SavingItemAddActivity
 import com.best.friends.home.update.SavingItemUpdateActivity
 import com.best.friends.navigator.NotificationNavigator
@@ -24,6 +26,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.text.NumberFormat
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import javax.inject.Inject
 
 /**
@@ -95,8 +99,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                 binding.tvDay.text = String.format("%d월 %d일", day.monthValue, day.dayOfMonth)
 
                 if (state.isInitialized) {
-                    binding.layout.visible()
-                    binding.emptyView.root.visibleOrGone(products.isEmpty())
+                    binding.recyclerView.visibleOrGone(products.isNotEmpty())
+                    binding.emptyView.root.visibleOrGone(!state.isPastDate && products.isEmpty())
+                    binding.tvEmptyTitle.visibleOrGone(state.isPastDate && products.isEmpty())
+
 
                     if (products.isNotEmpty()) {
                         adapter.submit(products)
@@ -116,9 +122,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
 
+        viewModel.action.onEach { action ->
+            when (action) {
+                is CalendarClick -> showDatePicker(action.currentDay)
+            }
+        }.launchIn(viewLifecycleOwner.lifecycleScope)
+
         viewModel.error
             .onEach { errorMessage -> showToast(errorMessage) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun showDatePicker(zonedDateTime: ZonedDateTime) {
+        DatePickerDialog(requireContext(), { _, year, month, dayOfMonth ->
+            val new = ZonedDateTime.of(
+                year,
+                month + 1,
+                dayOfMonth,
+                0, 0, 0, 0, ZoneId.systemDefault()
+            )
+
+            viewModel.getProductsSelectDay(new)
+        }, zonedDateTime.year, zonedDateTime.month.value - 1, zonedDateTime.dayOfMonth).show()
     }
 
     private fun startSavingUpdateActivity(product: Product) {
