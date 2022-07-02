@@ -22,7 +22,7 @@ class OnSingleClickListener(
 }
 
 fun View.setOnSingleClickListener(
-    interval: Int = 500,
+    interval: Int = 200,
     onClick: (View) -> Unit = { }
 ) {
     setOnClickListener(OnSingleClickListener(interval, onClick))
@@ -32,12 +32,12 @@ fun View.setOnSingleClickListener(
 fun setOnSingleClickListener(
     view: View,
     listener: View.OnClickListener?,
-    throttleMillis: Long? = 500
+    throttleMillis: Long? = 200
 ) {
     view.setOnClickListener(listener?.let {
         View.OnClickListener {
             val lastClickedAt = (view.getTag(R.id.last_click_at) as Long?) ?: 0L
-            if (System.currentTimeMillis() > lastClickedAt + (throttleMillis ?: 1000L)) {
+            if (System.currentTimeMillis() > lastClickedAt + (throttleMillis ?: 200L)) {
                 listener.onClick(view)
                 view.setTag(R.id.last_click_at, System.currentTimeMillis())
             }

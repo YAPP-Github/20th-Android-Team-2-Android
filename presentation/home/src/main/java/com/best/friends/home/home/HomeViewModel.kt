@@ -104,6 +104,18 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun onPrevArrowClick() {
+        val currentDay = _state.value.day
+        val prevDay = currentDay.minusDays(1L)
+        getProductsSelectDay(prevDay)
+    }
+
+    fun onNextArrowClick() {
+        val currentDay = _state.value.day
+        val nextDay = currentDay.plusDays(1L)
+        getProductsSelectDay(nextDay)
+    }
+
     data class State(
         val isInitialized: Boolean = false,
         val day: ZonedDateTime = ZonedDateTime.now(ZoneId.systemDefault()),

@@ -49,6 +49,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_chevron_left"
+                android:onClick="@{() -> viewModel.onPrevArrowClick()}"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="46dp"
@@ -60,6 +61,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_chevron_right"
+                android:onClick="@{() -> viewModel.onNextArrowClick()}"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:layout_marginEnd="46dp"
