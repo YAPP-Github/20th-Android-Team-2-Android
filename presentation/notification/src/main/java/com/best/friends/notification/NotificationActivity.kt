@@ -1,14 +1,10 @@
 package com.best.friends.notification
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.best.friends.core.BaseActivity
 import com.best.friends.notification.databinding.ActivityNotificationBinding
-import com.google.firebase.messaging.RemoteMessage
-import com.yapp.android2.domain.entity.Notification
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.activity_notification) {
@@ -22,7 +18,7 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
         initAdapter()
         getNotificationList()
         observeNotificationList()
-
+        setBackBtnClickListner()
     }
 
     private fun initAdapter() {
@@ -37,6 +33,12 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
             adapter.notificationList.clear()
             adapter.notificationList.addAll(it)
             adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun setBackBtnClickListner() {
+        binding.ivBack.setOnClickListener {
+            finish()
         }
     }
 }
