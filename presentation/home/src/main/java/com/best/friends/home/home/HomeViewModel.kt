@@ -7,8 +7,12 @@ import com.yapp.android2.domain.repository.ProductsRepository
 import com.yapp.android2.domain.repository.login.LoginRepository
 import com.yapp.android2.domain.repository.record.RecordRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.time.ZoneId
@@ -24,7 +28,11 @@ class HomeViewModel @Inject constructor(
 
     private val _state = MutableStateFlow(State())
     val state: StateFlow<State>
-        get() = _state
+        get() = _state.asStateFlow()
+
+    private val _action = MutableSharedFlow<Action>()
+    val action: SharedFlow<Action>
+        get() = _action.asSharedFlow()
 
     init {
         getProductsToday()
@@ -50,6 +58,28 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun getProductsSelectDay(zonedDateTime: ZonedDateTime) {
+        viewModelScope.launch {
+            _loading.value = true
+            kotlin.runCatching {
+                productsRepository.getProductsByZonedDateTime(zonedDateTime)
+            }.onSuccess { products ->
+                _state.value = _state.value.copy(
+                    day = zonedDateTime,
+                    products = products
+                )
+            }.onFailure { throwable ->
+                _state.value = _state.value.copy(
+                    day = zonedDateTime,
+                    products = emptyList()
+                )
+                sendErrorMessage(throwable.message)
+            }
+
+            _loading.value = false
+        }
+    }
+
     fun checkSavingItem(product: Product) {
         viewModelScope.launch {
             kotlin.runCatching {
@@ -67,6 +97,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    fun onCalendarClick() {
+        viewModelScope.launch {
+            val currentDay = _state.value.day
+            _action.emit(Action.CalendarClick(currentDay))
+        }
+    }
+
     data class State(
         val isInitialized: Boolean = false,
         val day: ZonedDateTime = ZonedDateTime.now(ZoneId.systemDefault()),
@@ -77,5 +114,9 @@ class HomeViewModel @Inject constructor(
             get() = products
                 .filter { it.checked && it.price.isNotBlank() }
                 .sumOf { it.price.toInt() }
+    }
+
+    sealed class Action {
+        data class CalendarClick(val currentDay: ZonedDateTime) : Action()
     }
 }

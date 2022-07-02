@@ -22,7 +22,7 @@ class OnSingleClickListener(
 }
 
 fun View.setOnSingleClickListener(
-    interval: Int = 1000,
+    interval: Int = 500,
     onClick: (View) -> Unit = { }
 ) {
     setOnClickListener(OnSingleClickListener(interval, onClick))
@@ -32,7 +32,7 @@ fun View.setOnSingleClickListener(
 fun setOnSingleClickListener(
     view: View,
     listener: View.OnClickListener?,
-    throttleMillis: Long? = 1000
+    throttleMillis: Long? = 500
 ) {
     view.setOnClickListener(listener?.let {
         View.OnClickListener {
