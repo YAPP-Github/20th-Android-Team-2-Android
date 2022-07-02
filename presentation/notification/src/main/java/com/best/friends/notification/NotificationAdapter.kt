@@ -4,14 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.best.friends.notification.databinding.ItemNotificationBinding
-import com.yapp.android2.domain.entity.NotificationResponse
+import com.yapp.android2.domain.entity.Notification
 
 class NotificationAdapter: RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
 
-    val notificationList = mutableListOf<NotificationResponse.Data>()
+    val notificationList = mutableListOf<Notification>()
 
     class NotificationViewHolder(private val binding: ItemNotificationBinding): RecyclerView.ViewHolder(binding.root) {
-        fun onBind(data: NotificationResponse.Data){
+        fun onBind(data: Notification){
             binding.data = data
         }
     }

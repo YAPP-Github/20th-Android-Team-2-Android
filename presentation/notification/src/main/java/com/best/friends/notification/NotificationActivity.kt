@@ -1,14 +1,10 @@
 package com.best.friends.notification
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.best.friends.core.BaseActivity
 import com.best.friends.notification.databinding.ActivityNotificationBinding
-import com.google.firebase.messaging.RemoteMessage
-import com.yapp.android2.domain.entity.NotificationResponse
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.activity_notification) {
@@ -20,6 +16,9 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
         super.onCreate(savedInstanceState)
 
         initAdapter()
+        getNotificationList()
+        observeNotificationList()
+        setBackBtnClickListner()
     }
 
     private fun initAdapter() {
@@ -27,16 +26,19 @@ class NotificationActivity : BaseActivity<ActivityNotificationBinding>(R.layout.
         binding.rvNotification.adapter = adapter
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
+    private fun getNotificationList() = viewModel.getNotificationList()
 
-        val message = intent?.getParcelableExtra<RemoteMessage>("RemoteMessage")
-        val data = NotificationResponse.Data(
-            message?.data?.get("title").orEmpty(),
-            message?.data?.get("body").orEmpty()
-        )
-        Timber.i("onMessageReceived-onNewIntent: $data")
-        adapter.notificationList.add(data)
-        adapter.notifyItemInserted(adapter.notificationList.size - 1)
+    private fun observeNotificationList() {
+        viewModel.notificationList.observe(this) {
+            adapter.notificationList.clear()
+            adapter.notificationList.addAll(it)
+            adapter.notifyDataSetChanged()
+        }
+    }
+
+    private fun setBackBtnClickListner() {
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 }

@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.yapp.android2.domain.entity.NotificationResponse.Data" />
+            type="com.yapp.android2.domain.entity.Notification" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:text="@{data.elapsedTime}"
             android:textAppearance="@style/Typography.Body5.Regular"
             android:textColor="@color/gray3"
             app:layout_constraintEnd_toEndOf="parent"

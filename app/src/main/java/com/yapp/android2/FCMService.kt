@@ -3,13 +3,14 @@ package com.yapp.android2
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
-import android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.os.Build
 import androidx.core.app.NotificationCompat
-import com.best.friends.notification.NotificationActivity
+import com.best.friends.home.MainActivity
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import timber.log.Timber
@@ -28,11 +29,8 @@ class FCMService : FirebaseMessagingService() {
         val title = message.data["title"].orEmpty()
         val body= message.data["body"].orEmpty()
 
-        val intent = Intent(this, NotificationActivity::class.java)
-            .putExtra("RemoteMessage", message)
-            .addFlags(FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_SINGLE_TOP)
-
-        startActivity(intent)
+        val intent = Intent(this, MainActivity::class.java).addFlags(FLAG_ACTIVITY_CLEAR_TOP)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
 
         val channelId = "ChannelID"
         val mManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -59,6 +57,7 @@ class FCMService : FirebaseMessagingService() {
             setWhen(System.currentTimeMillis())
             setContentTitle(title)
             setContentText(body)
+            setContentIntent(pendingIntent)
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             builder.setContentTitle(title)
