@@ -2,6 +2,7 @@ package com.yapp.android2.domain.usecase
 
 import com.yapp.android2.domain.entity.*
 import com.yapp.android2.domain.repository.login.LoginRepository
+import java.time.LocalDateTime
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(
@@ -34,8 +35,8 @@ class LoginUseCase @Inject constructor(
 
     fun getRefreshToken(): String = loginRepository.getRefreshToken()
 
-    fun saveUser(userId: Long, nickname: String) {
-        val user = User(userId, nickname)
+    fun saveUser(userId: Long, nickname: String, email: String, createAt: LocalDateTime) {
+        val user = User(userId, nickname, email, createAt)
         loginRepository.saveUser(user)
     }
 }
