@@ -19,10 +19,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:layout_width="0dp"
+            android:layout_width="220dp"
             android:layout_height="50dp"
             android:layout_marginBottom="30dp"
-            android:layout_marginHorizontal="70dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="100dp"
             app:cardElevation="10dp"

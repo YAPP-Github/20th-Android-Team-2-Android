@@ -6,6 +6,8 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.InputFilter
+import android.text.InputType.TYPE_CLASS_NUMBER
+import android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
@@ -13,6 +15,7 @@ import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
+import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.ui.showToast
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemAddBinding
@@ -36,6 +39,7 @@ class SavingItemAddActivity :
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
         setToolbar()
+        initView()
         observe()
     }
 
@@ -67,10 +71,26 @@ class SavingItemAddActivity :
     }
 
     private fun setToolbar() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setHomeAsUpIndicator(com.best.friend.design.R.drawable.icon_chevron_left)
-        supportActionBar?.title = getString(R.string.saving_item_activity_toolbar_title)
+        binding.ivBack.setOnSingleClickListener {
+            onBackPressed()
+        }
+
+        binding.tvToolbarTitle.text = getString(R.string.saving_item_activity_toolbar_title)
+    }
+
+    private fun initView() {
+        val filter = InputFilter { source, start, end, _, _, _ ->
+            for (i in start until end) {
+                if (Character.isWhitespace(source[i])) {
+                    return@InputFilter ""
+                }
+            }
+            null
+        }
+
+        binding.etItemContent.filters = arrayOf(filter)
+        binding.etItemPrice.inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
+        binding.etItemPrice.transformationMethod = null
     }
 
     private fun observe() {

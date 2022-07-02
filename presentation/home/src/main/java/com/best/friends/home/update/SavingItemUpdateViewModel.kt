@@ -2,7 +2,6 @@ package com.best.friends.home.update
 
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
-import com.best.friends.core.ui.Empty
 import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.repository.ProductsRepository
 import com.yapp.android2.domain.repository.login.LoginRepository
@@ -42,7 +41,7 @@ class SavingItemUpdateViewModel @Inject constructor(
                 productsRepository.updateProducts(
                     productId = params.product.productId,
                     userId = user.userId,
-                    name = content.value,
+                    name = content.value.trim(),
                     price = price.value
                         .replace(",", "")
                         .replace("원", "")

@@ -5,8 +5,8 @@ import com.yapp.android2.data.remote.request.PostProductsRequest
 import com.yapp.android2.data.remote.request.UpdateProductsRequest
 import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.repository.ProductsRepository
-import timber.log.Timber
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
@@ -16,10 +16,12 @@ class ProductsRepositoryImpl @Inject constructor(
 
     override suspend fun getProductsToday(): List<Product> {
         val now = LocalDateTime.now()
-        val recordYmd = DateTimeFormatter.ofPattern("yyyyMMdd").format(now).also {
-            Timber.i("--- ProductsRepository recordYmd: $it")
-        }
+        val recordYmd = DateTimeFormatter.ofPattern("yyyyMMdd").format(now)
+        return getProductsByYmd(recordYmd)
+    }
 
+    override suspend fun getProductsByZonedDateTime(zonedDateTime: ZonedDateTime): List<Product> {
+        val recordYmd = DateTimeFormatter.ofPattern("yyyyMMdd").format(zonedDateTime)
         return getProductsByYmd(recordYmd)
     }
 

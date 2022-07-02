@@ -17,6 +17,26 @@
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="10dp">
 
+        <View
+            android:id="@+id/checkbox_click_sections"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHorizontal_weight="2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/price_click_sections" />
+
+        <View
+            android:id="@+id/price_click_sections"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/checkbox_click_sections"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <CheckBox
             android:id="@+id/checkbox"
             android:layout_width="26dp"
@@ -34,6 +54,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@{product.name}"
+            android:maxLength="6"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textAppearance="@style/Typography.H2.Bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -15,15 +15,35 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
-        <androidx.appcompat.widget.Toolbar
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
-            app:contentInsetStart="0dp"
-            app:contentInsetStartWithNavigation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_back"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:padding="12dp"
+                app:srcCompat="@drawable/icon_chevron_left"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/Typography.H2.Medium"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_back"
+                tools:text="절약 추가" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
@@ -56,12 +76,12 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_rect_gray1_r10"
-                    android:text="@={viewModel.content}"
                     android:hint="@string/saving_items_content_hint"
                     android:importantForAutofill="no"
                     android:inputType="text"
-                    android:maxLength="8"
+                    android:maxLines="1"
                     android:paddingHorizontal="24dp"
+                    android:text="@={viewModel.content}"
                     android:textAppearance="@style/Typography.Body3.Bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -87,12 +107,13 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/bg_rect_gray1_r10"
-                    android:maxLength="6"
-                    android:text="@={viewModel.price}"
                     android:hint="@string/saving_items_price_hint"
                     android:importantForAutofill="no"
                     android:inputType="numberDecimal"
+                    android:maxLength="6"
+                    android:maxLines="1"
                     android:paddingHorizontal="24dp"
+                    android:text="@={viewModel.price}"
                     android:textAppearance="@style/Typography.Body3.Bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -106,7 +127,6 @@
 
         <TextView
             android:id="@+id/tv_add"
-            android:onClick="@{() -> viewModel.addSavingItem()}"
             android:layout_width="0dp"
             android:layout_height="46dp"
             android:layout_marginHorizontal="16dp"
@@ -114,6 +134,7 @@
             android:background="@drawable/selector_saving_add_button"
             android:enabled="@{!viewModel.content.empty &amp;&amp; !viewModel.price.empty, default=false}"
             android:gravity="center"
+            android:onClick="@{() -> viewModel.addSavingItem()}"
             android:text="@string/common_register"
             android:textAppearance="@style/Typography.Button1.Medium"
             android:textColor="@color/white"

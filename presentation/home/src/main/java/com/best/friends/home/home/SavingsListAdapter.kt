@@ -2,8 +2,6 @@ package com.best.friends.home.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.best.friends.core.AbstractViewHolder
@@ -25,9 +23,9 @@ internal class SavingsListAdapter(
         ITEM, ADD
     }
 
-    fun submit(products: List<Product>) {
+    fun submit(products: List<Product>, callback: () -> Unit = {}) {
         val list = products.map { it.toSavings() } + Savings.Add
-        submitList(list)
+        submitList(list, callback)
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -73,12 +71,22 @@ internal class SavingsListAdapter(
         private val onItemChecked: (product: Product) -> Unit
     ) : AbstractViewHolder<Savings.Item>(binding.root) {
 
-        override fun bind(data: Savings.Item) {
-            val product = data.product
-            binding.product = product
-            binding.root.setOnSingleClickListener {
-                onItemClick.invoke(product)
+        private lateinit var product: Product
+
+        init {
+            binding.checkboxClickSections.setOnSingleClickListener(100) {
+                binding.checkbox.isChecked = !binding.checkbox.isChecked
             }
+            binding.priceClickSections.setOnSingleClickListener(100) {
+                if (::product.isInitialized) {
+                    onItemClick.invoke(product)
+                }
+            }
+        }
+
+        override fun bind(data: Savings.Item) {
+            product = data.product
+            binding.product = product
             binding.checkbox.setOnCheckedChangeListener(null)
             binding.checkbox.isChecked = (product.checked == true)
             binding.checkbox.setOnCheckedChangeListener { _, _ ->

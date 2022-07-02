@@ -35,7 +35,7 @@ class SavingItemAddViewModel @Inject constructor(
                 val user = loginRepository.getUser()
                 productsRepository.postProducts(
                     userId = user.userId,
-                    name = content.value,
+                    name = content.value.trim(),
                     price = price.value
                         .replace(",", "")
                         .replace("원", "")
