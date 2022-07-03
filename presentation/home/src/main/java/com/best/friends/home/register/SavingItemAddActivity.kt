@@ -79,16 +79,6 @@ class SavingItemAddActivity :
     }
 
     private fun initView() {
-        val filter = InputFilter { source, start, end, _, _, _ ->
-            for (i in start until end) {
-                if (Character.isWhitespace(source[i])) {
-                    return@InputFilter ""
-                }
-            }
-            null
-        }
-
-        binding.etItemContent.filters = arrayOf(filter)
         binding.etItemPrice.inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
         binding.etItemPrice.transformationMethod = null
     }
@@ -109,7 +99,25 @@ class SavingItemAddActivity :
             }
             .launchIn(lifecycleScope)
 
-        binding.etItemPrice.setOnFocusChangeListener { view, hasFocus ->
+        binding.etItemContent.setOnFocusChangeListener { _, hasFocus ->
+            val editText = binding.etItemContent
+            val whiteSpaceFilter = InputFilter { source, start, end, _, _, _ ->
+                if (binding.etItemContent.text.isBlank()) {
+                    for (i in start until end) {
+                        if (Character.isWhitespace(source[i])) {
+                            return@InputFilter ""
+                        }
+                    }
+                }
+                null
+            }
+
+            if (hasFocus) {
+                editText.filters = arrayOf(whiteSpaceFilter)
+            }
+        }
+
+        binding.etItemPrice.setOnFocusChangeListener { _, hasFocus ->
             val editText = binding.etItemPrice
             val price = viewModel.price.value
             if (price.isBlank()) {

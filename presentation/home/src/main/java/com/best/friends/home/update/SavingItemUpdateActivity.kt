@@ -1,6 +1,5 @@
 package com.best.friends.home.update
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -76,6 +75,24 @@ class SavingItemUpdateActivity :
     }
 
     private fun initView() {
+        binding.etItemContent.setOnFocusChangeListener { _, hasFocus ->
+            val editText = binding.etItemContent
+            val whiteSpaceFilter = InputFilter { source, start, end, _, _, _ ->
+                if (binding.etItemContent.text.isBlank()) {
+                    for (i in start until end) {
+                        if (Character.isWhitespace(source[i])) {
+                            return@InputFilter ""
+                        }
+                    }
+                }
+                null
+            }
+
+            if (hasFocus) {
+                editText.filters = arrayOf(whiteSpaceFilter)
+            }
+        }
+
         binding.etItemPrice.inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
         binding.etItemPrice.transformationMethod = null
         binding.etItemPrice.setOnFocusChangeListener { _, hasFocus ->
@@ -85,17 +102,8 @@ class SavingItemUpdateActivity :
                 return@setOnFocusChangeListener
             }
 
-            val whiteSpaceFilter = InputFilter { source, start, end, _, _, _ ->
-                for (i in start until end) {
-                    if (Character.isWhitespace(source[i])) {
-                        return@InputFilter ""
-                    }
-                }
-                null
-            }
-
             if (hasFocus) {
-                editText.filters = arrayOf(whiteSpaceFilter, InputFilter.LengthFilter(6))
+                editText.filters = arrayOf(InputFilter.LengthFilter(6))
                 val onlyNumber = price
                     .replace(",", "")
                     .replace("원", "")
@@ -148,7 +156,7 @@ class SavingItemUpdateActivity :
                             description = getString(R.string.saving_item_update_popup_description),
                             negativeButtonName = getString(common_cancel),
                             positiveButtonName = getString(common_update),
-                            positiveAction = { setResult(Activity.RESULT_OK); finish() }
+                            positiveAction = { setResult(RESULT_OK); finish() }
                         )
                     }
                     Delete -> {
@@ -157,7 +165,7 @@ class SavingItemUpdateActivity :
                             description = getString(R.string.saving_item_delete_popup_description),
                             negativeButtonName = getString(common_cancel),
                             positiveButtonName = getString(common_delete),
-                            positiveAction = { setResult(Activity.RESULT_OK); finish() }
+                            positiveAction = { setResult(RESULT_OK); finish() }
                         )
                     }
                 }
