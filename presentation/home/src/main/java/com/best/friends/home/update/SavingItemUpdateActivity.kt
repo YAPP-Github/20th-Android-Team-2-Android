@@ -175,7 +175,9 @@ class SavingItemUpdateActivity :
         positiveButtonName: String,
         positiveAction: () -> Unit = {}
     ) {
-        HorizontalButtonsDialogFragment.newInstance(
+        HorizontalButtonsDialogFragment.show(
+            supportFragmentManager,
+            lifecycleOwner = this,
             title = title,
             description = description,
             negativeButtonName = negativeButtonName,

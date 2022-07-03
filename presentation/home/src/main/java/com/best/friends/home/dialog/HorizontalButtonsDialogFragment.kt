@@ -1,15 +1,17 @@
 package com.best.friends.home.dialog
 
-import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.LifecycleOwner
 import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.home.databinding.FragmentDialogHorizontalButtonsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +32,8 @@ class HorizontalButtonsDialogFragment private constructor() : DialogFragment() {
     ): View {
         binding = FragmentDialogHorizontalButtonsBinding.inflate(inflater)
         binding.lifecycleOwner = viewLifecycleOwner
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         return binding.root
     }
 
@@ -62,14 +66,16 @@ class HorizontalButtonsDialogFragment private constructor() : DialogFragment() {
         private const val RESULT_NEGATIVE_ACTION = "result_negative_action"
         private const val RESULT_POSITIVE_ACTION = "result_positive_action"
 
-        fun newInstance(
+        fun show(
+            fragmentManager: FragmentManager,
+            lifecycleOwner: LifecycleOwner,
             title: String,
             description: String,
             negativeButtonName: String,
             negativeAction: () -> Unit = {},
             positiveButtonName: String,
             positiveAction: () -> Unit = {},
-        ): HorizontalButtonsDialogFragment {
+        ) {
             return HorizontalButtonsDialogFragment().apply {
                 arguments = bundleOf(
                     TITLE to title,
@@ -77,7 +83,8 @@ class HorizontalButtonsDialogFragment private constructor() : DialogFragment() {
                     NEGATIVE_BUTTON_NAME to negativeButtonName,
                     POSITIVE_BUTTON_NAME to positiveButtonName
                 )
-                setFragmentResultListener(RESULT) { _, bundle ->
+            }.also {
+                fragmentManager.setFragmentResultListener(RESULT, lifecycleOwner) { _, bundle ->
                     when {
                         bundle.getBoolean(RESULT_NEGATIVE_ACTION, false) -> {
                             negativeAction.invoke()
@@ -87,15 +94,7 @@ class HorizontalButtonsDialogFragment private constructor() : DialogFragment() {
                         }
                     }
                 }
-            }
-        }
-
-        fun HorizontalButtonsDialogFragment.show(fragmentManager: FragmentManager) {
-            fragmentManager.executePendingTransactions()
-            val fragment = fragmentManager.findFragmentByTag(TAG)
-            if (fragment == null && !isAdded) {
-                show(fragmentManager, TAG)
-            }
+            }.show(fragmentManager, TAG)
         }
     }
 }
