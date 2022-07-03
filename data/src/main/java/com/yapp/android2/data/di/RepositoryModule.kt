@@ -1,6 +1,10 @@
 package com.yapp.android2.data.di
 
-import com.yapp.android2.data.repository.*
+import com.yapp.android2.data.repository.LoginRepositoryImpl
+import com.yapp.android2.data.repository.NotificationRepositoryImpl
+import com.yapp.android2.data.repository.RecordRepositoryImpl
+import com.yapp.android2.data.repository.SettingRepositoryImpl
+import com.yapp.android2.data.repository.ProductsRepositoryImpl
 import com.yapp.android2.domain.repository.Notification.NotificationRepository
 import com.yapp.android2.domain.repository.ProductsRepository
 import com.yapp.android2.domain.repository.login.LoginRepository
