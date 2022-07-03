@@ -156,16 +156,15 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/bg_rect_gray2_r10"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.onDeleteClick()}"
             android:text="@string/common_delete"
             android:textAppearance="@style/Typography.Button1.Medium"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_add"
+            app:layout_constraintEnd_toStartOf="@id/tv_update"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/tv_add"
+            android:id="@+id/tv_update"
             android:layout_width="0dp"
             android:layout_height="46dp"
             android:layout_marginStart="10dp"
@@ -174,7 +173,6 @@
             android:background="@drawable/selector_saving_add_button"
             android:enabled="@{!viewModel.content.empty &amp;&amp; !viewModel.price.empty, default=false}"
             android:gravity="center"
-            android:onClick="@{() -> viewModel.onUpdateClick()}"
             android:text="@string/common_update"
             android:textAppearance="@style/Typography.Button1.Medium"
             android:textColor="@color/white"

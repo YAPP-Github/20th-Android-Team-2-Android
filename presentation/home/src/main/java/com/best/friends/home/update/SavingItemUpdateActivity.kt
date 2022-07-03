@@ -133,6 +133,26 @@ class SavingItemUpdateActivity :
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(editText, 0)
         }
+
+        binding.tvUpdate.setOnSingleClickListener {
+            showConfirmDialogFragment(
+                title = getString(R.string.saving_item_update_popup_title),
+                description = getString(R.string.saving_item_update_popup_description),
+                negativeButtonName = getString(common_cancel),
+                positiveButtonName = getString(common_update),
+                positiveAction = { viewModel.onUpdateClick() }
+            )
+        }
+
+        binding.tvDelete.setOnSingleClickListener {
+            showConfirmDialogFragment(
+                title = getString(R.string.saving_item_delete_popup_title),
+                description = getString(R.string.saving_item_delete_popup_description),
+                negativeButtonName = getString(common_cancel),
+                positiveButtonName = getString(common_delete),
+                positiveAction = { viewModel.onDeleteClick() }
+            )
+        }
     }
 
     private fun setToolbar() {
@@ -152,22 +172,12 @@ class SavingItemUpdateActivity :
             .onEach { action ->
                 when (action) {
                     Update -> {
-                        showConfirmDialogFragment(
-                            title = getString(R.string.saving_item_update_popup_title),
-                            description = getString(R.string.saving_item_update_popup_description),
-                            negativeButtonName = getString(common_cancel),
-                            positiveButtonName = getString(common_update),
-                            positiveAction = { setResult(RESULT_OK); finish() }
-                        )
+                        setResult(RESULT_OK)
+                        finish()
                     }
                     Delete -> {
-                        showConfirmDialogFragment(
-                            title = getString(R.string.saving_item_delete_popup_title),
-                            description = getString(R.string.saving_item_delete_popup_description),
-                            negativeButtonName = getString(common_cancel),
-                            positiveButtonName = getString(common_delete),
-                            positiveAction = { setResult(RESULT_OK); finish() }
-                        )
+                        setResult(RESULT_OK)
+                        finish()
                     }
                     Finish -> finish()
                 }
