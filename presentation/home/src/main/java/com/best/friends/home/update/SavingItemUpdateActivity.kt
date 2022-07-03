@@ -24,6 +24,7 @@ import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemUpdateBinding
 import com.best.friends.home.dialog.HorizontalButtonsDialogFragment
 import com.best.friends.home.update.SavingItemUpdateViewModel.Action.Delete
+import com.best.friends.home.update.SavingItemUpdateViewModel.Action.Finish
 import com.best.friends.home.update.SavingItemUpdateViewModel.Action.Update
 import com.yapp.android2.domain.entity.Product
 import dagger.hilt.android.AndroidEntryPoint
@@ -168,6 +169,7 @@ class SavingItemUpdateActivity :
                             positiveAction = { setResult(RESULT_OK); finish() }
                         )
                     }
+                    Finish -> finish()
                 }
             }
             .launchIn(lifecycleScope)
