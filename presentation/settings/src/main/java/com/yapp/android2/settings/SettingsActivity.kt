@@ -2,6 +2,7 @@ package com.yapp.android2.settings
 
 import android.os.Bundle
 import com.best.friends.core.BaseActivity
+import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.navigator.PolicyNavigator
 import com.yapp.android2.settings.databinding.ActivitySettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,7 +22,10 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
     }
 
     private fun ActivitySettingsBinding.setOnClickListener() {
-        tvPolicy.setOnClickListener {
+        ivBack.setOnSingleClickListener(500) {
+            finish()
+        }
+        tvPolicy.setOnSingleClickListener(500) {
             this@SettingsActivity.startActivity(navigator.intent(this@SettingsActivity))
         }
     }
