@@ -76,17 +76,6 @@ class SavingItemUpdateActivity :
     }
 
     private fun initView() {
-        val filter = InputFilter { source, start, end, _, _, _ ->
-            for (i in start until end) {
-                if (Character.isWhitespace(source[i])) {
-                    return@InputFilter ""
-                }
-            }
-            null
-        }
-
-        binding.etItemContent.filters = arrayOf(filter)
-
         binding.etItemPrice.inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
         binding.etItemPrice.transformationMethod = null
         binding.etItemPrice.setOnFocusChangeListener { _, hasFocus ->
@@ -96,8 +85,17 @@ class SavingItemUpdateActivity :
                 return@setOnFocusChangeListener
             }
 
+            val whiteSpaceFilter = InputFilter { source, start, end, _, _, _ ->
+                for (i in start until end) {
+                    if (Character.isWhitespace(source[i])) {
+                        return@InputFilter ""
+                    }
+                }
+                null
+            }
+
             if (hasFocus) {
-                editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6))
+                editText.filters = arrayOf(whiteSpaceFilter, InputFilter.LengthFilter(6))
                 val onlyNumber = price
                     .replace(",", "")
                     .replace("원", "")
