@@ -14,18 +14,23 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.best.friend.design.R.string.common_cancel
+import com.best.friend.design.R.string.common_delete
+import com.best.friend.design.R.string.common_update
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.ui.Empty
 import com.best.friends.core.ui.showToast
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemUpdateBinding
+import com.best.friends.home.dialog.HorizontalButtonsDialogFragment
+import com.best.friends.home.update.SavingItemUpdateViewModel.Action.Delete
+import com.best.friends.home.update.SavingItemUpdateViewModel.Action.Update
 import com.yapp.android2.domain.entity.Product
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.text.DecimalFormat
-
 
 /**
  * 절약 수정 화면 Activity
@@ -137,11 +142,47 @@ class SavingItemUpdateActivity :
             .launchIn(lifecycleScope)
 
         viewModel.action
-            .onEach { _ ->
-                setResult(Activity.RESULT_OK)
-                finish()
+            .onEach { action ->
+                when (action) {
+                    Update -> {
+                        showConfirmDialogFragment(
+                            title = getString(R.string.saving_item_update_popup_title),
+                            description = getString(R.string.saving_item_update_popup_description),
+                            negativeButtonName = getString(common_cancel),
+                            positiveButtonName = getString(common_update),
+                            positiveAction = { setResult(Activity.RESULT_OK); finish() }
+                        )
+                    }
+                    Delete -> {
+                        showConfirmDialogFragment(
+                            title = getString(R.string.saving_item_delete_popup_title),
+                            description = getString(R.string.saving_item_delete_popup_description),
+                            negativeButtonName = getString(common_cancel),
+                            positiveButtonName = getString(common_delete),
+                            positiveAction = { setResult(Activity.RESULT_OK); finish() }
+                        )
+                    }
+                }
             }
             .launchIn(lifecycleScope)
+    }
+
+    private fun showConfirmDialogFragment(
+        title: String,
+        description: String,
+        negativeButtonName: String,
+        negativeAction: () -> Unit = {},
+        positiveButtonName: String,
+        positiveAction: () -> Unit = {}
+    ) {
+        HorizontalButtonsDialogFragment.newInstance(
+            title = title,
+            description = description,
+            negativeButtonName = negativeButtonName,
+            negativeAction = negativeAction,
+            positiveButtonName = positiveButtonName,
+            positiveAction = positiveAction
+        )
     }
 
     companion object {
