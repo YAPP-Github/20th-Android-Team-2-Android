@@ -16,6 +16,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
+import com.best.friends.core.ui.Empty
 import com.best.friends.core.ui.showToast
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemAddBinding
@@ -81,6 +82,22 @@ class SavingItemAddActivity :
     private fun initView() {
         binding.etItemPrice.inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
         binding.etItemPrice.transformationMethod = null
+
+        binding.ivClearContent.setOnSingleClickListener {
+            viewModel.setContentText(String.Empty)
+            val editText = binding.etItemContent
+            editText.requestFocus()
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(editText, 0)
+        }
+
+        binding.ivClearPrice.setOnSingleClickListener {
+            viewModel.setPriceText(String.Empty)
+            val editText = binding.etItemPrice
+            editText.requestFocus()
+            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(editText, 0)
+        }
     }
 
     private fun observe() {

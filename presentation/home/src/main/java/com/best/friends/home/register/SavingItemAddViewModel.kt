@@ -25,6 +25,10 @@ class SavingItemAddViewModel @Inject constructor(
     val action: SharedFlow<Action>
         get() = _action
 
+    fun setContentText(text: String) {
+        content.value = text
+    }
+
     fun setPriceText(text: String) {
         price.value = text
     }
