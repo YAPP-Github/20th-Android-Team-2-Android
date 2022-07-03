@@ -19,28 +19,28 @@
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_back"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
                 android:padding="12dp"
-                app:srcCompat="@drawable/icon_chevron_left"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icon_chevron_left" />
 
             <TextView
                 android:id="@+id/tv_toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/Typography.H2.Medium"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/iv_back"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="절약 수정" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -95,6 +95,7 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="14dp"
                     android:padding="6dp"
+                    android:visibility="@{!viewModel.content.empty}"
                     app:layout_constraintBottom_toBottomOf="@id/et_item_content"
                     app:layout_constraintEnd_toEndOf="@id/et_item_content"
                     app:layout_constraintTop_toTopOf="@id/et_item_content"
@@ -137,6 +138,7 @@
                     android:layout_height="30dp"
                     android:layout_marginEnd="14dp"
                     android:padding="6dp"
+                    android:visibility="@{!viewModel.price.empty}"
                     app:layout_constraintBottom_toBottomOf="@id/et_item_price"
                     app:layout_constraintEnd_toEndOf="@id/et_item_price"
                     app:layout_constraintTop_toTopOf="@id/et_item_price"
