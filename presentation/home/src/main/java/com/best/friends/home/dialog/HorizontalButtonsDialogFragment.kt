@@ -14,9 +14,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.LifecycleOwner
 import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.home.databinding.FragmentDialogHorizontalButtonsBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class HorizontalButtonsDialogFragment private constructor() : DialogFragment() {
 
     private lateinit var binding: FragmentDialogHorizontalButtonsBinding
