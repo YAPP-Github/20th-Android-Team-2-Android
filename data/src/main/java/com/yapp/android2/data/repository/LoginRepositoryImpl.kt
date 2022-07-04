@@ -2,8 +2,7 @@ package com.yapp.android2.data.repository
 
 import com.yapp.android2.data.local.login.LoginLocalDataSource
 import com.yapp.android2.data.remote.login.LoginRemoteDataSource
-import com.yapp.android2.domain.entity.LoginRequest
-import com.yapp.android2.domain.entity.LoginResponse
+import com.yapp.android2.data.remote.request.PostLoginRequest
 import com.yapp.android2.domain.entity.NotificationRequest
 import com.yapp.android2.domain.entity.User
 import com.yapp.android2.domain.repository.login.LoginRepository
@@ -14,31 +13,18 @@ class LoginRepositoryImpl @Inject constructor(
     private val loginLocalDataSource: LoginLocalDataSource
 ): LoginRepository {
 
-    override suspend fun postLogin(request: LoginRequest): LoginResponse {
+    override suspend fun postLogin(email: String, nickName: String, providerId: Long): User {
+        val request = PostLoginRequest(
+            email = email,
+            nickName = nickName,
+            providerId = providerId
+        )
         return loginRemoteDataSource.postLogin(request)
     }
 
     override suspend fun postFCMToken(request: NotificationRequest) {
         return loginRemoteDataSource.postFCMToken(request)
     }
-
-    override fun saveAccessToken(token: String) {
-        loginLocalDataSource.saveAccessToken(token)
-    }
-
-    override fun getAccessToken(): String = loginLocalDataSource.getAccessToken()
-
-    override fun saveKakaoAccessToken(kakaoToken: String) {
-        loginLocalDataSource.saveKakaoAccessToken(kakaoToken)
-    }
-
-    override fun getKakaoAccessToken(): String = loginLocalDataSource.getKakaoAccessToken()
-
-    override fun saveRefreshToken(refreshToken: String) {
-        loginLocalDataSource.saveRefreshToken(refreshToken)
-    }
-
-    override fun getRefreshToken(): String = loginLocalDataSource.getRefreshToken()
 
     override fun saveUser(user: User) {
         loginLocalDataSource.saveUser(user)
