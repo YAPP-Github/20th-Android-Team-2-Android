@@ -31,7 +31,13 @@ internal class DayBind(private val savingRecords: List<Item>) : DayBinder<DayCon
             container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray2))
         }
 
-        if(savingDays.any { DateTime.parse(it).dayOfMonth().get() == day.date.dayOfMonth }) {
+        val isSavingDay = savingDays.any {
+            val dateTime = DateTime.parse(it)
+
+            dateTime.dayOfMonth().get() == day.date.dayOfMonth && dateTime.monthOfYear().get() == day.date.yearMonth.monthValue
+        }
+
+        if(isSavingDay) {
             container.textView.background = ContextCompat.getDrawable(container.view.context, design.drawable.bg_oval_color_sub)
         }
     }
