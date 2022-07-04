@@ -16,6 +16,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/iv_title"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_splash"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:includeFontPadding="false"
+            android:text="@string/record_main_title"
+            android:textAppearance="@style/Typography.H2.Bold"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_title"
+            app:layout_constraintStart_toEndOf="@+id/iv_title"
+            app:layout_constraintTop_toTopOf="@+id/iv_title"
+            tools:text="@string/record_main_title" />
+
         <TextView
             android:id="@+id/tv_total_saving"
             android:layout_width="wrap_content"
@@ -146,27 +170,29 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:letterSpacing="-.1"
+            android:text="@string/record_empty_title"
             android:textAppearance="@style/Typography.Body1.Bold"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tv_empty_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:letterSpacing="-.1"
             app:layout_constraintVertical_chainStyle="packed"
-            tools:text="절약한 기록이 없어요" />
+            tools:text="@string/record_empty_title" />
 
         <TextView
             android:id="@+id/tv_empty_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:text="@string/record_empty_description"
             android:textAppearance="@style/Typography.Body4.Regular"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_empty_title"
-            tools:text="절약을 시작하면 기록을 볼 수 있어요." />
+            tools:text="@string/record_empty_description" />
 
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
