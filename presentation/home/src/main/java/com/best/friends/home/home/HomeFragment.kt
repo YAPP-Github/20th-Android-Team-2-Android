@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
@@ -21,6 +23,7 @@ import com.best.friends.home.update.SavingItemUpdateActivity
 import com.best.friends.navigator.NotificationNavigator
 import com.best.friends.navigator.SettingNavigator
 import com.yapp.android2.domain.entity.Product
+import com.yapp.android2.domain.key.PRODUCT
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -53,7 +56,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         SavingsListAdapter(
             onItemClick = { product -> startSavingUpdateActivity(product) },
             onAddClick = { startSavingAddActivity() },
-            onItemChecked = { product -> viewModel.checkSavingItem(product) }
+            onItemChecked = { product ->
+                viewModel.checkSavingItem(product)
+
+                setFragmentResult(PRODUCT, bundleOf(product.name.orEmpty() to product))
+            }
         )
     }
 
