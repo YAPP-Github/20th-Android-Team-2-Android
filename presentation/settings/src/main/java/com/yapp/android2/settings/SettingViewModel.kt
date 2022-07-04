@@ -17,14 +17,6 @@ class SettingViewModel @Inject constructor(
         .stateIn(
             scope = viewModelScope,
             initialValue = SettingRepository.Settings.Init,
-            started = SharingStarted.WhileSubscribed(5000L)
+            started = SharingStarted.WhileSubscribed(5_000L)
         )
-
-    fun logout() {
-        //TODO
-    }
-
-    fun onUserWithDraw() {
-        //TODO
-    }
 }

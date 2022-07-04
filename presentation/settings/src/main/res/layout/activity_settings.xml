@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.yapp.android2.settings.SettingViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,26 +44,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="YAPP@naver.com"
             android:textAppearance="@style/Typography.Body3.Bold"
             android:textColor="@color/gray4"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/tv_created_at"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:text="YAPP@naver.com" />
 
         <TextView
             android:id="@+id/tv_created_at"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            tools:text="22.05.20 간편가입"
             android:textAppearance="@style/Typography.Caption2.Medium"
             android:textColor="@color/gray3"
             android:textSize="12sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_user_id"
             app:layout_constraintEnd_toStartOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/tv_user_id" />
+            app:layout_constraintStart_toEndOf="@+id/tv_user_id"
+            tools:text="22.05.20 간편가입" />
 
         <ImageView
             android:id="@+id/imageView"

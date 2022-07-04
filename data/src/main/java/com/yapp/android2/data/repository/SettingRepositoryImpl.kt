@@ -10,10 +10,10 @@ class SettingRepositoryImpl @Inject constructor(
     override fun getUserOrThrow(): SettingRepository.Settings.Success {
         val user = localDataSource.getUser()
 
-        return if(user.email.isEmpty()) {
+        return if(user.email.isNullOrEmpty()) {
             throw IllegalArgumentException("email is empty")
         } else {
-            SettingRepository.Settings.Success(user.email, user.createAt)
+            SettingRepository.Settings.Success(user.email.orEmpty(), user.createAt)
         }
     }
 

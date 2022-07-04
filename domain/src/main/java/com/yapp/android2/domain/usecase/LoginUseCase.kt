@@ -35,7 +35,7 @@ class LoginUseCase @Inject constructor(
 
     fun getRefreshToken(): String = loginRepository.getRefreshToken()
 
-    fun saveUser(userId: Long, nickname: String, email: String, createAt: LocalDateTime) {
+    fun saveUser(userId: Long, nickname: String, email: String, createAt: String) {
         val user = User(userId, nickname, email, createAt)
         loginRepository.saveUser(user)
     }

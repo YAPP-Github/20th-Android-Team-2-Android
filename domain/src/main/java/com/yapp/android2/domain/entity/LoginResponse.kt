@@ -10,6 +10,6 @@ data class LoginResponse(override val data: Data) : BaseResponse<LoginResponse.D
         val refreshToken: String?,
         val userId: Long?,
         val email: String?,
-        val createAt: LocalDateTime
+        val createAt: String?
     )
 }

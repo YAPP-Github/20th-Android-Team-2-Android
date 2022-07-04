@@ -54,7 +54,7 @@ class LoginViewModel @Inject constructor(
                 Timber.i("액세스 토큰 : ${it.data.accessToken}")
                 loginUseCase.saveAccessToken(requireNotNull(it.data.accessToken))
                 loginUseCase.saveRefreshToken(requireNotNull(it.data.refreshToken))
-                loginUseCase.saveUser(it.data.userId ?: 0, it.data.nickName.orEmpty(), it.data.email.orEmpty(), it.data.createAt)
+                loginUseCase.saveUser(it.data.userId ?: 0, it.data.nickName.orEmpty(), it.data.email.orEmpty(), it.data.createAt.orEmpty())
 
                 _accessToken.postValue(requireNotNull(it.data.accessToken))
                 _refreshToken.postValue(requireNotNull(it.data.refreshToken))

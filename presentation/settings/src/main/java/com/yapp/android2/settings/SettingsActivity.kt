@@ -1,6 +1,7 @@
 package com.yapp.android2.settings
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -11,6 +12,7 @@ import com.yapp.android2.domain.repository.setting.SettingRepository
 import com.yapp.android2.settings.databinding.ActivitySettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -38,7 +40,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
 
     private fun ActivitySettingsBinding.viewInit(value: SettingRepository.Settings.Success) {
         tvUserId.text = value.email
-        tvCreatedAt.text = getString(R.string.created_at, value.createAt.format(DateTimeFormatter.ofPattern("yy.MM.dd")))
+        tvCreatedAt.text = getString(R.string.created_at, LocalDateTime.parse(value.createAt)?.format(DateTimeFormatter.ofPattern("yy.MM.dd")))
     }
 
 
