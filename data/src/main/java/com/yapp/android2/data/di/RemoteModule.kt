@@ -2,6 +2,8 @@ package com.yapp.android2.data.di
 
 import com.yapp.android2.data.remote.login.LoginRemoteDataSource
 import com.yapp.android2.data.remote.login.LoginRemoteDataSourceImpl
+import com.yapp.android2.data.remote.logout.LogoutRemoteDataSource
+import com.yapp.android2.data.remote.logout.LogoutRemoteDataSourceImpl
 import com.yapp.android2.data.remote.notification.NotificationRemoteDataSource
 import com.yapp.android2.data.remote.notification.NotificationRemoteDataSourceImpl
 import com.yapp.android2.data.remote.products.ProductsRemoteDataSource
@@ -45,4 +47,10 @@ internal abstract class RemoteModule {
     abstract fun provideAppVersionDataSource(
         dataSource: AppVersionCheckDataSourceImpl
     ): AppVersionCheckDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindLogoutDataRemoteSource(
+        dataSource: LogoutRemoteDataSourceImpl
+    ): LogoutRemoteDataSource
 }

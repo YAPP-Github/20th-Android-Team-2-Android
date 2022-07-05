@@ -20,7 +20,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
         overridePendingTransition(R.anim.activity_in_transition, R.anim.activity_stay_transition)
 
         binding.tvLogout.setOnSingleClickListener {
-            logoutNavigator.intent(this)
+            startActivity(logoutNavigator.intent(this))
         }
     }
 

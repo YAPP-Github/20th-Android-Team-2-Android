@@ -9,6 +9,7 @@
         tools:context=".LogoutActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="0dp"
             android:layout_height="?android:attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +47,7 @@
             android:gravity="center"
             android:text="@string/logout_title"
             android:textAppearance="@style/Typography.Body1.Bold"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tv_logout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -63,6 +64,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <TextView
+            android:id="@+id/tv_logout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
