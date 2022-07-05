@@ -1,6 +1,5 @@
 package com.yapp.android2.settings
 
-import com.best.friends.navigator.LogoutNavigator
 import com.best.friends.navigator.SettingNavigator
 import dagger.Binds
 import dagger.Module
@@ -13,7 +12,4 @@ internal abstract class SettingsModule {
 
     @Binds
     abstract fun bindSettingsNavigator(navi: SettingsNavigatorImpl): SettingNavigator
-
-    @Binds
-    abstract fun bindLogoutNavigator(navi: LogoutNavigatorImpl): LogoutNavigator
 }

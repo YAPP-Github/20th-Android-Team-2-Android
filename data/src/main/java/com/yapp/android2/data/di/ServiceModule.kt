@@ -52,6 +52,12 @@ internal object ServiceModule {
         retrofit: Retrofit
     ): LogoutService = retrofit.create()
 
+    @Singleton
+    @Provides
+    fun provideWithDrawService(
+        retrofit: Retrofit
+    ): WithDrawService = retrofit.create()
+
     @Provides
     @Singleton
     fun provideRetrofit(

@@ -12,6 +12,8 @@ import com.yapp.android2.data.remote.record.RecordRemoteDataSource
 import com.yapp.android2.data.remote.record.RecordRemoteDataSourceImpl
 import com.yapp.android2.data.remote.version.AppVersionCheckDataSource
 import com.yapp.android2.data.remote.version.AppVersionCheckDataSourceImpl
+import com.yapp.android2.data.remote.withdraw.WithDrawRemoteDataSource
+import com.yapp.android2.data.remote.withdraw.WithDrawRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -53,4 +55,10 @@ internal abstract class RemoteModule {
     abstract fun bindLogoutDataRemoteSource(
         dataSource: LogoutRemoteDataSourceImpl
     ): LogoutRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun bindWithDrawDataRemoteSource(
+        dataSource: WithDrawRemoteDataSourceImpl
+    ): WithDrawRemoteDataSource
 }

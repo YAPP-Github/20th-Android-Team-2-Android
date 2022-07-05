@@ -2,5 +2,5 @@
     <string name="with_draw_main_title">계정 탈퇴</string>
     <string name="with_draw">탈퇴하기</string>
     <string name="with_draw_title">정말 탈퇴하실 건가요?</string>
-    <string name="with_draw_description">그동안 $1%s 님과\n함께해서 행복했어요…</string>
+    <string name="with_draw_description">그동안 %1$s 님과\n함께해서 행복했어요…</string>
 </resources>

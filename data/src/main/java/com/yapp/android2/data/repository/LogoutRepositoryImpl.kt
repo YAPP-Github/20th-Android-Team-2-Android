@@ -1,13 +1,13 @@
 package com.yapp.android2.data.repository
 
-import com.yapp.android2.data.local.logout.LogoutLocalDataSourceImpl
+import com.yapp.android2.data.local.logout.LogoutLocalDataSource
 import com.yapp.android2.data.remote.logout.LogoutRemoteDataSource
 import com.yapp.android2.domain.repository.logout.LogoutRepository
 import javax.inject.Inject
 
 class LogoutRepositoryImpl @Inject constructor(
     private val logoutRemoteDataSource: LogoutRemoteDataSource,
-    private val logoutLocalDataSourceImpl: LogoutLocalDataSourceImpl
+    private val logoutLocalDataSourceImpl: LogoutLocalDataSource
 ) : LogoutRepository {
 
     override suspend fun logout() = runCatching {

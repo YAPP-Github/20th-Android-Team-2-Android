@@ -6,6 +6,7 @@ import com.yapp.android2.domain.repository.ProductsRepository
 import com.yapp.android2.domain.repository.login.LoginRepository
 import com.yapp.android2.domain.repository.logout.LogoutRepository
 import com.yapp.android2.domain.repository.record.RecordRepository
+import com.yapp.android2.domain.repository.withdraw.WithDrawRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -41,4 +42,10 @@ abstract class RepositoryModule {
     abstract fun bindLogoutRepository(
         repository: LogoutRepositoryImpl
     ): LogoutRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindWithDrawRepository(
+        repository: WithDrawRepositoryImpl
+    ): WithDrawRepository
 }
