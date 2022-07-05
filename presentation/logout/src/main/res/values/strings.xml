@@ -1,0 +1,5 @@
+<resources>
+    <string name="logout_main_title">로그아웃</string>
+    <string name="logout_title">로그아웃 하시겠어요?</string>
+    <string name="logout_description">절친이 그리워지면 언제든지 돌아오세요.\n기다리고 있을게요…!</string>
+</resources>
