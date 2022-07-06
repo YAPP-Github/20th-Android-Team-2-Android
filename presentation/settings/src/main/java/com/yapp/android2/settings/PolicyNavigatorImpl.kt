@@ -10,7 +10,7 @@ class PolicyNavigatorImpl @Inject constructor(): PolicyNavigator {
     override fun intent(context: Context): Intent {
         return Intent(
             Intent.ACTION_VIEW,
-            Uri.parse("https://rustic-decade-83c.notion.site/cdfb1587f8854c7e86a2ee46ec471311")
+            Uri.parse("https://bit.ly/3yn5yL4")
         )
     }
 }
