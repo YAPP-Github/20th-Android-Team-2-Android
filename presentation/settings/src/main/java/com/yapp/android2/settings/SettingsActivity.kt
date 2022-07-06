@@ -1,30 +1,33 @@
 package com.yapp.android2.settings
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
+import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.ui.showToast
+import com.best.friends.navigator.PolicyNavigator
 import com.yapp.android2.domain.repository.setting.SettingRepository
 import com.yapp.android2.settings.databinding.ActivitySettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import java.time.LocalDateTime
-import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity_settings) {
     private val viewModel by viewModels<SettingViewModel>()
 
+    @Inject
+    lateinit var navigator: PolicyNavigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         overridePendingTransition(R.anim.activity_in_transition, R.anim.activity_stay_transition)
+        binding.setOnClickListener()
 
         viewModel.user.flowWithLifecycle(lifecycle = this.lifecycle)
             .filter{ it != SettingRepository.Settings.Init }
@@ -40,10 +43,17 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
 
     private fun ActivitySettingsBinding.viewInit(value: SettingRepository.Settings.Success) {
         tvUserId.text = value.email
-        tvCreatedAt.text = getString(R.string.created_at, LocalDateTime.parse(value.createAt)?.format(DateTimeFormatter.ofPattern("yy.MM.dd")))
+        tvCreatedAt.text = getString(R.string.setting_created_at, LocalDateTime.parse(value.createAt)?.format(DateTimeFormatter.ofPattern("yy.MM.dd")))
     }
 
-
+    private fun ActivitySettingsBinding.setOnClickListener() {
+        ivBack.setOnSingleClickListener(500) {
+            finish()
+        }
+        tvPolicy.setOnSingleClickListener(500) {
+            this@SettingsActivity.startActivity(navigator.intent(this@SettingsActivity))
+        }
+    }
 
     override fun onDestroy() {
         overridePendingTransition(R.anim.activity_out_transition, R.anim.activity_stay_transition)

@@ -5,5 +5,5 @@
     <string name="setting_policy">이용약관</string>
     <string name="setting_version">버전</string>
 
-    <string name="created_at">%1$s 간편가입</string>
+    <string name="setting_created_at">%1$s 간편가입</string>
 </resources>
