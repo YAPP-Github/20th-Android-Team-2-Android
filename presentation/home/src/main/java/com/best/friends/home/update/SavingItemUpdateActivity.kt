@@ -15,6 +15,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friend.design.R.string.common_cancel
 import com.best.friend.design.R.string.common_delete
+import com.best.friend.design.R.string.common_ok
 import com.best.friend.design.R.string.common_update
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
@@ -145,12 +146,32 @@ class SavingItemUpdateActivity :
         }
 
         binding.tvDelete.setOnSingleClickListener {
+            val isChecked = viewModel.paramsFlow.value.product.checked
+            val title = if (isChecked) {
+                getString(R.string.saving_item_cannot_delete_popup_title)
+            } else {
+                getString(R.string.saving_item_delete_popup_title)
+            }
+
+            val description = if (isChecked) {
+                getString(R.string.saving_item_cannot_delete_popup_description)
+            } else {
+                getString(R.string.saving_item_delete_popup_description)
+            }
+
+            val positiveButtonName = if (isChecked) {
+                getString(common_ok)
+            } else {
+                getString(common_delete)
+            }
+
             showConfirmDialogFragment(
-                title = getString(R.string.saving_item_delete_popup_title),
-                description = getString(R.string.saving_item_delete_popup_description),
+                title = title,
+                description = description,
+                negativeButtonEnable = !isChecked,
                 negativeButtonName = getString(common_cancel),
-                positiveButtonName = getString(common_delete),
-                positiveAction = { viewModel.onDeleteClick() }
+                positiveButtonName = positiveButtonName,
+                positiveAction = { if (!isChecked) viewModel.onDeleteClick() }
             )
         }
     }
@@ -188,6 +209,7 @@ class SavingItemUpdateActivity :
     private fun showConfirmDialogFragment(
         title: String,
         description: String,
+        negativeButtonEnable: Boolean = true,
         negativeButtonName: String,
         negativeAction: () -> Unit = {},
         positiveButtonName: String,
@@ -198,6 +220,7 @@ class SavingItemUpdateActivity :
             lifecycleOwner = this,
             title = title,
             description = description,
+            negativeButtonEnable = negativeButtonEnable,
             negativeButtonName = negativeButtonName,
             negativeAction = negativeAction,
             positiveButtonName = positiveButtonName,

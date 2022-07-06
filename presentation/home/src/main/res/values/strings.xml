@@ -21,6 +21,8 @@
     <string name="saving_item_update_popup_title">정말 수정하시겠어요?</string>
     <string name="saving_item_update_popup_description">지금부터 수정한 내용이\n기록 화면에 적용되어 보일거예요.</string>
     <string name="saving_item_delete_popup_title">정말 삭제하시겠어요?</string>
-    <string name="saving_item_delete_popup_description">삭제하시면 되돌릴 수 없어요.</string>
+    <string name="saving_item_cannot_delete_popup_title">삭제할 수 없어요.</string>
+    <string name="saving_item_delete_popup_description">삭제하시면 되돌릴 수 없어요.\n신중하게 생각해보시고 삭제하세요!</string>
+    <string name="saving_item_cannot_delete_popup_description">절약한 항목은 삭제할 수 없어요!\n삭제를 원하면 체크를 해제해주세요. </string>
 
 </resources>
