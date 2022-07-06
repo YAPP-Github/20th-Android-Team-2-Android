@@ -1,7 +1,7 @@
 package com.yapp.android2.data.service
 
 import com.yapp.android2.data.remote.request.PostLoginRequest
-import com.yapp.android2.domain.entity.NotificationRequest
+import com.yapp.android2.domain.entity.FCMToken
 import com.yapp.android2.domain.entity.User
 import com.yapp.android2.domain.entity.base.ApiResponse
 import retrofit2.http.Body
@@ -16,6 +16,6 @@ interface LoginService : Service {
 
     @POST("/api/fcm-token")
     suspend fun postFCMToken(
-        @Body request: NotificationRequest
+        @Body request: FCMToken
     )
 }

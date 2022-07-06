@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
-import com.yapp.android2.domain.entity.NotificationRequest
-import com.yapp.android2.domain.repository.login.LoginRepository
+import com.yapp.android2.domain.entity.FCMToken
 import com.yapp.android2.domain.usecase.LoginUseCase
+import com.yapp.android2.domain.usecase.PostFCMTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
-    private val loginRepository: LoginRepository
+    private val postFCMTokenUseCase: PostFCMTokenUseCase
 ) : BaseViewModel() {
     private val _fcmToken = MutableLiveData<String>()
     val fcmToken: LiveData<String> = _fcmToken
@@ -51,7 +51,7 @@ class LoginViewModel @Inject constructor(
     fun addFCMToken() {
         viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
-                loginUseCase.postFCMToken(NotificationRequest(requireNotNull(fcmToken.value)))
+                postFCMTokenUseCase(requireNotNull(fcmToken.value))
             }.onSuccess {
                 _isSuccess.postValue(true)
             }.onFailure {

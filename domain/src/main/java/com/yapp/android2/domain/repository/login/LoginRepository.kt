@@ -1,6 +1,5 @@
 package com.yapp.android2.domain.repository.login
 
-import com.yapp.android2.domain.entity.NotificationRequest
 import com.yapp.android2.domain.entity.User
 import com.yapp.android2.domain.repository.Repository
 
@@ -12,7 +11,7 @@ interface LoginRepository : Repository {
         providerId: Long
     ): User
 
-    suspend fun postFCMToken(request: NotificationRequest)
+    suspend fun postFCMToken(fcmToken: String)
 
     fun saveUser(user: User)
 

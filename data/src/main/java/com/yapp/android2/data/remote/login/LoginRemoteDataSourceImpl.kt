@@ -2,7 +2,7 @@ package com.yapp.android2.data.remote.login
 
 import com.yapp.android2.data.remote.request.PostLoginRequest
 import com.yapp.android2.data.service.LoginService
-import com.yapp.android2.domain.entity.NotificationRequest
+import com.yapp.android2.domain.entity.FCMToken
 import com.yapp.android2.domain.entity.User
 import javax.inject.Inject
 
@@ -14,7 +14,7 @@ class LoginRemoteDataSourceImpl @Inject constructor(
         return loginService.postLogin(request).data ?: User.EMPTY
     }
 
-    override suspend fun postFCMToken(request: NotificationRequest) {
+    override suspend fun postFCMToken(request: FCMToken) {
         return loginService.postFCMToken(request)
     }
 }

@@ -1,6 +1,5 @@
 package com.yapp.android2.domain.usecase
 
-import com.yapp.android2.domain.entity.NotificationRequest
 import com.yapp.android2.domain.entity.User
 import com.yapp.android2.domain.repository.login.LoginRepository
 import javax.inject.Inject
@@ -27,7 +26,4 @@ class LoginUseCase @Inject constructor(
         }
     }
 
-    suspend fun postFCMToken(request: NotificationRequest) {
-        return loginRepository.postFCMToken(request)
-    }
 }
