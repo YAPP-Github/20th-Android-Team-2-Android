@@ -52,6 +52,8 @@ dependencies {
     implementation(project(":presentation:splash"))
     implementation(project(":presentation:notification"))
     implementation(project(":presentation:settings"))
+    implementation(project(":presentation:logout"))
+    implementation(project(":presentation:drawwith"))
 
     implementation(jetpackDeps)
     implementation(coroutines)
