@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="270dp"
+        android:background="@drawable/bg_rect_white_r20">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginHorizontal="18dp"
+            android:gravity="center"
+            android:textAppearance="@style/Typography.Body3.Bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="정말 수정하시겠어요?" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginHorizontal="18dp"
+            android:gravity="center_horizontal"
+            android:textAppearance="@style/Typography.Body5.Regular"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="지금부터 수정한 내용이\n기록 화면에 적용되어 보일거에요." />
+
+        <TextView
+            android:id="@+id/tv_negative"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_rect_gray2_r10"
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="18dp"
+            android:layout_marginBottom="20dp"
+            android:textAppearance="@style/Typography.Button2.Medium"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_description"
+            app:layout_constraintEnd_toStartOf="@id/tv_positive"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="취소" />
+
+        <TextView
+            android:id="@+id/tv_positive"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_rect_primary_r10"
+            android:gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="18dp"
+            android:textAppearance="@style/Typography.Button2.Medium"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/tv_negative"
+            app:layout_constraintTop_toTopOf="@id/tv_negative"
+            app:layout_constraintBottom_toBottomOf="@id/tv_negative"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="수정" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
