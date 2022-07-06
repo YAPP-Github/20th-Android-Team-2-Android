@@ -36,13 +36,10 @@ class LoginViewModel @Inject constructor(
                     providerId = providerId
                 )
             }.onSuccess {
-                Timber.i("-- isSuccess : ${it.isSuccess}")
-                Timber.i("-- Access Token : ${it.getOrNull()?.accessToken}")
-                Timber.i("-- Refresh Token : ${it.getOrNull()?.refreshToken}")
                 _isRegisterUser.postValue(true)
 
             }.onFailure { throwable ->
-                Timber.e("--- LoginViewModel error: ${throwable.message}")
+                Timber.e("--- LoginViewModel - Login error: ${throwable.message}")
             }
         }
     }
@@ -52,15 +49,13 @@ class LoginViewModel @Inject constructor(
     }
 
     fun addFCMToken() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
-                Timber.i("UserData-FCM : ${loginRepository.getUser().accessToken}")
                 loginUseCase.postFCMToken(NotificationRequest(requireNotNull(fcmToken.value)))
             }.onSuccess {
-                Timber.tag("FCM-Server-Connect").d("$it")
                 _isSuccess.postValue(true)
             }.onFailure {
-                Timber.tag("FCM-Server-Connect").e("$it")
+                Timber.tag("--- LoginViewModel - FCM Token error").e("$it")
             }
         }
     }
