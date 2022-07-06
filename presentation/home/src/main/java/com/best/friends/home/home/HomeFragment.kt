@@ -107,7 +107,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                 if (state.isInitialized) {
                     binding.recyclerView.visibleOrGone(products.isNotEmpty())
                     binding.emptyView.root.visibleOrGone(!state.isPastDate && products.isEmpty())
-                    binding.tvEmptyTitle.visibleOrGone(state.isPastDate && products.isEmpty())
+                    binding.tvEmptyTitleWhenPastDate
+                        .visibleOrGone(state.isPastDate && products.isEmpty())
 
                     if (products.isNotEmpty()) {
                         adapter.submit(products)
