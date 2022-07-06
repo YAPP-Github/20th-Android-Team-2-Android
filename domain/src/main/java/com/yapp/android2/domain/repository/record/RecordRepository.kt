@@ -6,7 +6,7 @@ import com.yapp.android2.domain.entity.base.Response
 import com.yapp.android2.domain.repository.Repository
 
 interface RecordRepository : Repository {
-    suspend fun fetchRecords(recordMM: String): List<Item>
+    suspend fun fetchRecordsOrThrow(recordMM: String): List<Item>
     suspend fun updateRecords(product: Product, user: User)
 }
 

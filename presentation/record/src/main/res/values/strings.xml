@@ -4,6 +4,9 @@
     <string name="record_count">%1$d번</string>
     <string name="record_title">총 %1$s번의 절약</string>
     <string name="record_total_price">%1$s원 아꼈어요!</string>
+    <string name="record_empty_title">절약한 기록이 없어요</string>
+    <string name="record_empty_description">절약을 시작하면 기록을 볼 수 있어요.</string>
+    <string name="record_main_title">절친 기록</string>
 
     <string name="calendar_title">%1$d년 %2$d월</string>
     <string name="record_saving">%1$d월보다 %2$d번 더 아꼈어요!</string>
