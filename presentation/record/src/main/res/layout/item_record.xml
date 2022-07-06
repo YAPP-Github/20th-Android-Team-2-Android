@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:cardCornerRadius="10dp"
-        app:cardElevation="0dp"
-        android:layout_marginHorizontal="50dp">
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -23,41 +22,53 @@
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
+                android:ellipsize="end"
+                android:maxLines="1"
                 android:text="@{item.record.name}"
+                android:textAppearance="@style/Typography.Body3.Bold"
                 android:textColor="@color/gray4"
                 android:textStyle="bold"
-                android:textAppearance="@style/Typography.Body3.Bold"
                 app:layout_constraintBottom_toTopOf="@+id/amount"
+                app:layout_constraintEnd_toStartOf="@+id/title_guide"
                 app:layout_constraintStart_toStartOf="@+id/guideStart"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="아메리카노" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/title_guide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:constraint_referenced_ids="title"
+                app:layout_constraintGuide_percent=".45" />
 
             <TextView
                 android:id="@+id/amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                app:price="@{item.record.price}"
                 android:textColor="@color/gray4"
                 app:layout_constraintBottom_toTopOf="@+id/divider"
                 app:layout_constraintStart_toStartOf="@+id/guideStart"
                 app:layout_constraintTop_toBottomOf="@+id/title"
+                app:price="@{item.record.price}"
                 tools:text="00,000원" />
 
 
             <TextView
                 android:id="@+id/count"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
                 android:layout_marginBottom="8dp"
+                android:gravity="end"
                 android:text="@{String.format(@string/record_count, item.totalCount)}"
+                android:textAppearance="@style/Typography.Number1.Bold"
                 android:textColor="@color/gray4"
                 android:textStyle="bold"
-                android:textAppearance="@style/Typography.Number1.Bold"
                 app:layout_constraintBottom_toTopOf="@+id/divider"
                 app:layout_constraintEnd_toEndOf="@+id/guideEnd"
                 app:layout_constraintTop_toTopOf="parent"
@@ -68,13 +79,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="6dp"
-                app:itemSavingMessage="@{item.timesComparedToPrev}"
                 android:textAppearance="@style/Typography.Calender2.Medium"
                 android:textColor="@color/gray4"
+                app:itemSavingMessage="@{item.timesComparedToPrev}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:text="N월보다 0번 더 아꼈어요!"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="N월보다 0번 더 아꼈어요!" />
 
             <View
                 android:id="@+id/divider"

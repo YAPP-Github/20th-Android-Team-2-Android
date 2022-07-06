@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.get
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.MonthScrollListener
 import com.kizitonwose.calendarview.utils.next
 import com.kizitonwose.calendarview.utils.previous
-import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.key.PRODUCT
 import com.yapp.android2.record.adapter.RecordAdapter
 import com.yapp.android2.record.databinding.FragmentRecordBinding
@@ -61,7 +64,13 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
     private fun FragmentRecordBinding.viewInit() {
         viewPager.adapter = recordAdapter
         viewPager.offscreenPageLimit = 3
-        viewPager.setOffsetTransformer()
+        viewPager[0].overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+        val compositePageTransformer = CompositePageTransformer().apply {
+            addTransformer(MarginPageTransformer(40))
+            addTransformer(viewPager.setOffsetTransformer())
+        }
+
+        viewPager.setPageTransformer(compositePageTransformer)
     }
 
     private fun FragmentRecordBinding.setListener() {
