@@ -4,6 +4,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
 import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
 import android.content.Intent
@@ -30,7 +31,7 @@ class FCMService : FirebaseMessagingService() {
         val body= message.data["body"].orEmpty()
 
         val intent = Intent(this, MainActivity::class.java).addFlags(FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
+        val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_IMMUTABLE)
 
         val channelId = "ChannelID"
         val mManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
