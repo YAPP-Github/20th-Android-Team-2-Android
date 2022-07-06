@@ -2,6 +2,7 @@ package com.yapp.android2.data.service.interceptor
 
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.core.content.edit
 import com.best.friends.login.KaKaoLoginActivity
@@ -15,7 +16,6 @@ import com.yapp.android2.domain.key.USER
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.Interceptor
 import okhttp3.Response
-import timber.log.Timber
 import javax.inject.Inject
 
 class HeaderInterceptor @Inject constructor(
@@ -84,7 +84,8 @@ class HeaderInterceptor @Inject constructor(
 
                 // 리프레시 토큰 만료
                 removeUser()
-                val intent = Intent(context, KaKaoLoginActivity::class.java).addFlags(FLAG_ACTIVITY_NEW_TASK)
+                val intent = Intent(context, KaKaoLoginActivity::class.java).addFlags(
+                    FLAG_ACTIVITY_CLEAR_TASK).addFlags(FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
             }
         }
