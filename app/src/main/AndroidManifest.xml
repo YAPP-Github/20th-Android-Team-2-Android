@@ -79,6 +79,10 @@
 
         <activity android:name=".settings.SettingsActivity" />
 
+        <activity
+            android:name=".webview.WebViewActivity"
+            android:exported="false" />
+
 
     </application>
 

@@ -13,6 +13,7 @@ import com.yapp.android2.settings.databinding.ActivitySettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.best.friends.core.ui.showToast
 import com.best.friends.navigator.PolicyNavigator
+import com.best.friends.navigator.WebViewNavigator
 import com.yapp.android2.domain.repository.setting.SettingRepository
 import kotlinx.coroutines.flow.*
 import java.time.LocalDateTime
@@ -24,7 +25,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
     private val viewModel by viewModels<SettingViewModel>()
 
     @Inject
-    lateinit var navigator: PolicyNavigator
+    lateinit var navigator: WebViewNavigator
 
     @Inject
     lateinit var logoutNavigator: LogoutNavigator

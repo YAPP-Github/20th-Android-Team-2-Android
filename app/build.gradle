@@ -54,6 +54,7 @@ dependencies {
     implementation(project(":presentation:settings"))
     implementation(project(":presentation:logout"))
     implementation(project(":presentation:drawwith"))
+    implementation(project(":presentation:webview"))
 
     implementation(jetpackDeps)
     implementation(coroutines)
