@@ -2,5 +2,6 @@
 <resources>
 
     <string name="toolbar_title_notification">알림</string>
+    <string name="notification_empty_message">아직 알림이 없어요</string>
 
 </resources>
