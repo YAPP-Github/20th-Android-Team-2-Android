@@ -75,6 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
+                android:layout_marginEnd="7dp"
                 android:textAppearance="@style/Typography.Body1.Bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -132,11 +133,12 @@
                 tools:visibility="gone" />
 
             <TextView
-                android:id="@+id/tv_empty_title"
+                android:id="@+id/tv_empty_title_when_past_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/saving_items_empty_title"
-                android:textAppearance="@style/Typography.Body1.Bold"
+                android:text="@string/saving_items_empty_title2"
+                android:textColor="@color/gray3"
+                android:textAppearance="@style/Typography.Body2.Medium"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

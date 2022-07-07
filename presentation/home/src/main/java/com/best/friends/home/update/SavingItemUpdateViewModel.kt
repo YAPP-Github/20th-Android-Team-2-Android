@@ -19,6 +19,7 @@ class SavingItemUpdateViewModel @Inject constructor(
     private val loginRepository: LoginRepository
 ) : BaseViewModel() {
 
+    val paramsFlow = MutableStateFlow(params)
     val content = MutableStateFlow(params.product.name.orEmpty())
     val price = MutableStateFlow(params.product.wonPrice)
 
