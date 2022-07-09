@@ -31,8 +31,7 @@ class NotificationViewModel @Inject constructor(
                 _notificationList.postValue(it)
 
                 if(it.isNotEmpty()) {
-                    val index = it.size - 1 // 내림차순으로 데이터 정렬 변경시 index는 0으로 변경 예정
-                    saveLastNotificationTime(it[index].createAt ?: "0000-00-00T00:00:00")
+                    saveLastNotificationTime(it[0].createAt ?: "0000-00-00T00:00:00")
                 }
             }.onFailure { throwable ->
                 Timber.e("--- NotificationViewModel error: ${throwable.message}")
