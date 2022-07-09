@@ -2,6 +2,7 @@ package com.best.friends.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
 import com.yapp.android2.domain.usecase.LoginUseCase
@@ -20,7 +21,7 @@ class LoginViewModel @Inject constructor(
     val fcmToken: LiveData<String> = _fcmToken
 
     private val _isSuccess = MutableLiveData(false)
-    val isSuccess: LiveData<Boolean> = _isSuccess
+    val isSuccess: LiveData<Boolean> = _isSuccess.distinctUntilChanged()
 
     private val _isRegisterUser = MutableLiveData(false)
     val isRegisterUser: LiveData<Boolean> = _isRegisterUser

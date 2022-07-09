@@ -28,7 +28,7 @@ class RecordRepositoryImpl @Inject constructor(
                 }
         }
 
-        return checkedItems
+        return checkedItems.distinctBy { it.record.name }
     }
 
     override suspend fun updateRecords(product: Product, user: User) {

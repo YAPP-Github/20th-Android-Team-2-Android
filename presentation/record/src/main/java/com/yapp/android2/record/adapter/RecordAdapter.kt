@@ -23,11 +23,11 @@ class RecordAdapter : ListAdapter<Item, RecordViewHolder>(DIFF_UTIL) {
     companion object {
         private val DIFF_UTIL = object : DiffUtil.ItemCallback<Item>() {
             override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-                return false
+                return oldItem == newItem
             }
 
             override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {
-                return false
+                return oldItem == newItem
             }
         }
     }
