@@ -35,11 +35,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/setting_main_title"
                 android:textAppearance="@style/Typography.H2.Medium"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_back"
-                app:layout_constraintTop_toTopOf="parent"
-                android:text="@string/setting_main_title" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -56,6 +56,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_end="20dp" />
+
+        <View
+            android:id="@+id/view_user"
+            android:layout_width="0dp"
+            android:layout_height="?android:actionBarSize"
+            app:layout_constraintEnd_toEndOf="@+id/guide_end"
+            app:layout_constraintStart_toStartOf="@+id/guide_start"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
         <TextView
             android:id="@+id/tv_user_id"
@@ -117,6 +125,14 @@
             app:layout_constraintStart_toEndOf="@+id/tv_notice_title"
             app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
+        <View
+            android:id="@+id/view_policy"
+            android:layout_width="0dp"
+            android:layout_height="?android:actionBarSize"
+            app:layout_constraintEnd_toEndOf="@+id/guide_end"
+            app:layout_constraintStart_toStartOf="@+id/guide_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_notice_title" />
+
         <TextView
             android:id="@+id/tv_policy"
             android:layout_width="0dp"
@@ -164,6 +180,14 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_version_title"
             app:layout_constraintStart_toEndOf="@+id/tv_version_title" />
 
+
+        <View
+            android:id="@+id/view_logout"
+            android:layout_width="0dp"
+            android:layout_height="?android:actionBarSize"
+            app:layout_constraintEnd_toEndOf="@+id/guide_end"
+            app:layout_constraintStart_toStartOf="@+id/guide_start"
+            app:layout_constraintTop_toBottomOf="@+id/tv_version_title" />
 
         <TextView
             android:id="@+id/tv_logout"

@@ -39,10 +39,10 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
 
         overridePendingTransition(R.anim.activity_in_transition, R.anim.activity_stay_transition)
 
-        binding.tvLogout.setOnSingleClickListener {
+        binding.viewLogout.setOnSingleClickListener {
             startActivity(logoutNavigator.intent(this))
         }
-        binding.tvUserId.setOnSingleClickListener {
+        binding.viewUser.setOnSingleClickListener {
             startActivity(withDrawNavigator.intent(this).putExtra(EMAIL, binding.tvUserId.text))
         }
 
