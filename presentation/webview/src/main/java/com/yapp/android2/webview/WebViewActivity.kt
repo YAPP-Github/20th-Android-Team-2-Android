@@ -2,6 +2,7 @@ package com.yapp.android2.webview
 
 import android.os.Bundle
 import android.webkit.WebSettings
+import android.webkit.WebViewClient
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.ui.gone
 import com.best.friends.core.ui.visible
@@ -22,6 +23,8 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding>(R.layout.activity_w
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        webViewSetting()
         toolbarInit()
         webViewInit()
     }
@@ -55,8 +58,6 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding>(R.layout.activity_w
             if(progress == 100) { binding.progressBar.gone() }
         }
 
-        webViewSetting()
-
         binding.webView.loadUrl(baseUrl.url)
     }
 
@@ -71,6 +72,11 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding>(R.layout.activity_w
             cacheMode = WebSettings.LOAD_NO_CACHE
             setSupportZoom(false)
         }
+    }
+
+    override fun onDestroy() {
+        binding.webView.destroy()
+        super.onDestroy()
     }
 
 }

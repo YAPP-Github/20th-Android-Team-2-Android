@@ -30,7 +30,11 @@ object AppModule {
     @Singleton
     @Named(POLICY_WEB_URL_KEY)
     fun providesWebURL(): WebURL {
-        //https://bit.ly/3yn5yL4
-        return WebURL("https://rustic-decade-83c.notion.site/cdfb1587f8854c7e86a2ee46ec471311")
+        /**
+         * 기존 raw url
+         * @param = https://rustic-decade-83c.notion.site/cdfb1587f8854c7e86a2ee46ec471311
+         **/
+
+        return WebURL("https://bit.ly/3yn5yL4")
     }
 }
