@@ -106,7 +106,7 @@ class DatePickerWithTodayButtonDialog private constructor() : DialogFragment() {
                             val today = ZonedDateTime.now()
                             listener.onDateSet(
                                 year = today.year,
-                                month = today.monthValue,
+                                month = today.monthValue - 1,
                                 dayOfMonth = today.dayOfMonth
                             )
                         }
