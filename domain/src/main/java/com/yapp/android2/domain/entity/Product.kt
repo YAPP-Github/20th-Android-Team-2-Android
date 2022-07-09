@@ -18,7 +18,7 @@ data class Product(
         get() = try {
             DecimalFormat("###,###").format(price.toInt())
         } catch (e: Exception) {
-            price.toString()
+            price
         }
 
     val wonPrice: String

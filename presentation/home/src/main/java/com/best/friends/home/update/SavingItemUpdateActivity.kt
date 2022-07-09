@@ -1,6 +1,5 @@
 package com.best.friends.home.update
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
@@ -14,18 +13,25 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.best.friend.design.R.string.common_cancel
+import com.best.friend.design.R.string.common_delete
+import com.best.friend.design.R.string.common_ok
+import com.best.friend.design.R.string.common_update
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.ui.Empty
 import com.best.friends.core.ui.showToast
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemUpdateBinding
+import com.best.friends.home.dialog.HorizontalButtonsDialogFragment
+import com.best.friends.home.update.SavingItemUpdateViewModel.Action.Delete
+import com.best.friends.home.update.SavingItemUpdateViewModel.Action.Finish
+import com.best.friends.home.update.SavingItemUpdateViewModel.Action.Update
 import com.yapp.android2.domain.entity.Product
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.text.DecimalFormat
-
 
 /**
  * 절약 수정 화면 Activity
@@ -71,16 +77,23 @@ class SavingItemUpdateActivity :
     }
 
     private fun initView() {
-        val filter = InputFilter { source, start, end, _, _, _ ->
-            for (i in start until end) {
-                if (Character.isWhitespace(source[i])) {
-                    return@InputFilter ""
+        binding.etItemContent.setOnFocusChangeListener { _, hasFocus ->
+            val editText = binding.etItemContent
+            val whiteSpaceFilter = InputFilter { source, start, end, _, _, _ ->
+                if (binding.etItemContent.text.isBlank()) {
+                    for (i in start until end) {
+                        if (Character.isWhitespace(source[i])) {
+                            return@InputFilter ""
+                        }
+                    }
                 }
+                null
             }
-            null
-        }
 
-        binding.etItemContent.filters = arrayOf(filter)
+            if (hasFocus) {
+                editText.filters = arrayOf(whiteSpaceFilter)
+            }
+        }
 
         binding.etItemPrice.inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
         binding.etItemPrice.transformationMethod = null
@@ -92,7 +105,7 @@ class SavingItemUpdateActivity :
             }
 
             if (hasFocus) {
-                editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6))
+                editText.filters = arrayOf(InputFilter.LengthFilter(6))
                 val onlyNumber = price
                     .replace(",", "")
                     .replace("원", "")
@@ -121,6 +134,46 @@ class SavingItemUpdateActivity :
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(editText, 0)
         }
+
+        binding.tvUpdate.setOnSingleClickListener {
+            showConfirmDialogFragment(
+                title = getString(R.string.saving_item_update_popup_title),
+                description = getString(R.string.saving_item_update_popup_description),
+                negativeButtonName = getString(common_cancel),
+                positiveButtonName = getString(common_update),
+                positiveAction = { viewModel.onUpdateClick() }
+            )
+        }
+
+        binding.tvDelete.setOnSingleClickListener {
+            val isChecked = viewModel.paramsFlow.value.product.checked
+            val title = if (isChecked) {
+                getString(R.string.saving_item_cannot_delete_popup_title)
+            } else {
+                getString(R.string.saving_item_delete_popup_title)
+            }
+
+            val description = if (isChecked) {
+                getString(R.string.saving_item_cannot_delete_popup_description)
+            } else {
+                getString(R.string.saving_item_delete_popup_description)
+            }
+
+            val positiveButtonName = if (isChecked) {
+                getString(common_ok)
+            } else {
+                getString(common_delete)
+            }
+
+            showConfirmDialogFragment(
+                title = title,
+                description = description,
+                negativeButtonEnable = !isChecked,
+                negativeButtonName = getString(common_cancel),
+                positiveButtonName = positiveButtonName,
+                positiveAction = { if (!isChecked) viewModel.onDeleteClick() }
+            )
+        }
     }
 
     private fun setToolbar() {
@@ -137,11 +190,42 @@ class SavingItemUpdateActivity :
             .launchIn(lifecycleScope)
 
         viewModel.action
-            .onEach { _ ->
-                setResult(Activity.RESULT_OK)
-                finish()
+            .onEach { action ->
+                when (action) {
+                    Update -> {
+                        setResult(RESULT_OK)
+                        finish()
+                    }
+                    Delete -> {
+                        setResult(RESULT_OK)
+                        finish()
+                    }
+                    Finish -> finish()
+                }
             }
             .launchIn(lifecycleScope)
+    }
+
+    private fun showConfirmDialogFragment(
+        title: String,
+        description: String,
+        negativeButtonEnable: Boolean = true,
+        negativeButtonName: String,
+        negativeAction: () -> Unit = {},
+        positiveButtonName: String,
+        positiveAction: () -> Unit = {}
+    ) {
+        HorizontalButtonsDialogFragment.show(
+            supportFragmentManager,
+            lifecycleOwner = this,
+            title = title,
+            description = description,
+            negativeButtonEnable = negativeButtonEnable,
+            negativeButtonName = negativeButtonName,
+            negativeAction = negativeAction,
+            positiveButtonName = positiveButtonName,
+            positiveAction = positiveAction
+        )
     }
 
     companion object {

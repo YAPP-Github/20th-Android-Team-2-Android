@@ -32,6 +32,7 @@
                 android:layout_marginTop="4dp"
                 android:maxLines="2"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:text="@string/saving_items_empty_description"
                 android:textColor="@color/gray3"
                 android:textAppearance="@style/Typography.Body4.Regular"

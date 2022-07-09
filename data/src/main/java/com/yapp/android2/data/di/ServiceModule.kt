@@ -5,11 +5,7 @@ import com.chuckerteam.chucker.api.ChuckerCollector
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.chuckerteam.chucker.api.RetentionManager
 import com.google.gson.Gson
-import com.yapp.android2.data.service.LoginService
-import com.yapp.android2.data.service.NotificationService
-import com.yapp.android2.data.service.ProductsService
-import com.yapp.android2.data.service.RecordService
-import com.yapp.android2.data.service.Service
+import com.yapp.android2.data.service.*
 import com.yapp.android2.data.service.interceptor.HeaderInterceptor
 import dagger.Module
 import dagger.Provides
@@ -49,6 +45,18 @@ internal object ServiceModule {
     fun providesProductsService(
         retrofit: Retrofit
     ): ProductsService = retrofit.create()
+
+    @Singleton
+    @Provides
+    fun providesLogoutService(
+        retrofit: Retrofit
+    ): LogoutService = retrofit.create()
+
+    @Singleton
+    @Provides
+    fun provideWithDrawService(
+        retrofit: Retrofit
+    ): WithDrawService = retrofit.create()
 
     @Provides
     @Singleton

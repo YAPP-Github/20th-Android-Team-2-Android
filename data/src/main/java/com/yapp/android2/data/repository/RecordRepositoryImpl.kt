@@ -11,18 +11,24 @@ class RecordRepositoryImpl @Inject constructor(
     private val recordRemoteDataSource: RecordRemoteDataSource
 ) : RecordRepository {
 
-    override suspend fun fetchRecords(recordMM: String): List<Item> {
+    override suspend fun fetchRecordsOrThrow(recordMM: String): List<Item> {
 
         val savingList = recordRemoteDataSource.fetchRecords(recordMM)
         val summaryList = recordRemoteDataSource.fetchSummaryRecord(recordMM)
 
-        return savingList.map { response ->
-            Item(
-                response,
-                totalCount = summaryList.first { response.name == it.name }.baseTimes,
-                timesComparedToPrev = summaryList.first { response.name == it.name }.timesComparedToPrev
-            )
+
+        val checkedItems = savingList.flatMap { savingItem ->
+            summaryList.filter { savingItem.name == it.name }
+                .map {
+                    Item(
+                        record = savingItem,
+                        totalCount = it.baseTimes,
+                        timesComparedToPrev = it.timesComparedToPrev
+                    )
+                }
         }
+
+        return checkedItems
     }
 
     override suspend fun updateRecords(product: Product, user: User) {

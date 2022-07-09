@@ -15,10 +15,8 @@ class GetRecordUseCase @Inject constructor(
         val now = LocalDate.now()
         val reformatDate = DateTimeFormatter.ofPattern("yyyyMM").format(now)
 
-        return runCatching { recordRepository.fetchRecords(reformatDate) }
-            .getOrElse { it.printStackTrace()
-                emptyList()
-            }
+        return runCatching { recordRepository.fetchRecordsOrThrow(reformatDate) }
+            .getOrElse { emptyList() }
     }
 }
 

@@ -8,11 +8,21 @@ import com.yapp.android2.domain.entity.Notification
 
 class NotificationAdapter: RecyclerView.Adapter<NotificationAdapter.NotificationViewHolder>() {
 
-    val notificationList = mutableListOf<Notification>()
+    private val notifications = mutableListOf<Notification>()
 
-    class NotificationViewHolder(private val binding: ItemNotificationBinding): RecyclerView.ViewHolder(binding.root) {
+    fun submitList(list: List<Notification>) {
+        this.notifications.clear()
+        notifications.addAll(list)
+        notifyDataSetChanged()
+    }
+
+    class NotificationViewHolder(
+        private val binding: ItemNotificationBinding
+    ): RecyclerView.ViewHolder(binding.root) {
+
         fun onBind(data: Notification){
             binding.data = data
+            binding.executePendingBindings()
         }
     }
 
@@ -24,8 +34,10 @@ class NotificationAdapter: RecyclerView.Adapter<NotificationAdapter.Notification
     }
 
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
-        holder.onBind(notificationList[position])
+        holder.onBind(notifications[position])
     }
 
-    override fun getItemCount(): Int = notificationList.size
+    override fun getItemCount(): Int {
+        return notifications.size
+    }
 }

@@ -19,7 +19,11 @@ class NotificationViewModel @Inject constructor(
     private val _notificationList = MutableLiveData<List<Notification>>()
     val notificationList: LiveData<List<Notification>> = _notificationList
 
-    fun getNotificationList() {
+    init {
+        getNotificationList()
+    }
+
+    private fun getNotificationList() {
         viewModelScope.launch {
             kotlin.runCatching {
                 notificationRepository.getNotification()
