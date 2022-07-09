@@ -9,4 +9,6 @@
     <string name="common_cancel">취소</string>
     <string name="common_ok">확인</string>
 
+    <string name="common_today">오늘</string>
+
 </resources>

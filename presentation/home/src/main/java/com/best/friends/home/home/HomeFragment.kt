@@ -1,7 +1,6 @@
 package com.best.friends.home.home
 
 import android.app.Activity
-import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +16,7 @@ import com.best.friends.core.ui.showToast
 import com.best.friends.core.ui.visibleOrGone
 import com.best.friends.home.R
 import com.best.friends.home.databinding.FragmentHomeBinding
+import com.best.friends.home.dialog.DatePickerWithTodayButtonDialog
 import com.best.friends.home.home.HomeViewModel.Action.CalendarClick
 import com.best.friends.home.register.SavingItemAddActivity
 import com.best.friends.home.update.SavingItemUpdateActivity
@@ -140,16 +140,23 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     }
 
     private fun showDatePicker(zonedDateTime: ZonedDateTime) {
-        DatePickerDialog(requireContext(), { _, year, month, dayOfMonth ->
-            val new = ZonedDateTime.of(
-                year,
-                month + 1,
-                dayOfMonth,
-                0, 0, 0, 0, ZoneId.systemDefault()
-            )
+        DatePickerWithTodayButtonDialog.show(
+            fragmentManager = childFragmentManager,
+            lifecycleOwner = viewLifecycleOwner,
+            year = zonedDateTime.year,
+            month = zonedDateTime.month.value - 1,
+            dayOfMonth = zonedDateTime.dayOfMonth,
+            listener = { year, month, dayOfMonth ->
+                val new = ZonedDateTime.of(
+                    year,
+                    month + 1,
+                    dayOfMonth,
+                    0, 0, 0, 0, ZoneId.systemDefault()
+                )
 
-            viewModel.getProductsSelectDay(new)
-        }, zonedDateTime.year, zonedDateTime.month.value - 1, zonedDateTime.dayOfMonth).show()
+                viewModel.getProductsSelectDay(new)
+            }
+        )
     }
 
     private fun startSavingUpdateActivity(product: Product) {
