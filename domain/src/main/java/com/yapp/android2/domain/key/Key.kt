@@ -13,3 +13,5 @@ const val USER = "user"
 const val EMAIL = "email"
 
 const val PRODUCT = "product"
+
+const val LAST_NOTIFICATION_TIME_KEY = "BestFriend-Notification-Time"

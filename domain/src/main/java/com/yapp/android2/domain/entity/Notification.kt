@@ -4,6 +4,6 @@ data class Notification(
     val title: String?,
     val body: String?,
     val elapsedTime: String?,
-    val createdAt: String?
+    val createAt: String?
 )
 
