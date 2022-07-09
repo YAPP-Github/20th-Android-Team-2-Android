@@ -26,7 +26,7 @@ class DatePickerWithTodayButtonDialog private constructor() : DialogFragment() {
 
     private val year by lazy { arguments?.getInt(KEY_YEAR) ?: 0 }
     private val month by lazy { arguments?.getInt(KEY_MONTH) ?: 0 }
-    private val dayOfMonth by lazy { arguments?.getInt(KEY_DAY_OF_MONTH) ?: 0 }
+    private val dayOfMonth by lazy { arguments?.getInt(KEY_DAY_OF_MONTH) ?: 1 }
 
     override fun onCreateView(
         inflater: LayoutInflater,
