@@ -39,13 +39,6 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
 
         overridePendingTransition(R.anim.activity_in_transition, R.anim.activity_stay_transition)
 
-        binding.viewLogout.setOnSingleClickListener {
-            startActivity(logoutNavigator.intent(this))
-        }
-        binding.viewUser.setOnSingleClickListener {
-            startActivity(withDrawNavigator.intent(this).putExtra(EMAIL, binding.tvUserId.text))
-        }
-
         binding.setOnClickListener()
 
         viewModel.user.flowWithLifecycle(lifecycle = this.lifecycle)
@@ -62,6 +55,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
 
     private fun ActivitySettingsBinding.viewInit(value: SettingRepository.Settings.Success) {
         tvUserId.text = value.email
+        tvVersion.text = packageManager.getPackageInfo(this@SettingsActivity.packageName, 0).versionName
         tvCreatedAt.text = getString(R.string.setting_created_at, LocalDateTime.parse(value.createAt)?.format(DateTimeFormatter.ofPattern("yy.MM.dd")))
     }
 
@@ -71,6 +65,14 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
         }
         tvPolicy.setOnSingleClickListener(500) {
             this@SettingsActivity.startActivity(navigator.intent(this@SettingsActivity))
+        }
+
+        viewLogout.setOnSingleClickListener {
+            startActivity(logoutNavigator.intent(this@SettingsActivity))
+        }
+
+        viewUser.setOnSingleClickListener {
+            startActivity(withDrawNavigator.intent(this@SettingsActivity).putExtra(EMAIL, binding.tvUserId.text))
         }
     }
 

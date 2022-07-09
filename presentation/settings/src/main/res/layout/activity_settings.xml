@@ -174,7 +174,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="9dp"
-            android:text="1.0.0"
+            tools:text="1.0.0"
             android:textAppearance="@style/Typography.Caption2.Medium"
             android:textColor="@color/color_primary"
             app:layout_constraintBaseline_toBaselineOf="@+id/tv_version_title"
