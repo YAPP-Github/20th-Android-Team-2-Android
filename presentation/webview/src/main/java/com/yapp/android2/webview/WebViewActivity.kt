@@ -5,15 +5,18 @@ import android.webkit.WebSettings
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.ui.gone
 import com.best.friends.core.ui.visible
+import com.yapp.android2.domain.key.POLICY_WEB_URL_KEY
 import com.yapp.android2.domain.url.WebURL
 import com.yapp.android2.webview.databinding.ActivityWebViewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class WebViewActivity : BaseActivity<ActivityWebViewBinding>(R.layout.activity_web_view) {
 
     @Inject
+    @Named(POLICY_WEB_URL_KEY)
     lateinit var baseUrl: WebURL
 
     override fun onCreate(savedInstanceState: Bundle?) {

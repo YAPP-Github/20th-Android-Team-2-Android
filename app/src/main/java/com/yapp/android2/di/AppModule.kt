@@ -3,11 +3,13 @@ package com.yapp.android2.di
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.yapp.android2.domain.key.POLICY_WEB_URL_KEY
 import com.yapp.android2.domain.url.WebURL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -26,6 +28,7 @@ object AppModule {
 
     @Provides
     @Singleton
+    @Named(POLICY_WEB_URL_KEY)
     fun providesWebURL(): WebURL {
         return WebURL("https://bit.ly/3yn5yL4")
     }
