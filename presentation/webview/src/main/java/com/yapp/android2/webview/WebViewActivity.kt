@@ -66,6 +66,8 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding>(R.layout.activity_w
             domStorageEnabled = true
             javaScriptEnabled = true
             loadWithOverviewMode = true
+            useWideViewPort = true
+            loadsImagesAutomatically = true
             cacheMode = WebSettings.LOAD_NO_CACHE
             setSupportZoom(false)
         }
