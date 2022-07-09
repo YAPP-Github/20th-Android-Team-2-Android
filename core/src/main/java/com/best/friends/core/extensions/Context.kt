@@ -1,4 +1,4 @@
-package com.best.friends.core.ui
+package com.best.friends.core.extensions
 
 import android.content.Context
 import android.widget.Toast

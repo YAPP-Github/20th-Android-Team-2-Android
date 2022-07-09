@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
 import com.best.friends.core.BaseActivity
-import com.best.friends.core.ui.showToast
+import com.best.friends.core.extensions.showToast
 import com.best.friends.home.databinding.ActivityMainBinding
 import com.best.friends.home.databinding.LayoutCustomTabBinding
 import com.google.android.material.tabs.TabLayout

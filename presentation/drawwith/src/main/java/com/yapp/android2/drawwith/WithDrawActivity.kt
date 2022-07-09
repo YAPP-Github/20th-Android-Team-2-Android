@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
-import com.best.friends.core.ui.showToast
+import com.best.friends.core.extensions.showToast
 import com.best.friends.navigator.LoginNavigator
 import com.google.firebase.messaging.FirebaseMessaging
 import com.yapp.android2.drawwith.databinding.ActivityWithDrawBinding
