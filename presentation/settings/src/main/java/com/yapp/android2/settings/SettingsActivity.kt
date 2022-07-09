@@ -6,15 +6,17 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
+import com.best.friends.core.ui.showToast
 import com.best.friends.navigator.LogoutNavigator
+import com.best.friends.navigator.WebViewNavigator
 import com.best.friends.navigator.WithDrawNavigator
 import com.yapp.android2.domain.key.EMAIL
+import com.yapp.android2.domain.repository.setting.SettingRepository
 import com.yapp.android2.settings.databinding.ActivitySettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import com.best.friends.core.ui.showToast
-import com.best.friends.navigator.PolicyNavigator
-import com.yapp.android2.domain.repository.setting.SettingRepository
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
@@ -24,7 +26,7 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
     private val viewModel by viewModels<SettingViewModel>()
 
     @Inject
-    lateinit var navigator: PolicyNavigator
+    lateinit var navigator: WebViewNavigator
 
     @Inject
     lateinit var logoutNavigator: LogoutNavigator
