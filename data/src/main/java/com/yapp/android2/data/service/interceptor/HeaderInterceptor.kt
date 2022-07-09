@@ -58,7 +58,7 @@ class HeaderInterceptor @Inject constructor(
         val response = chain.proceed(request)
 
         when (response.code) {
-            401 or 403 -> {
+            401, 403 -> {
                 for (i in 1..REPEAT_NUM) {
                     response.close()
                     val renewalTokenRequest = chain.request().newBuilder().get()
