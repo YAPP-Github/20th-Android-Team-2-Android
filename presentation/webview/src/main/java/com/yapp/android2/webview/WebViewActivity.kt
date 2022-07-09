@@ -2,7 +2,6 @@ package com.yapp.android2.webview
 
 import android.os.Bundle
 import android.webkit.WebSettings
-import android.webkit.WebViewClient
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.ui.gone
 import com.best.friends.core.ui.visible
@@ -30,14 +29,9 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding>(R.layout.activity_w
     }
 
     private fun toolbarInit() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = getString(R.string.policy_title)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
-        binding.toolbar.setNavigationOnClickListener {
+        binding.ivBack.setOnClickListener {
             clearCookie()
-            onBackPressed()
+            finish()
         }
     }
 
