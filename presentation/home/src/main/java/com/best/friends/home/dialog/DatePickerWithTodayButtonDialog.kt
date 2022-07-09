@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
@@ -20,6 +21,9 @@ class DatePickerWithTodayButtonDialog private constructor() : DialogFragment() {
     }
 
     private lateinit var binding: FragmentDialogDatePickerTodayButtonBinding
+    private val datePicker: DatePicker
+        get() = binding.datePicker
+
     private val year by lazy { arguments?.getInt(KEY_YEAR) ?: 0 }
     private val month by lazy { arguments?.getInt(KEY_MONTH) ?: 0 }
     private val dayOfMonth by lazy { arguments?.getInt(KEY_DAY_OF_MONTH) ?: 0 }
@@ -37,10 +41,18 @@ class DatePickerWithTodayButtonDialog private constructor() : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.datePicker.init(year, month, dayOfMonth, null)
+        datePicker.init(year, month, dayOfMonth, null)
 
         binding.tvConfirm.setOnSingleClickListener {
-            setFragmentResult(RESULT, bundleOf(RESULT_POSITIVE_ACTION to true))
+            setFragmentResult(
+                requestKey = RESULT,
+                result = bundleOf(
+                    RESULT_POSITIVE_ACTION to true,
+                    KEY_YEAR to datePicker.year,
+                    KEY_MONTH to datePicker.month,
+                    KEY_DAY_OF_MONTH to datePicker.dayOfMonth
+                )
+            )
             dismiss()
         }
 

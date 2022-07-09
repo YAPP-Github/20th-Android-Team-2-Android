@@ -149,7 +149,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             listener = { year, month, dayOfMonth ->
                 val new = ZonedDateTime.of(
                     year,
-                    month + 1,
+                    month,
                     dayOfMonth,
                     0, 0, 0, 0, ZoneId.systemDefault()
                 )
