@@ -31,4 +31,8 @@ class NotificationViewModel @Inject constructor(
             }
         }
     }
+
+    fun saveLastNotificationTime(time: String) {
+        notificationRepository.saveLastNotificationTime(time)
+    }
 }

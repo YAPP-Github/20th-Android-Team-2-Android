@@ -4,4 +4,6 @@ import com.yapp.android2.domain.entity.Notification
 
 interface NotificationRepository {
     suspend fun getNotification(): List<Notification>
+    fun saveLastNotificationTime(time: String)
+    fun getLastNotificationTime(): String
 }
