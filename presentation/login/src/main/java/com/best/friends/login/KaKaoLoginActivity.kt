@@ -58,7 +58,6 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
                 kotlin.runCatching {
                     UserApiClient.loginWithKakaoOrThrow(context)
                 }.onSuccess {
-                    viewModel.setKakaoAccessToken(it.accessToken)
                     registerUser()
                 }.onFailure {
                     if (it is ClientError && it.reason == ClientErrorCause.Cancelled) {
@@ -75,12 +74,11 @@ class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.acti
     private fun registerUser() {
         UserApiClient.instance.me { user, _ ->
             if (user != null) {
-                viewModel.setKakaoUser(
+                viewModel.addKakaoUser(
                     user.kakaoAccount?.email ?: "",
                     user.kakaoAccount?.profile?.nickname ?: "",
                     user.id ?: 0
                 )
-                viewModel.user.value?.let { viewModel.addKakaoUser(it) }
             }
         }
     }
