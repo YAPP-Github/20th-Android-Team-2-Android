@@ -88,7 +88,7 @@ internal class SavingsListAdapter(
             product = data.product
             binding.product = product
             binding.checkbox.setOnCheckedChangeListener(null)
-            binding.checkbox.isChecked = (product.checked == true)
+            binding.checkbox.isChecked = (product.checked)
             binding.checkbox.setOnCheckedChangeListener { _, _ ->
                 onItemChecked.invoke(product)
             }

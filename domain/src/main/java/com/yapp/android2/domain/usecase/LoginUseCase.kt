@@ -25,5 +25,4 @@ class LoginUseCase @Inject constructor(
             throw it
         }
     }
-
 }

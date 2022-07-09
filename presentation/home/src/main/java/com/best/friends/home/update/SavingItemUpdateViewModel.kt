@@ -19,6 +19,7 @@ class SavingItemUpdateViewModel @Inject constructor(
     private val loginRepository: LoginRepository
 ) : BaseViewModel() {
 
+    val paramsFlow = MutableStateFlow(params)
     val content = MutableStateFlow(params.product.name.orEmpty())
     val price = MutableStateFlow(params.product.wonPrice)
 
@@ -37,15 +38,21 @@ class SavingItemUpdateViewModel @Inject constructor(
     fun onUpdateClick() {
         viewModelScope.launch {
             kotlin.runCatching {
-                val user = loginRepository.getUser()
-                productsRepository.updateProducts(
-                    productId = params.product.productId,
-                    userId = user.userId,
-                    name = content.value.trim(),
-                    price = price.value
-                        .replace(",", "")
-                        .replace("원", "")
-                )
+                val name = content.value.trim()
+                val price = price.value
+                    .replace(",", "")
+                    .replace("원", "")
+                if (params.product.name != name || params.product.price != price) {
+                    val user = loginRepository.getUser()
+                    productsRepository.updateProducts(
+                        productId = params.product.productId,
+                        userId = user.userId,
+                        name = name,
+                        price = price
+                    )
+                } else {
+                    return@launch _action.emit(Action.Finish)
+                }
             }.onSuccess {
                 _action.emit(Action.Update)
             }.onFailure { throwable ->
@@ -69,6 +76,7 @@ class SavingItemUpdateViewModel @Inject constructor(
     data class Params(val product: Product)
 
     sealed class Action {
+        object Finish : Action()
         object Update : Action()
         object Delete : Action()
     }

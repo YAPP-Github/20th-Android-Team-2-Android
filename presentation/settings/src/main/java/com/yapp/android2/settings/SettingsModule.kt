@@ -12,5 +12,4 @@ internal abstract class SettingsModule {
 
     @Binds
     abstract fun bindSettingsNavigator(navi: SettingsNavigatorImpl): SettingNavigator
-
 }

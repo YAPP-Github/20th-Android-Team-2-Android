@@ -6,6 +6,8 @@ import com.yapp.android2.data.local.BestFriendSharedPreferenceProviderImpl
 import com.yapp.android2.data.local.SharedPreferenceProvider
 import com.yapp.android2.data.local.login.LoginLocalDataSource
 import com.yapp.android2.data.local.login.LoginLocalDataSourceImpl
+import com.yapp.android2.data.local.logout.LogoutLocalDataSource
+import com.yapp.android2.data.local.logout.LogoutLocalDataSourceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,4 +29,8 @@ internal class LocalModule {
     @Provides
     fun provideLoginLocalDataModule(sharedPreference: BestFriendSharedPreferenceProviderImpl): LoginLocalDataSource =
         LoginLocalDataSourceImpl(sharedPreference)
+
+    @Provides
+    fun provideLogoutLocalDataModule(sharedPreference: BestFriendSharedPreferenceProviderImpl): LogoutLocalDataSource =
+        LogoutLocalDataSourceImpl(sharedPreference)
 }

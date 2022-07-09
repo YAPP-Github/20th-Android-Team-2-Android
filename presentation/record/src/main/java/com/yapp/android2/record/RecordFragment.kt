@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
@@ -14,6 +15,8 @@ import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.MonthScrollListener
 import com.kizitonwose.calendarview.utils.next
 import com.kizitonwose.calendarview.utils.previous
+import com.yapp.android2.domain.entity.Product
+import com.yapp.android2.domain.key.PRODUCT
 import com.yapp.android2.record.adapter.RecordAdapter
 import com.yapp.android2.record.databinding.FragmentRecordBinding
 import com.yapp.android2.record.view.setOffsetTransformer
@@ -50,11 +53,9 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
             executePendingBindings()
         }
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.fetchRecords()
+        setFragmentResultListener(PRODUCT) { _, _ ->
+            viewModel.fetchRecords()
+        }
     }
 
     private fun FragmentRecordBinding.viewInit() {

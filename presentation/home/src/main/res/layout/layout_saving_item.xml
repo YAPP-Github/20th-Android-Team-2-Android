@@ -50,16 +50,16 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@{product.name}"
-            android:maxLength="6"
             android:maxLines="1"
             android:ellipsize="end"
             android:textAppearance="@style/Typography.H2.Bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/checkbox_click_sections"
             app:layout_constraintStart_toEndOf="@id/checkbox"
             tools:text="아메리카노" />
 

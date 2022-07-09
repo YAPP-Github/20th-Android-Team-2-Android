@@ -4,11 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
-import com.yapp.android2.domain.entity.FCMToken
 import com.yapp.android2.domain.usecase.LoginUseCase
 import com.yapp.android2.domain.usecase.PostFCMTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
@@ -28,7 +26,7 @@ class LoginViewModel @Inject constructor(
     val isRegisterUser: LiveData<Boolean> = _isRegisterUser
 
     fun addKakaoUser(email: String, nickName: String, providerId: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             kotlin.runCatching {
                 loginUseCase(
                     email = email,
@@ -49,7 +47,7 @@ class LoginViewModel @Inject constructor(
     }
 
     fun addFCMToken() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             kotlin.runCatching {
                 postFCMTokenUseCase(requireNotNull(fcmToken.value))
             }.onSuccess {
