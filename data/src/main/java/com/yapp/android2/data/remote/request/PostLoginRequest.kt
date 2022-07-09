@@ -1,6 +1,6 @@
-package com.yapp.android2.domain.entity
+package com.yapp.android2.data.remote.request
 
-data class LoginRequest(
+data class PostLoginRequest(
     val email: String,
     val nickName: String,
     val providerId: Long
