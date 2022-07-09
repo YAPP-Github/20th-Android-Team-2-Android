@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
-import com.best.friends.core.ui.showToast
+import com.best.friends.core.extensions.showToast
 import com.best.friends.login.databinding.ActivityKakaoLoginBinding
 import com.best.friends.navigator.HomeNavigator
 import com.google.android.gms.tasks.OnCompleteListener

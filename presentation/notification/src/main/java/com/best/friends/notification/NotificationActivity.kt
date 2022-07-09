@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
-import com.best.friends.core.ui.visibleOrGone
+import com.best.friends.core.extensions.visibleOrGone
 import com.best.friends.notification.databinding.ActivityNotificationBinding
 import dagger.hilt.android.AndroidEntryPoint
 

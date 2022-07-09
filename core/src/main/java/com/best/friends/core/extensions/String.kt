@@ -1,4 +1,4 @@
-package com.best.friends.core.ui
+package com.best.friends.core.extensions
 
 val String.Companion.Empty
     get() = ""

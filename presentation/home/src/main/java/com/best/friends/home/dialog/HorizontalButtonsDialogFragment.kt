@@ -14,7 +14,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.LifecycleOwner
 import com.best.friend.design.R.*
 import com.best.friends.core.setOnSingleClickListener
-import com.best.friends.core.ui.visibleOrGone
+import com.best.friends.core.extensions.visibleOrGone
 import com.best.friends.home.databinding.FragmentDialogHorizontalButtonsBinding
 
 class HorizontalButtonsDialogFragment private constructor() : DialogFragment() {

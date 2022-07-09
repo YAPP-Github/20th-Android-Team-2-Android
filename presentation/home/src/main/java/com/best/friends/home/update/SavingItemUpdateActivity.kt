@@ -19,8 +19,8 @@ import com.best.friend.design.R.string.common_ok
 import com.best.friend.design.R.string.common_update
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
-import com.best.friends.core.ui.Empty
-import com.best.friends.core.ui.showToast
+import com.best.friends.core.extensions.Empty
+import com.best.friends.core.extensions.showToast
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemUpdateBinding
 import com.best.friends.home.dialog.HorizontalButtonsDialogFragment
