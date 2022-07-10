@@ -19,7 +19,9 @@ import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.MonthScrollListener
 import com.kizitonwose.calendarview.utils.next
 import com.kizitonwose.calendarview.utils.previous
+import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.key.PRODUCT
+import com.yapp.android2.domain.key.PRODUCT_RESULT
 import com.yapp.android2.record.adapter.RecordAdapter
 import com.yapp.android2.record.databinding.FragmentRecordBinding
 import com.yapp.android2.record.view.setOffsetTransformer
@@ -56,15 +58,17 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
             executePendingBindings()
         }
 
-        setFragmentResultListener(PRODUCT) { _, _ ->
+        setFragmentResultListener(PRODUCT_RESULT) { _, _ ->
             viewModel.fetchRecords()
+
+            recordAdapter.notifyDataSetChanged()
         }
     }
 
     private fun FragmentRecordBinding.viewInit() {
         viewPager.adapter = recordAdapter
         viewPager.offscreenPageLimit = 3
-        viewPager[0].overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
         val compositePageTransformer = CompositePageTransformer().apply {
             addTransformer(MarginPageTransformer(40))
             addTransformer(viewPager.setOffsetTransformer())

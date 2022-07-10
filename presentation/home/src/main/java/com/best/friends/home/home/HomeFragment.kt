@@ -24,6 +24,7 @@ import com.best.friends.navigator.NotificationNavigator
 import com.best.friends.navigator.SettingNavigator
 import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.key.PRODUCT
+import com.yapp.android2.domain.key.PRODUCT_RESULT
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -59,7 +60,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             onItemChecked = { product ->
                 viewModel.checkSavingItem(product)
 
-                setFragmentResult(PRODUCT, bundleOf(product.name.orEmpty() to product))
+                setFragmentResult(PRODUCT_RESULT, bundleOf(PRODUCT to product))
             }
         )
     }
