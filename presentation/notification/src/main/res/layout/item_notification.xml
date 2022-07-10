@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="15dp"
             android:text="@{data.body}"
             android:textAppearance="@style/Typography.Body4.Medium"
             android:textColor="@color/black"

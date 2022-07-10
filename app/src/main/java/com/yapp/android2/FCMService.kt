@@ -5,10 +5,11 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
-import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.best.friends.home.MainActivity
@@ -51,14 +52,17 @@ class FCMService : FirebaseMessagingService() {
             mManager.createNotificationChannel(channel)
         }
 
+        val largeIcon: Bitmap = BitmapFactory.decodeResource(resources, com.best.friend.design.R.drawable.app_logo)
+
         val builder = NotificationCompat.Builder(this, channelId).apply {
-            setSmallIcon(com.best.friend.design.R.drawable.app_logo)
+            setSmallIcon(com.best.friend.design.R.drawable.icon_notification_logo)
             setAutoCancel(true)
             setDefaults(Notification.DEFAULT_ALL)
             setWhen(System.currentTimeMillis())
             setContentTitle(title)
             setContentText(body)
             setContentIntent(pendingIntent)
+            setLargeIcon(largeIcon)
         }
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             builder.setContentTitle(title)
