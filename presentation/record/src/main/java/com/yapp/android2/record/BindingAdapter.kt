@@ -20,17 +20,6 @@ fun TextView.bindTotalSaving(items: List<Item>?) {
     }
 }
 
-@BindingAdapter("app:savingItems")
-fun CalendarView.bindSavingItems(items: List<Item>?) {
-    if(items == null) {
-        return
-    }
-
-    dayBinder = DayBind.newInstance(items)
-    setup(firstMonth, lastMonth, firstDayOfWeek)
-    scrollToMonth(currentMonth)
-}
-
 @BindingAdapter("app:itemSavingMessage")
 fun TextView.bindItemSavingMessage(timesComparedToPrev: Int?) {
     if(timesComparedToPrev == null) { return }

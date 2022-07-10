@@ -18,12 +18,11 @@ import java.time.ZoneId
 import java.time.temporal.WeekFields
 import java.util.*
 
-internal class DayBind(private val savingRecords: List<Item>) : DayBinder<DayContainer> {
+internal class DayBind(private val savingRecords: List<String> = emptyList()) : DayBinder<DayContainer> {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun bind(container: DayContainer, day: CalendarDay) {
         container.textView.text = day.date.dayOfMonth.toString()
-        val savingDays = savingRecords.map { it.record.recordYmd }
 
         if(day.owner == DayOwner.THIS_MONTH) {
             container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray4))
@@ -31,7 +30,7 @@ internal class DayBind(private val savingRecords: List<Item>) : DayBinder<DayCon
             container.textView.setTextColor(ContextCompat.getColor(container.view.context, design.color.gray2))
         }
 
-        val isSavingDay = savingDays.any {
+        val isSavingDay = savingRecords.any {
             val dateTime = DateTime.parse(it)
 
             dateTime.dayOfMonth().get() == day.date.dayOfMonth && dateTime.monthOfYear().get() == day.date.yearMonth.monthValue
@@ -46,7 +45,7 @@ internal class DayBind(private val savingRecords: List<Item>) : DayBinder<DayCon
 
 
     companion object {
-        fun newInstance(savingRecords: List<Item>): DayBind = DayBind(savingRecords)
+        fun newInstance(savingRecords: List<String> = emptyList()): DayBind = DayBind(savingRecords)
     }
 }
 
