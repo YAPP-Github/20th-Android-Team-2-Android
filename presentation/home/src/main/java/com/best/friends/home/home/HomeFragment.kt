@@ -6,14 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
-import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.extensions.showToast
 import com.best.friends.core.extensions.visibleOrGone
+import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.home.R
 import com.best.friends.home.databinding.FragmentHomeBinding
 import com.best.friends.home.dialog.DatePickerWithTodayButtonDialog
@@ -23,8 +22,7 @@ import com.best.friends.home.update.SavingItemUpdateActivity
 import com.best.friends.navigator.NotificationNavigator
 import com.best.friends.navigator.SettingNavigator
 import com.yapp.android2.domain.entity.Product
-import com.yapp.android2.domain.key.PRODUCT
-import com.yapp.android2.domain.key.PRODUCT_RESULT
+import com.yapp.android2.record.RecordViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -40,6 +38,7 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.fragment_home) {
 
     override val viewModel by viewModels<HomeViewModel>()
+    private val recordViewModel by activityViewModels<RecordViewModel>()
 
     @Inject
     lateinit var settingNavigator: SettingNavigator
@@ -60,7 +59,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
             onItemChecked = { product ->
                 viewModel.checkSavingItem(product)
 
-                setFragmentResult(PRODUCT_RESULT, bundleOf(PRODUCT to product))
+                recordViewModel.onItemClick()
             }
         )
     }

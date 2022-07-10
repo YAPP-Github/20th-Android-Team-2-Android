@@ -4,36 +4,49 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
-import androidx.fragment.app.setFragmentResultListener
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.flowWithLifecycle
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import androidx.viewpager2.widget.ViewPager2
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.ui.MonthScrollListener
 import com.kizitonwose.calendarview.utils.next
 import com.kizitonwose.calendarview.utils.previous
-import com.yapp.android2.domain.entity.Product
-import com.yapp.android2.domain.key.PRODUCT
-import com.yapp.android2.domain.key.PRODUCT_RESULT
 import com.yapp.android2.record.adapter.RecordAdapter
 import com.yapp.android2.record.databinding.FragmentRecordBinding
 import com.yapp.android2.record.view.setOffsetTransformer
-import dagger.hilt.android.AndroidEntryPoint
+import com.yapp.android2.record.view.currentMonth
+import com.yapp.android2.record.view.firstDayOfWeek
+import com.yapp.android2.record.view.DayBind
+import com.yapp.android2.record.view.firstMonth
+import com.yapp.android2.record.view.lastMonth
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
-@AndroidEntryPoint
 class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.layout.fragment_record) {
 
-    override val viewModel: RecordViewModel by viewModels()
+    override val viewModel: RecordViewModel by activityViewModels()
+
     private val recordAdapter = RecordAdapter()
+
+    private val pagerListener = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageScrolled(
+            position: Int,
+            positionOffset: Float,
+            positionOffsetPixels: Int
+        ) {
+            super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+
+            val items = recordAdapter.currentList[position].recordDates
+
+            binding.calendar.dayBinder = DayBind.newInstance(items)
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,21 +61,20 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.fetchRecords()
         binding.viewInit()
         binding.setListener()
         viewModel.setObserve()
-        viewModel.fetchRecords()
 
         onBind {
             viewModel = this@RecordFragment.viewModel
             executePendingBindings()
         }
+    }
 
-        setFragmentResultListener(PRODUCT_RESULT) { _, _ ->
-            viewModel.fetchRecords()
-
-            recordAdapter.notifyDataSetChanged()
-        }
+    override fun onDestroyView() {
+        binding.viewPager.unregisterOnPageChangeCallback(pagerListener)
+        super.onDestroyView()
     }
 
     private fun FragmentRecordBinding.viewInit() {
@@ -75,6 +87,18 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
         }
 
         viewPager.setPageTransformer(compositePageTransformer)
+        this.viewPager.registerOnPageChangeCallback(pagerListener)
+
+        this.calendar.dayBinder = DayBind.newInstance()
+        with(binding) {
+
+            viewPager.setPageTransformer(compositePageTransformer)
+            viewPager.registerOnPageChangeCallback(pagerListener)
+
+            calendar.dayBinder = DayBind.newInstance()
+            calendar.setup(firstMonth, lastMonth, firstDayOfWeek)
+            calendar.scrollToMonth(currentMonth)
+        }
     }
 
     private fun FragmentRecordBinding.setListener() {
@@ -102,8 +126,20 @@ class RecordFragment : BaseFragment<FragmentRecordBinding, RecordViewModel>(R.la
     }
 
     private fun RecordViewModel.setObserve() {
-        items.flowWithLifecycle(this@RecordFragment.lifecycle, Lifecycle.State.RESUMED)
-            .onEach(recordAdapter::submitList)
+        items
+            .filter { it.isNotEmpty() }
+            .onEach {
+                val distinctList = it.distinctBy { item -> item.record.name }
+                recordAdapter.submitList(distinctList)
+
+                val recordDates = distinctList[binding.viewPager.currentItem].recordDates
+
+                binding.calendar.dayBinder = DayBind.newInstance(recordDates)
+            }
+            .launchIn(viewLifecycleOwner.lifecycleScope)
+
+        action
+            .onEach { fetchRecords() }
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
