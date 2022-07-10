@@ -1,11 +1,14 @@
 package com.best.friends.home.home
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
 import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.repository.ProductsRepository
 import com.yapp.android2.domain.repository.login.LoginRepository
 import com.yapp.android2.domain.repository.record.RecordRepository
+import com.yapp.android2.domain.usecase.IsUnreadNotification
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +26,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val productsRepository: ProductsRepository,
     private val recordRepository: RecordRepository,
-    private val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
+    private val isUnreadNotification: IsUnreadNotification
 ) : BaseViewModel() {
 
     private val _state = MutableStateFlow(State())
@@ -33,6 +37,9 @@ class HomeViewModel @Inject constructor(
     private val _action = MutableSharedFlow<Action>()
     val action: SharedFlow<Action>
         get() = _action.asSharedFlow()
+
+    private val _isNotification = MutableLiveData(false)
+    val isNotification: LiveData<Boolean> = _isNotification
 
     init {
         getProductsToday()
@@ -114,6 +121,20 @@ class HomeViewModel @Inject constructor(
         val currentDay = _state.value.day
         val nextDay = currentDay.plusDays(1L)
         getProductsSelectDay(nextDay)
+    }
+
+    fun setUnreadNotification() {
+        viewModelScope.launch {
+            kotlin.runCatching {
+                isUnreadNotification()
+            }.onSuccess {
+                _isNotification.postValue(it)
+            }.onFailure { throwable ->
+                Timber.e("--- HomeViewModel error: ${throwable.message}")
+                sendErrorMessage(throwable.message)
+            }
+        }
+
     }
 
     data class State(

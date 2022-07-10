@@ -31,7 +31,7 @@ class NotificationViewModel @Inject constructor(
                 _notificationList.postValue(it)
 
                 if(it.isNotEmpty()) {
-                    saveLastNotificationTime(it[0].createAt ?: "0000-00-00T00:00:00")
+                    saveLastNotificationTime(it[0].createAt ?: "")
                 }
             }.onFailure { throwable ->
                 Timber.e("--- NotificationViewModel error: ${throwable.message}")

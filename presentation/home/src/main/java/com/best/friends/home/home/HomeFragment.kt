@@ -11,9 +11,9 @@ import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
-import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.extensions.showToast
 import com.best.friends.core.extensions.visibleOrGone
+import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.home.R
 import com.best.friends.home.databinding.FragmentHomeBinding
 import com.best.friends.home.dialog.DatePickerWithTodayButtonDialog
@@ -81,6 +81,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         observe()
     }
 
+    override fun onStart() {
+        super.onStart()
+
+        viewModel.setUnreadNotification()
+    }
+
     private fun initView() {
         binding.ivNotifications.setOnSingleClickListener {
             startActivity(notificationNavigator.intent(requireContext()))
@@ -137,6 +143,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
         viewModel.error
             .onEach { errorMessage -> showToast(errorMessage) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+
+        viewModel.isNotification.observe(viewLifecycleOwner) {
+            binding.ivNotifications.setImageResource(
+                if (it) com.best.friend.design.R.drawable.icon_notifications
+                else com.best.friend.design.R.drawable.icon_no_notification
+            )
+        }
     }
 
     private fun showDatePicker(zonedDateTime: ZonedDateTime) {
