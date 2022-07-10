@@ -52,10 +52,10 @@ class FCMService : FirebaseMessagingService() {
             mManager.createNotificationChannel(channel)
         }
 
-        val largeIcon: Bitmap = BitmapFactory.decodeResource(resources, com.best.friend.design.R.drawable.icon_app_logo)
+        val largeIcon: Bitmap = BitmapFactory.decodeResource(resources, com.best.friend.design.R.drawable.app_logo)
 
         val builder = NotificationCompat.Builder(this, channelId).apply {
-            setSmallIcon(com.best.friend.design.R.drawable.icon_app_logo)
+            setSmallIcon(com.best.friend.design.R.drawable.icon_notification_logo)
             setAutoCancel(true)
             setDefaults(Notification.DEFAULT_ALL)
             setWhen(System.currentTimeMillis())
