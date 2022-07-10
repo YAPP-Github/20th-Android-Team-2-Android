@@ -1,7 +1,5 @@
 package com.yapp.android2.domain.repository.setting
 
-import java.time.LocalDateTime
-
 interface SettingRepository {
 
     sealed class Settings {
