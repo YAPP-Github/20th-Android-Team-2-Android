@@ -61,14 +61,18 @@
             android:id="@+id/view_user"
             android:layout_width="0dp"
             android:layout_height="?android:actionBarSize"
+            app:layout_constraintBottom_toTopOf="@+id/view_notice"
             app:layout_constraintEnd_toEndOf="@+id/guide_end"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0"
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
             android:id="@+id/tv_user_id"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:textAppearance="@style/Typography.Body3.Medium"
             android:textColor="@color/gray4"
             android:textSize="16sp"
@@ -76,6 +80,7 @@
             app:layout_constraintEnd_toStartOf="@+id/tv_created_at"
             app:layout_constraintStart_toStartOf="@+id/view_user"
             app:layout_constraintTop_toTopOf="@+id/view_user"
+            app:layout_constraintVertical_bias="0"
             tools:text="YAPP@naver.com" />
 
         <TextView
@@ -91,12 +96,13 @@
             app:layout_constraintStart_toEndOf="@+id/tv_user_id"
             tools:text="22.05.20 간편가입" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icon_right_arrow"
-            android:backgroundTint="@color/gray3"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="12dp"
+            app:srcCompat="@drawable/icon_chevron_right"
+            app:tint="@color/gray3"
             app:layout_constraintBottom_toBottomOf="@+id/tv_user_id"
             app:layout_constraintEnd_toEndOf="@+id/guide_end"
             app:layout_constraintTop_toTopOf="@+id/tv_user_id" />
@@ -105,6 +111,7 @@
             android:id="@+id/view_notice"
             android:layout_width="0dp"
             android:layout_height="?android:actionBarSize"
+            app:layout_constraintBottom_toTopOf="@+id/view_policy"
             app:layout_constraintEnd_toEndOf="@+id/guide_end"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
             app:layout_constraintTop_toBottomOf="@+id/view_user" />
@@ -112,7 +119,8 @@
         <TextView
             android:id="@+id/tv_notice_title"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:text="@string/setting_notice"
             android:textAppearance="@style/Typography.Body3.Medium"
             android:textColor="@color/gray4"
@@ -120,29 +128,35 @@
             app:layout_constraintBottom_toBottomOf="@+id/view_notice"
             app:layout_constraintEnd_toStartOf="@+id/notice_switch"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
-            app:layout_constraintTop_toTopOf="@+id/view_notice" />
+            app:layout_constraintTop_toTopOf="@+id/view_notice"
+            app:layout_constraintVertical_bias="0" />
 
         <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/notice_switch"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="6dp"
             app:layout_constraintBottom_toBottomOf="@+id/view_notice"
             app:layout_constraintEnd_toEndOf="@+id/guide_end"
             app:layout_constraintStart_toEndOf="@+id/tv_notice_title"
-            app:layout_constraintTop_toTopOf="@+id/view_notice" />
+            app:layout_constraintTop_toTopOf="@+id/view_notice"
+            app:layout_constraintVertical_bias="0" />
 
         <View
             android:id="@+id/view_policy"
             android:layout_width="0dp"
             android:layout_height="?android:actionBarSize"
+            app:layout_constraintBottom_toTopOf="@+id/view_version"
             app:layout_constraintEnd_toEndOf="@+id/guide_end"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_notice_title" />
+            app:layout_constraintTop_toBottomOf="@+id/view_notice" />
 
         <TextView
             android:id="@+id/tv_policy"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:text="@string/setting_policy"
             android:textAppearance="@style/Typography.Body3.Medium"
             android:textColor="@color/gray4"
@@ -150,14 +164,16 @@
             app:layout_constraintBottom_toBottomOf="@+id/view_policy"
             app:layout_constraintEnd_toStartOf="@+id/iv_policy"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_notice_title" />
+            app:layout_constraintTop_toBottomOf="@+id/view_notice"
+            app:layout_constraintVertical_bias="0" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_policy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icon_right_arrow"
-            android:backgroundTint="@color/gray3"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="12dp"
+            app:srcCompat="@drawable/icon_chevron_right"
+            app:tint="@color/gray3"
             app:layout_constraintBottom_toBottomOf="@+id/tv_policy"
             app:layout_constraintEnd_toStartOf="@+id/guide_end"
             app:layout_constraintStart_toEndOf="@+id/tv_policy"
@@ -167,6 +183,7 @@
             android:id="@+id/view_version"
             android:layout_width="0dp"
             android:layout_height="?android:actionBarSize"
+            app:layout_constraintBottom_toTopOf="@+id/view_logout"
             app:layout_constraintEnd_toEndOf="@+id/guide_end"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
             app:layout_constraintTop_toBottomOf="@+id/view_policy" />
@@ -174,14 +191,16 @@
         <TextView
             android:id="@+id/tv_version_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:text="@string/setting_version"
             android:textAppearance="@style/Typography.Body3.Medium"
             android:textColor="@color/gray4"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/view_version"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
-            app:layout_constraintTop_toTopOf="@+id/view_version" />
+            app:layout_constraintTop_toTopOf="@+id/view_version"
+            app:layout_constraintVertical_bias="0" />
 
         <TextView
             android:id="@+id/tv_version"
@@ -199,29 +218,34 @@
             android:id="@+id/view_logout"
             android:layout_width="0dp"
             android:layout_height="?android:actionBarSize"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/guide_end"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
-            app:layout_constraintTop_toBottomOf="@+id/tv_version_title" />
+            app:layout_constraintTop_toBottomOf="@+id/view_version" />
 
         <TextView
             android:id="@+id/tv_logout"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
             android:text="@string/setting_logout"
             android:textAppearance="@style/Typography.Body3.Medium"
             android:textColor="@color/gray4"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/view_logout"
             app:layout_constraintEnd_toStartOf="@+id/iv_logout"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
             app:layout_constraintTop_toTopOf="@+id/view_logout"
-            app:layout_constraintBottom_toBottomOf="@+id/view_logout"/>
+            app:layout_constraintVertical_bias="0" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/icon_right_arrow"
-            android:backgroundTint="@color/gray3"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:padding="12dp"
+            app:layout_constraintStart_toEndOf="@+id/tv_logout"
+            app:srcCompat="@drawable/icon_chevron_right"
+            app:tint="@color/gray3"
             app:layout_constraintBottom_toBottomOf="@+id/tv_logout"
             app:layout_constraintEnd_toEndOf="@+id/guide_end"
             app:layout_constraintTop_toTopOf="@+id/tv_logout" />
