@@ -31,7 +31,7 @@ class RecordViewModel @Inject constructor(
 
         recordJob = viewModelScope.launch {
             try {
-                val response = getRecordUseCase.execute(Unit)
+                val response = getRecordUseCase.execute(Unit).toMutableList()
 
                 _items.value = response
             } catch (exception: Exception) {

@@ -8,7 +8,6 @@ import com.yapp.android2.record.RecordViewHolder
 
 class RecordAdapter : ListAdapter<Item, RecordViewHolder>(DIFF_UTIL) {
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecordViewHolder {
         return RecordViewHolder.create(parent, false)
     }
@@ -19,11 +18,15 @@ class RecordAdapter : ListAdapter<Item, RecordViewHolder>(DIFF_UTIL) {
 
     override fun getItemCount(): Int = currentList.size
 
+    override fun getItemId(position: Int): Long {
+        return getItem(position).record.productId.toLong()
+    }
+
 
     companion object {
         private val DIFF_UTIL = object : DiffUtil.ItemCallback<Item>() {
             override fun areItemsTheSame(oldItem: Item, newItem: Item): Boolean {
-                return oldItem == newItem
+                return oldItem.record.productId == newItem.record.productId
             }
 
             override fun areContentsTheSame(oldItem: Item, newItem: Item): Boolean {

@@ -14,6 +14,8 @@ const val EMAIL = "email"
 
 const val PRODUCT = "product"
 
+const val PRODUCT_RESULT = "product_result"
+
 const val POLICY_WEB_URL_KEY = "policy_web_url"
 
 const val LAST_NOTIFICATION_TIME_KEY = "BestFriend-Notification-Time"
