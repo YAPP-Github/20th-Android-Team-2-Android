@@ -16,8 +16,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
-import com.best.friends.core.ui.Empty
-import com.best.friends.core.ui.showToast
+import com.best.friends.core.extensions.Empty
+import com.best.friends.core.extensions.showToast
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemAddBinding
 import com.best.friends.home.register.SavingItemAddViewModel.Action.ItemAdded

@@ -1,9 +1,8 @@
-package com.best.friends.core.ui
+package com.best.friends.core.extensions
 
 import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
-import kotlin.math.round
 import kotlin.math.roundToInt
 
 fun dpToPx(dp: Int, context: Context): Int =

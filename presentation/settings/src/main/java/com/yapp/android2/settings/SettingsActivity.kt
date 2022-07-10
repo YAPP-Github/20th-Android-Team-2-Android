@@ -6,7 +6,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
-import com.best.friends.core.ui.showToast
+import com.best.friends.core.extensions.showToast
 import com.best.friends.navigator.LogoutNavigator
 import com.best.friends.navigator.WebViewNavigator
 import com.best.friends.navigator.WithDrawNavigator

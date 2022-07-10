@@ -2,7 +2,7 @@ package com.best.friends.home.register
 
 import androidx.lifecycle.viewModelScope
 import com.best.friends.core.BaseViewModel
-import com.best.friends.core.ui.Empty
+import com.best.friends.core.extensions.Empty
 import com.yapp.android2.domain.repository.ProductsRepository
 import com.yapp.android2.domain.repository.login.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

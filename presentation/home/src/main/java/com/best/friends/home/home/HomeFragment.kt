@@ -12,8 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseFragment
 import com.best.friends.core.setOnSingleClickListener
-import com.best.friends.core.ui.showToast
-import com.best.friends.core.ui.visibleOrGone
+import com.best.friends.core.extensions.showToast
+import com.best.friends.core.extensions.visibleOrGone
 import com.best.friends.home.R
 import com.best.friends.home.databinding.FragmentHomeBinding
 import com.best.friends.home.dialog.DatePickerWithTodayButtonDialog
@@ -111,7 +111,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
                         .visibleOrGone(state.isPastDate && products.isEmpty())
 
                     if (products.isNotEmpty()) {
-                        adapter.submit(products)
+                        adapter.submit(state)
                     }
 
                     val descriptionText = if (state.priceSum == 0) {

@@ -3,8 +3,8 @@ package com.yapp.android2.webview
 import android.os.Bundle
 import android.webkit.WebSettings
 import com.best.friends.core.BaseActivity
-import com.best.friends.core.ui.gone
-import com.best.friends.core.ui.visible
+import com.best.friends.core.extensions.gone
+import com.best.friends.core.extensions.visible
 import com.yapp.android2.domain.key.POLICY_WEB_URL_KEY
 import com.yapp.android2.domain.url.WebURL
 import com.yapp.android2.webview.databinding.ActivityWebViewBinding
