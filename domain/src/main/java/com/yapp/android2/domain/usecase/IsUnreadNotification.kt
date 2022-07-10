@@ -15,9 +15,21 @@ class IsUnreadNotification @Inject constructor(
             notificationRepository.getRecentCreatedNotification()
         }.onSuccess {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", java.util.Locale.getDefault())
-            val remoteLastNotification = dateFormat.parse(it.createAt)
-            val localLastNotification = dateFormat.parse(notificationRepository.getLastNotificationTime())
-            return remoteLastNotification.after(localLastNotification)
+            val remoteLastNotification = it.createAt
+            val localLastNotification = notificationRepository.getLastNotificationTime()
+            return when {
+                remoteLastNotification == null -> {
+                    false
+                }
+                localLastNotification == "" -> {
+                    true
+                }
+                else -> {
+                    val remoteLastNotificationFormat = dateFormat.parse(remoteLastNotification)
+                    val localLastNotificationFormat = dateFormat.parse(localLastNotification)
+                    remoteLastNotificationFormat.after(localLastNotificationFormat)
+                }
+            }
         }.onFailure { throw it }
 
         return false
