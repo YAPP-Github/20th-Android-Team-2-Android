@@ -5,33 +5,33 @@ import android.webkit.WebSettings
 import com.best.friends.core.BaseActivity
 import com.best.friends.core.ui.gone
 import com.best.friends.core.ui.visible
+import com.yapp.android2.domain.key.POLICY_WEB_URL_KEY
 import com.yapp.android2.domain.url.WebURL
 import com.yapp.android2.webview.databinding.ActivityWebViewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import javax.inject.Named
 
 @AndroidEntryPoint
 class WebViewActivity : BaseActivity<ActivityWebViewBinding>(R.layout.activity_web_view) {
 
     @Inject
+    @Named(POLICY_WEB_URL_KEY)
     lateinit var baseUrl: WebURL
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+        webViewSetting()
         toolbarInit()
         webViewInit()
     }
 
     private fun toolbarInit() {
-        setSupportActionBar(binding.toolbar)
-        supportActionBar?.title = getString(R.string.policy_title)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
-        binding.toolbar.setNavigationOnClickListener {
+        binding.ivBack.setOnClickListener {
             clearCookie()
-            onBackPressed()
+            finish()
         }
     }
 
@@ -52,8 +52,6 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding>(R.layout.activity_w
             if(progress == 100) { binding.progressBar.gone() }
         }
 
-        webViewSetting()
-
         binding.webView.loadUrl(baseUrl.url)
     }
 
@@ -63,9 +61,16 @@ class WebViewActivity : BaseActivity<ActivityWebViewBinding>(R.layout.activity_w
             domStorageEnabled = true
             javaScriptEnabled = true
             loadWithOverviewMode = true
+            useWideViewPort = true
+            loadsImagesAutomatically = true
             cacheMode = WebSettings.LOAD_NO_CACHE
             setSupportZoom(false)
         }
+    }
+
+    override fun onDestroy() {
+        binding.webView.destroy()
+        super.onDestroy()
     }
 
 }
