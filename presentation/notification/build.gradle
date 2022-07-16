@@ -53,6 +53,9 @@ dependencies {
     implementation deps.hilt.core
     kapt deps.hilt.compiler
 
+    implementation deps.deepLink.core
+    kapt deps.deepLink.processor
+
     implementation platform(deps.firebaseBom)
     implementation(firebaseDeps)
 
