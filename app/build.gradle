@@ -80,6 +80,9 @@ dependencies {
     implementation deps.glide.okhttp
     kapt deps.glide.compiler
 
+    implementation deps.deepLink.core
+    kapt deps.deepLink.processor
+
     implementation deps.timber
     implementation deps.gson
 
