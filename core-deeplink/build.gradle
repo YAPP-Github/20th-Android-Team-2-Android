@@ -8,10 +8,10 @@ android {
     compileSdk 32
 
     defaultConfig {
-        minSdk 24
+        minSdk 23
         targetSdk 32
 
-        buildConfigField 'String', 'SCHEME_PREFIX', "\"bestfriends\""
+        buildConfigField 'String', 'SCHEME_PREFIX', "\"${schemes['bestfriends']}\""
     }
 
     buildTypes {

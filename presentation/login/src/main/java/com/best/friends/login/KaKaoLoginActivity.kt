@@ -12,11 +12,17 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
+import com.yapp.android2.deeplink.DeepLinkPrefixSpec
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
+@DeepLinkPrefixSpec(
+    value = [
+        "login"
+    ]
+)
 @AndroidEntryPoint
 class KaKaoLoginActivity : BaseActivity<ActivityKakaoLoginBinding>(R.layout.activity_kakao_login) {
 
