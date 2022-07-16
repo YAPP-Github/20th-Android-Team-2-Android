@@ -53,9 +53,6 @@ dependencies {
     implementation deps.hilt.core
     kapt deps.hilt.compiler
 
-    implementation deps.deepLink.core
-    kapt deps.deepLink.processor
-
     testImplementation(testDeps)
     androidTestImplementation(androidTestDeps)
 }

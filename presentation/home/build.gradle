@@ -42,6 +42,7 @@ android {
 dependencies {
 
     implementation(project(":core"))
+    implementation(project(":core-deeplink"))
     implementation(project(":core-design-system"))
     implementation(project(":navigator"))
     implementation(project(":domain"))

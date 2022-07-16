@@ -21,8 +21,6 @@ android {
         versionCode 1
         versionName "1.0.0"
 
-        buildConfigField 'String', 'SCHEME_PREFIX', "\"bestfriends\""
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -59,6 +57,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":core"))
+    implementation(project(":core-deeplink"))
     implementation(project(":navigator"))
     implementation(project(":presentation:home"))
     implementation(project(":presentation:login"))

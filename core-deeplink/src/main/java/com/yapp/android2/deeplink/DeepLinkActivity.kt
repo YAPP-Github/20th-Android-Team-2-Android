@@ -17,6 +17,7 @@ class DeepLinkActivity : AppCompatActivity() {
 
         val deepLinkDelegate = BaseDeepLinkDelegate(
             listOf(
+
             )
         )
 

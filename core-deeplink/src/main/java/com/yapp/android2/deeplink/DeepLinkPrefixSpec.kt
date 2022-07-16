@@ -1,7 +1,6 @@
 package com.yapp.android2.deeplink
 
 import com.airbnb.deeplinkdispatch.DeepLinkSpec
-import com.yapp.android2.BuildConfig
 
 @DeepLinkSpec(
     prefix = [
