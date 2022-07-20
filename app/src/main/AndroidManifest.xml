@@ -21,7 +21,7 @@
         tools:ignore="UnusedAttribute">
 
         <activity
-            android:name="com.best.friends.login.KaKaoLoginActivity"
+            android:name="com.best.friends.login.LoginActivity"
             android:exported="true" />
 
         <activity

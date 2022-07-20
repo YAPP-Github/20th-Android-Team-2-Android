@@ -5,7 +5,7 @@ import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import androidx.core.content.edit
-import com.best.friends.login.KaKaoLoginActivity
+import com.best.friends.login.LoginActivity
 import com.google.gson.Gson
 import com.yapp.android2.data.service.Service.Companion.BASE_URL
 import com.yapp.android2.domain.entity.RenewalResponse
@@ -84,7 +84,7 @@ class HeaderInterceptor @Inject constructor(
 
                 // 리프레시 토큰 만료
                 removeUser()
-                val intent = Intent(context, KaKaoLoginActivity::class.java).addFlags(
+                val intent = Intent(context, LoginActivity::class.java).addFlags(
                     FLAG_ACTIVITY_CLEAR_TASK).addFlags(FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
             }

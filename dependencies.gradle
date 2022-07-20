@@ -84,7 +84,7 @@ ext {
             "calendar"                     : "com.github.kizitonwose:CalendarView:${versions.calendar}",
             "login"                        : [
                     "kakao"                : "com.kakao.sdk:v2-user:${versions.kakao}",
-                    "google"               : "com.google.android.gms:play-services-auth:20.2.0:${versions.google}"
+                    "google"               : "com.google.android.gms:play-services-auth:${versions.google}"
             ]
     ]
 

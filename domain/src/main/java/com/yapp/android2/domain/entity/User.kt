@@ -23,4 +23,6 @@ data class User(
             createAt = ""
         )
     }
+
+    enum class Type { KAKAO, GOOGLE }
 }

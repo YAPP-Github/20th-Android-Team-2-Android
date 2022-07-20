@@ -8,7 +8,8 @@ interface LoginRepository : Repository {
     suspend fun postLogin(
         email: String,
         nickName: String,
-        providerId: Long
+        provider: String,
+        providerId: String
     ): User
 
     suspend fun postFCMToken(fcmToken: String)
