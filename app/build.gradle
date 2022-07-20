@@ -83,7 +83,7 @@ dependencies {
     implementation deps.timber
     implementation deps.gson
 
-    implementation "com.kakao.sdk:v2-user:2.10.0"
+    implementation(loginDeps)
 
     // testing
     testImplementation(testDeps)

@@ -42,7 +42,7 @@ dependencies {
     implementation(project(":core-design-system"))
 
     implementation(jetpackDeps)
-    implementation(deps.kakao)
+    implementation(loginDeps)
 
     implementation deps.hilt.core
     implementation 'androidx.appcompat:appcompat:1.4.2'

@@ -53,7 +53,7 @@ dependencies {
 
     implementation deps.timber
 
-    implementation deps.kakao
+    implementation(loginDeps)
 
     implementation platform(deps.firebaseBom)
     implementation(firebaseDeps)
