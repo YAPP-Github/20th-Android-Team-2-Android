@@ -115,26 +115,25 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         googleSignResultLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()){ result ->
             if (result.resultCode == RESULT_OK) {
+                val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+                task.addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val account = it.result
+                        viewModel.addUser(
+                            account.email ?: "",
+                            account.displayName ?: "",
+                            User.Type.GOOGLE.toString(),
+                            account.id ?: ""
+                        )
 
-                kotlin.runCatching{
-                    val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(result.data)
-                    task.getResult(ApiException::class.java)
-                }.onSuccess {
-                    viewModel.addUser(
-                        it.email ?: "",
-                        it.displayName ?: "",
-                        User.Type.GOOGLE.toString(),
-                        it.id ?: ""
-                    )
-
-                    Timber.i("구글 id ${it.id}")
-                    Timber.i("구글 displayName ${it.displayName}")
-                    Timber.i("구글 email ${it.email}")
-                }.onFailure {
-                    showToast("로그인에 실패하였습니다")
-                    Timber.e("$it")
+                        Timber.i("구글 id ${account.id}")
+                        Timber.i("구글 displayName ${account.displayName}")
+                        Timber.i("구글 email ${account.email}")
+                    } else {
+                        showToast("로그인에 실패하였습니다")
+                        Timber.e("$it")
+                    }
                 }
-
             } else {
                 showToast("로그인에 실패하였습니다")
                 Timber.d("구글 ${result.resultCode.toString() + "+" + RESULT_OK.toString()}")
