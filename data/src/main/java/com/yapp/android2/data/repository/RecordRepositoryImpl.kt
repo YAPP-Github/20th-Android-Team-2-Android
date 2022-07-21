@@ -5,6 +5,9 @@ import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.entity.User
 import com.yapp.android2.domain.repository.record.Item
 import com.yapp.android2.domain.repository.record.RecordRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RecordRepositoryImpl @Inject constructor(
@@ -12,23 +15,39 @@ class RecordRepositoryImpl @Inject constructor(
 ) : RecordRepository {
 
     override suspend fun fetchRecordsOrThrow(recordMM: String): List<Item> {
-
-        val savingList = recordRemoteDataSource.fetchRecords(recordMM)
-        val summaryList = recordRemoteDataSource.fetchSummaryRecord(recordMM)
+        val cacheDates = mutableMapOf<String, List<String>>()
 
 
-        val checkedItems = savingList.flatMap { savingItem ->
-            summaryList.filter { savingItem.name == it.name }
-                .map {
-                    Item(
-                        record = savingItem,
-                        totalCount = it.baseTimes,
-                        timesComparedToPrev = it.timesComparedToPrev
-                    )
-                }
+        val savingList = withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+                recordRemoteDataSource.fetchRecords(recordMM)
+            }
+
+        val summaryList = withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+            recordRemoteDataSource.fetchSummaryRecord(recordMM)
         }
 
-        return checkedItems.distinctBy { it.record.name }
+        val flatSummary = savingList.flatMap { item ->
+
+            cacheDates[item.name] = emptyList()
+
+            summaryList.filter { item.name == it.name }.map {
+                it.copy(recordYmd = item.recordYmd) to item
+            }
+        }
+
+        val groups = flatSummary.groupBy { it.first.name }
+
+        val checkedItems = flatSummary.map { (summary, record) ->
+            Item(
+                record = record.copy(price = groups.getValue(summary.name)
+                    .sumOf { it.second.price }),
+                totalCount = summary.baseTimes,
+                timesComparedToPrev = summary.timesComparedToPrev,
+                recordDates = groups.getValue(summary.name).map { it.first.recordYmd }
+            )
+        }
+
+        return checkedItems
     }
 
     override suspend fun updateRecords(product: Product, user: User) {

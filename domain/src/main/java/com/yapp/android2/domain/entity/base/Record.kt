@@ -24,6 +24,7 @@ data class Summary(
     val prevTimes: Int,
     val timesComparedToPrev: Int,
     override val name: String,
-    override val recordYmd: String
+    override val recordYmd: String,
+    val price: Int?
 ): Entity, Record
 

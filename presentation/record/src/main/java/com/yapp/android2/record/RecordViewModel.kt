@@ -6,10 +6,12 @@ import com.yapp.android2.domain.repository.record.Item
 import com.yapp.android2.domain.usecase.GetRecordUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,6 +23,10 @@ class RecordViewModel @Inject constructor(
     val items: StateFlow<List<Item>>
         get() = _items
 
+    private val _action = MutableSharedFlow<Action>()
+    val action: SharedFlow<Action>
+        get() = _action.asSharedFlow()
+
     var recordJob: Job? = null
 
     /**
@@ -31,7 +37,7 @@ class RecordViewModel @Inject constructor(
 
         recordJob = viewModelScope.launch {
             try {
-                val response = getRecordUseCase.execute(Unit).toMutableList()
+                val response = getRecordUseCase.execute(Unit)
 
                 _items.value = response
             } catch (exception: Exception) {
@@ -40,9 +46,19 @@ class RecordViewModel @Inject constructor(
         }
     }
 
+    fun onItemClick() {
+        viewModelScope.launch {
+            _action.emit(Action.ItemClick)
+        }
+    }
+
 
     override fun onCleared() {
         recordJob?.cancel()
         super.onCleared()
+    }
+
+    sealed class Action {
+        object ItemClick : Action()
     }
 }
