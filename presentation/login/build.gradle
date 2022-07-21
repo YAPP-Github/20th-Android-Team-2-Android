@@ -41,6 +41,7 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":core-deeplink"))
     implementation(project(":navigator"))
     implementation(project(":domain"))
     implementation(project(":core-design-system"))
@@ -51,8 +52,10 @@ dependencies {
     implementation deps.hilt.core
     kapt deps.hilt.compiler
 
-    implementation deps.timber
+    implementation deps.deepLink.core
+    kapt deps.deepLink.processor
 
+    implementation deps.timber
     implementation deps.kakao
 
     implementation platform(deps.firebaseBom)
