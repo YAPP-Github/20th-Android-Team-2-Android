@@ -1,7 +1,7 @@
 <resources>
     <string name="setting_main_title">설정</string>
     <string name="setting_logout">로그아웃</string>
-    <string name="setting_notice">알람 받기</string>
+    <string name="setting_notice">알림 받기</string>
     <string name="setting_policy">이용약관</string>
     <string name="setting_version">버전</string>
 

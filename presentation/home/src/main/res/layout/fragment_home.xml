@@ -34,7 +34,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/iv_settings"
                 app:layout_constraintEnd_toStartOf="@id/iv_settings"
                 app:layout_constraintTop_toTopOf="@id/iv_settings"
-                app:srcCompat="@drawable/icon_notifications" />
+                app:srcCompat="@drawable/icon_no_notification" />
 
             <ImageView
                 android:id="@+id/iv_settings"
