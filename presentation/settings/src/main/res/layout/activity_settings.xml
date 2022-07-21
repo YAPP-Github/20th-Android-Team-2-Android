@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent=".05" />
+            app:layout_constraintGuide_begin="20dp" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guide_end"
@@ -87,13 +87,13 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:padding="12dp"
             app:srcCompat="@drawable/icon_chevron_right"
             app:tint="@color/gray3"
             app:layout_constraintBottom_toBottomOf="@+id/tv_user_id"
-            app:layout_constraintEnd_toEndOf="@+id/guide_end"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_user_id" />
 
         <TextView
@@ -117,7 +117,7 @@
             android:layout_height="0dp"
             android:gravity="center_vertical"
             app:layout_constraintBottom_toBottomOf="@+id/view_notice"
-            app:layout_constraintEnd_toEndOf="@+id/guide_end"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_notice_title"
             app:layout_constraintTop_toTopOf="@+id/view_notice" />
 
@@ -138,13 +138,13 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_policy"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:padding="12dp"
             app:srcCompat="@drawable/icon_chevron_right"
             app:tint="@color/gray3"
             app:layout_constraintBottom_toBottomOf="@+id/tv_policy"
-            app:layout_constraintEnd_toStartOf="@+id/guide_end"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_policy"
             app:layout_constraintTop_toTopOf="@+id/tv_policy" />
 
@@ -189,14 +189,14 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_logout"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:padding="12dp"
             app:layout_constraintStart_toEndOf="@+id/tv_logout"
             app:srcCompat="@drawable/icon_chevron_right"
             app:tint="@color/gray3"
             app:layout_constraintBottom_toBottomOf="@+id/tv_logout"
-            app:layout_constraintEnd_toEndOf="@+id/guide_end"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_logout" />
 
         <View
