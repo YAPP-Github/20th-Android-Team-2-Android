@@ -11,6 +11,7 @@ ext {
             "coroutines"            : "1.6.1",
             "calendar"              : "1.0.4",
             "hilt"                  : "2.42",
+            "deepLink"              : "6.1.0",
             "glide"                 : "4.13.2",
             "gson"                  : "2.9.0",
             "lifecycle"             : "2.4.1",
@@ -27,6 +28,7 @@ ext {
     ]
     deps = [
             "kotlin"          : [
+                    "stdlib"           : "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}",
                     "coroutines"       : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}",
                     "coroutinesJvm"    : "org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:${versions.coroutines}",
                     "coroutinesAndroid": "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
@@ -57,6 +59,10 @@ ext {
                     "core"                 : "com.github.bumptech.glide:glide:${versions.glide}",
                     "compiler"             : "com.github.bumptech.glide:compiler:${versions.glide}",
                     "okhttp"               : "com.github.bumptech.glide:okhttp3-integration:${versions.glide}"
+            ],
+            "deepLink"                     : [
+                    "core"                 : "com.airbnb:deeplinkdispatch:${versions.deepLink}",
+                    "processor"            : "com.airbnb:deeplinkdispatch-processor:${versions.deepLink}"
             ],
             "firebaseBom"                  : "com.google.firebase:firebase-bom:30.0.1",
             "analyticsKtx"                 : "com.google.firebase:firebase-analytics-ktx",

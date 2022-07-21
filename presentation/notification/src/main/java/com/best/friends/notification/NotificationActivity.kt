@@ -6,8 +6,14 @@ import com.best.friends.core.BaseActivity
 import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.extensions.visibleOrGone
 import com.best.friends.notification.databinding.ActivityNotificationBinding
+import com.yapp.android2.deeplink.DeepLinkPrefixSpec
 import dagger.hilt.android.AndroidEntryPoint
 
+@DeepLinkPrefixSpec(
+    value = [
+        "notifications"
+    ]
+)
 @AndroidEntryPoint
 class NotificationActivity :
     BaseActivity<ActivityNotificationBinding>(R.layout.activity_notification) {

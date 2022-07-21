@@ -21,6 +21,10 @@ android {
         versionCode 1
         versionName "1.0.0"
 
+        manifestPlaceholders = [
+                schemePrefix          : schemes['bestfriends']
+        ]
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -51,12 +55,20 @@ android {
     }
 }
 
+kapt {
+    arguments {
+        arg("deepLink.incremental", "true")
+        arg("deepLink.customAnnotations", "com.yapp.android2.deeplink.DeepLinkPrefixSpec")
+    }
+}
+
 dependencies {
 
     //modules
     implementation(project(":domain"))
     implementation(project(":data"))
     implementation(project(":core"))
+    implementation(project(":core-deeplink"))
     implementation(project(":navigator"))
     implementation(project(":presentation:home"))
     implementation(project(":presentation:login"))
@@ -79,6 +91,9 @@ dependencies {
     implementation deps.glide.core
     implementation deps.glide.okhttp
     kapt deps.glide.compiler
+
+    implementation deps.deepLink.core
+    kapt deps.deepLink.processor
 
     implementation deps.timber
     implementation deps.gson

@@ -12,6 +12,7 @@ interface RecordRepository : Repository {
 
 data class Item(
     val record: Response,
+    val recordDates: List<String>,
     val totalCount: Int,
     val timesComparedToPrev: Int
 )

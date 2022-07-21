@@ -13,12 +13,18 @@ import com.best.friends.home.databinding.ActivityMainBinding
 import com.best.friends.home.databinding.LayoutCustomTabBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.yapp.android2.deeplink.DeepLinkPrefixSpec
 import dagger.hilt.android.AndroidEntryPoint
 import com.best.friend.design.R as designR
 
 /**
  * 홈탭, 기록탭 TabLayout 이 있는 메인화면 Activity
  */
+@DeepLinkPrefixSpec(
+    value = [
+        "start"
+    ]
+)
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
