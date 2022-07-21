@@ -181,6 +181,7 @@
             android:text="@string/setting_logout"
             android:textAppearance="@style/Typography.Body3.Medium"
             android:textColor="@color/gray4"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/view_logout"
             app:layout_constraintEnd_toStartOf="@+id/iv_logout"
             app:layout_constraintStart_toStartOf="@+id/guide_start"
