@@ -8,6 +8,6 @@ import javax.inject.Inject
 class LoginNavigatorImpl @Inject constructor() : LoginNavigator {
 
     override fun intent(context: Context): Intent {
-        return Intent(context, KaKaoLoginActivity::class.java)
+        return Intent(context, LoginActivity::class.java)
     }
 }

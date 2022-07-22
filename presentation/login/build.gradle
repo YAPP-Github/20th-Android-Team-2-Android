@@ -55,9 +55,8 @@ dependencies {
     implementation deps.deepLink.core
     kapt deps.deepLink.processor
 
+    implementation(loginDeps)
     implementation deps.timber
-    implementation deps.kakao
-
     implementation platform(deps.firebaseBom)
     implementation(firebaseDeps)
 

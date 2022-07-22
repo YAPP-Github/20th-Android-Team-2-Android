@@ -11,12 +11,14 @@ class LoginUseCase @Inject constructor(
     suspend operator fun invoke(
         email: String,
         nickName: String,
-        providerId: Long
+        provider: String,
+        providerId: String
     ): Result<User> {
         return kotlin.runCatching {
             loginRepository.postLogin(
                 email = email,
                 nickName = nickName,
+                provider = provider,
                 providerId = providerId
             )
         }.onSuccess {

@@ -13,10 +13,11 @@ class LoginRepositoryImpl @Inject constructor(
     private val loginLocalDataSource: LoginLocalDataSource
 ): LoginRepository {
 
-    override suspend fun postLogin(email: String, nickName: String, providerId: Long): User {
+    override suspend fun postLogin(email: String, nickName: String, provider: String, providerId: String): User {
         val request = PostLoginRequest(
             email = email,
             nickName = nickName,
+            provider = provider,
             providerId = providerId
         )
         return loginRemoteDataSource.postLogin(request)

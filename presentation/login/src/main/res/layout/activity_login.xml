@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".KaKaoLoginActivity">
+        tools:context=".LoginActivity">
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -53,11 +53,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginBottom="12dp"
             android:background="@drawable/bg_kakao_login"
-            app:layout_constraintEnd_toEndOf="@+id/tv_description"
-            app:layout_constraintStart_toStartOf="@+id/tv_description"
-            app:layout_constraintTop_toBottomOf="@id/tv_description">
+            app:layout_constraintBottom_toTopOf="@+id/cl_google_login"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <TextView
                 android:id="@+id/tv_kakao_login"
@@ -80,6 +80,43 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:src="@drawable/ic_kakao"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_google_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/bg_google_login"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/cl_kakao_login"
+            app:layout_constraintStart_toStartOf="@+id/cl_kakao_login">
+
+            <TextView
+                android:id="@+id/tv_google_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="12dp"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:text="@string/google_login"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/iv_google_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="18dp"
+                android:src="@drawable/icon_google"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

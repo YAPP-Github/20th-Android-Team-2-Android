@@ -23,7 +23,8 @@ ext {
             "interceptor"           : "4.9.3",
             "kakao"                 : "2.10.0",
             "leakcanary"            : "2.9.1",
-            "chucker"               : "3.5.2"
+            "chucker"               : "3.5.2",
+            "google"                : "20.2.0"
     ]
     deps = [
             "kotlin"          : [
@@ -87,7 +88,10 @@ ext {
             "inject"                       : "javax.inject:javax.inject:1",
             "jodaTime"                     : "joda-time:joda-time:${versions.jodaTime}",
             "calendar"                     : "com.github.kizitonwose:CalendarView:${versions.calendar}",
-            "kakao"                        : "com.kakao.sdk:v2-user:${versions.kakao}",
+            "login"                        : [
+                    "kakao"                : "com.kakao.sdk:v2-user:${versions.kakao}",
+                    "google"               : "com.google.android.gms:play-services-auth:${versions.google}"
+            ]
     ]
 
     coroutines = [
@@ -126,5 +130,10 @@ ext {
 
     testDeps = [
             deps.test.junit
+    ]
+
+    loginDeps = [
+            deps.login.kakao,
+            deps.login.google
     ]
 }

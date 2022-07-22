@@ -26,12 +26,13 @@ class LoginViewModel @Inject constructor(
     private val _isRegisterUser = MutableLiveData(false)
     val isRegisterUser: LiveData<Boolean> = _isRegisterUser
 
-    fun addKakaoUser(email: String, nickName: String, providerId: Long) {
+    fun addUser(email: String, nickName: String, provider: String, providerId: String) {
         viewModelScope.launch {
             kotlin.runCatching {
                 loginUseCase(
                     email = email,
                     nickName = nickName,
+                    provider = provider,
                     providerId = providerId
                 )
             }.onSuccess {
