@@ -5,7 +5,6 @@ import com.yapp.android2.domain.entity.Product
 import com.yapp.android2.domain.entity.User
 import com.yapp.android2.domain.repository.record.Item
 import com.yapp.android2.domain.repository.record.RecordRepository
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -18,11 +17,11 @@ class RecordRepositoryImpl @Inject constructor(
         val cacheDates = mutableMapOf<String, List<String>>()
 
 
-        val savingList = withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
-                recordRemoteDataSource.fetchRecords(recordMM)
-            }
+        val savingList = withContext(Dispatchers.IO) {
+            recordRemoteDataSource.fetchRecords(recordMM)
+        }
 
-        val summaryList = withContext(CoroutineScope(Dispatchers.IO).coroutineContext) {
+        val summaryList = withContext(Dispatchers.IO) {
             recordRemoteDataSource.fetchSummaryRecord(recordMM)
         }
 

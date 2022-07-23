@@ -26,16 +26,12 @@ class RecordViewModel @Inject constructor(
     private val _action = MutableSharedFlow<Action>()
     val action: SharedFlow<Action>
         get() = _action.asSharedFlow()
-
-    var recordJob: Job? = null
-
+    
     /**
      * @param date format yyyyMM
      */
     fun fetchRecords() {
-        recordJob?.cancel()
-
-        recordJob = viewModelScope.launch {
+        viewModelScope.launch {
             try {
                 val response = getRecordUseCase.execute(Unit)
 
@@ -50,12 +46,6 @@ class RecordViewModel @Inject constructor(
         viewModelScope.launch {
             _action.emit(Action.ItemClick)
         }
-    }
-
-
-    override fun onCleared() {
-        recordJob?.cancel()
-        super.onCleared()
     }
 
     sealed class Action {
