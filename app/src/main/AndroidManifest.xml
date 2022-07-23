@@ -55,6 +55,7 @@
 
         <activity
             android:name="com.best.friends.splash.SplashActivity"
+            android:theme="@style/Theme.BestFriends.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

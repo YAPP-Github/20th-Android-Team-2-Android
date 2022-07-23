@@ -12,6 +12,7 @@ ext {
             "calendar"              : "1.0.4",
             "hilt"                  : "2.42",
             "deepLink"              : "6.1.0",
+            "splashscreen"          : "1.0.0-rc01",
             "glide"                 : "4.13.2",
             "gson"                  : "2.9.0",
             "lifecycle"             : "2.4.1",
@@ -80,6 +81,7 @@ ext {
                     "adapter"              : "com.squareup.retrofit2:converter-gson:2.9.0",
                     "interceptor"          : "com.squareup.okhttp3:logging-interceptor:${versions.interceptor}"
             ],
+            "splashscreen"                 : "androidx.core:core-splashscreen:${versions.splashscreen}",
             "leakcanary"                   : "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}",
             "chucker"                      : [
                     "library"              : "com.github.chuckerteam.chucker:library:${versions.chucker}",
