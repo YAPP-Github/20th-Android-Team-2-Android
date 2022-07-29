@@ -53,6 +53,7 @@ dependencies {
     kapt deps.hilt.compiler
 
     implementation deps.timber
+    implementation deps.splashscreen
 
     // testing
     testImplementation(testDeps)

@@ -2,6 +2,7 @@ package com.best.friends.splash
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
 import com.best.friends.navigator.HomeNavigator
@@ -24,9 +25,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
     lateinit var homeNavigator: HomeNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        applySplashScreen()
         super.onCreate(savedInstanceState)
 
-        lifecycleScope.launch() {
+        lifecycleScope.launch {
             delay(2000)
 
             if (viewModel.isAlreadyUser()) {
@@ -37,5 +39,10 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             }
             finish()
         }
+    }
+
+    private fun applySplashScreen() {
+        val screen = installSplashScreen()
+        screen.setKeepOnScreenCondition { true }
     }
 }
