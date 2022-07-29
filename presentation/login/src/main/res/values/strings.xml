@@ -4,4 +4,12 @@
     <string name="description">소소한 지출을 막아 \n절약의 습관을 잡아</string>
     <string name="kakao_login">카카오 로그인</string>
     <string name="google_login">구글 로그인</string>
+
+    <string name="string_email">이메일</string>
+    <string name="string_password">비밀번호</string>
+    <string name="string_find_id">아이디 찾기</string>
+    <string name="string_find_password">비밀번호 찾기</string>
+    <string name="string_find_sign_up">회원가입</string>
+    <string name="string_login">로그인</string>
+
 </resources>

@@ -26,5 +26,6 @@
 
     <color name="color_divider">#BDBDBD</color>
     <color name="transparent">#00000000</color>
+    <color name="temp_gary_alpha60">#99333333</color>
 
 </resources>
