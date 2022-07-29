@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "238291040120-m43kejktruk2tk9frgigkkairo0cj8lb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yapp.android2",
+            "certificate_hash": "112386b2ac546c52fc012d61f91eb84964b2c472"
+          }
+        },
+        {
           "client_id": "238291040120-0hc84ta4jv65nvqvdrqge02peol4bj43.apps.googleusercontent.com",
           "client_type": 3
         }
