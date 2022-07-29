@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?><!-- START xml_defaults -->
+<defaultsMap>
+    <entry>
+        <key>login_only_sns</key>
+        <value>false</value>
+    </entry>
+</defaultsMap>

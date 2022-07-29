@@ -66,6 +66,7 @@ ext {
                     "processor"            : "com.airbnb:deeplinkdispatch-processor:${versions.deepLink}"
             ],
             "firebaseBom"                  : "com.google.firebase:firebase-bom:30.0.1",
+            "remoteConfig"                 : "com.google.firebase:firebase-config-ktx",
             "analyticsKtx"                 : "com.google.firebase:firebase-analytics-ktx",
             "crashlyticsKtx"               : "com.google.firebase:firebase-crashlytics-ktx",
             "messagingKtx"                 : "com.google.firebase:firebase-messaging-ktx",
@@ -121,7 +122,8 @@ ext {
     firebaseDeps = [
             deps.analyticsKtx,
             deps.crashlyticsKtx,
-            deps.messagingKtx
+            deps.messagingKtx,
+            deps.remoteConfig
     ]
 
     androidTestDeps = [

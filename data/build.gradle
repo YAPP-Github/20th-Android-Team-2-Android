@@ -42,6 +42,9 @@ dependencies {
     implementation deps.hilt.core
     kapt deps.hilt.compiler
 
+    implementation platform(deps.firebaseBom)
+    implementation deps.remoteConfig
+
     implementation deps.network.core
     implementation deps.network.adapter
     implementation deps.network.interceptor

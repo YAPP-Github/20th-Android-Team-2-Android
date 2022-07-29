@@ -1,5 +1,9 @@
 package com.yapp.android2.data.di
 
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings
+import com.yapp.android2.data.BuildConfig
+import com.yapp.android2.data.R
 import com.yapp.android2.data.remote.login.LoginRemoteDataSource
 import com.yapp.android2.data.remote.login.LoginRemoteDataSourceImpl
 import com.yapp.android2.data.remote.logout.LogoutRemoteDataSource
@@ -16,8 +20,10 @@ import com.yapp.android2.data.remote.withdraw.WithDrawRemoteDataSource
 import com.yapp.android2.data.remote.withdraw.WithDrawRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
@@ -61,4 +67,27 @@ internal abstract class RemoteModule {
     abstract fun bindWithDrawDataRemoteSource(
         dataSource: WithDrawRemoteDataSourceImpl
     ): WithDrawRemoteDataSource
+
+    companion object {
+
+        @Singleton
+        @Provides
+        fun provideFirebaseRemoteConfig(): FirebaseRemoteConfig {
+            return FirebaseRemoteConfig.getInstance().apply {
+                setDefaultsAsync(R.xml.remote_config_default)
+                setConfigSettingsAsync(
+                    FirebaseRemoteConfigSettings.Builder()
+                        .setMinimumFetchIntervalInSeconds(if (BuildConfig.DEBUG) 0L else 3600L)
+                        .build()
+                )
+                fetch(if (BuildConfig.DEBUG) 0L else 3600L)
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            activate()
+                        }
+                    }
+
+            }
+        }
+    }
 }
