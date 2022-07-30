@@ -18,6 +18,14 @@ abstract class BaseViewModel : ViewModel() {
     val error: SharedFlow<String>
         get() = _error
 
+    protected fun startLoading() {
+        _loading.value = true
+    }
+
+    protected fun stopLoading() {
+        _loading.value = false
+    }
+
     protected fun sendErrorMessage(throwable: Throwable) {
         sendErrorMessage(throwable.message.toString())
     }

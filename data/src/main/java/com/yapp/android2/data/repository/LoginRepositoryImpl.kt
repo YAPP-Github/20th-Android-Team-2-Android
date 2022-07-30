@@ -2,6 +2,7 @@ package com.yapp.android2.data.repository
 
 import com.yapp.android2.data.local.login.LoginLocalDataSource
 import com.yapp.android2.data.remote.login.LoginRemoteDataSource
+import com.yapp.android2.data.remote.request.LoginForAppReviewRequest
 import com.yapp.android2.data.remote.request.PostLoginRequest
 import com.yapp.android2.domain.entity.FCMToken
 import com.yapp.android2.domain.entity.User
@@ -21,6 +22,12 @@ class LoginRepositoryImpl @Inject constructor(
             providerId = providerId
         )
         return loginRemoteDataSource.postLogin(request)
+    }
+
+    override suspend fun loginForAppReview(email: String, password: String) {
+        val request = LoginForAppReviewRequest(email, password)
+        val user = loginRemoteDataSource.loginForAppReview(request)
+        saveUser(user)
     }
 
     override suspend fun postFCMToken(fcmToken: String) {

@@ -12,6 +12,8 @@ interface LoginRepository : Repository {
         providerId: String
     ): User
 
+    suspend fun loginForAppReview(email: String, password: String)
+
     suspend fun postFCMToken(fcmToken: String)
 
     fun saveUser(user: User)

@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.best.friends.login.LoginForAppReviewViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,6 +37,7 @@
             android:inputType="textEmailAddress"
             android:paddingHorizontal="20dp"
             android:paddingVertical="12dp"
+            android:text="@={viewModel.email}"
             android:textAppearance="@style/Typography.Body3.Medium"
             android:textColorHint="@color/gray2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +56,7 @@
             android:inputType="textPassword"
             android:paddingHorizontal="20dp"
             android:paddingVertical="12dp"
+            android:text="@={viewModel.password}"
             android:textAppearance="@style/Typography.Body3.Medium"
             android:textColorHint="@color/gray2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -109,6 +118,7 @@
 
         <TextView
             android:id="@+id/tv_login"
+            android:onClick="@{() -> viewModel.login()}"
             android:layout_width="0dp"
             android:layout_height="46dp"
             android:layout_marginHorizontal="30dp"
@@ -120,9 +130,17 @@
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_find_id"
+            app:layout_constraintTop_toBottomOf="@id/tv_find_id" />
 
-            />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.loading, default=gone}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
