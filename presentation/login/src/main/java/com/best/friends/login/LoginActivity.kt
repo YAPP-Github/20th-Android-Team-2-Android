@@ -15,6 +15,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
@@ -63,7 +65,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(activity_login) {
         })
     }
 
-    private fun initGoogleLogin(){
+    private fun initGoogleLogin() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.google_client_id))
             .requestEmail()
@@ -95,23 +97,24 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(activity_login) {
                         Timber.d("사용자가 명시적으로 카카오 로그인 취소")
                     } else {
                         showToast("로그인에 실패하였습니다")
-                        Timber.e("$it")
+                        Firebase.crashlytics.recordException(it)
                     }
                 }
             }
         }
     }
 
-    private fun startGoogleLogin(){
+    private fun startGoogleLogin() {
         binding.clGoogleLogin.setOnClickListener {
             val intent = googleSignInClient.signInIntent
             googleSignResultLauncher.launch(intent)
         }
     }
 
-    private fun setGoogleLogin(){
+    private fun setGoogleLogin() {
         googleSignResultLauncher = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()){ result ->
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
             if (result.resultCode == RESULT_OK) {
                 val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
                 task.addOnCompleteListener {
@@ -123,24 +126,26 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(activity_login) {
                             User.Type.GOOGLE.toString(),
                             account.id ?: ""
                         )
-
-                        Timber.i("구글 id ${account.id}")
-                        Timber.i("구글 displayName ${account.displayName}")
-                        Timber.i("구글 email ${account.email}")
                     } else {
                         showToast("로그인에 실패하였습니다")
                         Timber.e("$it")
+                        it.exception?.let { exception ->
+                            Firebase.crashlytics.recordException(exception)
+                        }
                     }
                 }
             } else {
                 showToast("로그인에 실패하였습니다")
-                Timber.d("구글 ${result.resultCode.toString() + "+" + RESULT_OK.toString()}")
+                val exception = RuntimeException(
+                    "구글 로그인 실패 - [${result.resultCode}] ${result.data?.dataString}"
+                )
+                Firebase.crashlytics.recordException(exception)
             }
         }
     }
 
-    private fun observe(){
-        viewModel.isRegisterUser.observe(this){
+    private fun observe() {
+        viewModel.isRegisterUser.observe(this) {
             if (it) {
                 viewModel.addFCMToken()
             }
