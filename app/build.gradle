@@ -18,8 +18,8 @@ android {
         applicationId "com.yapp.android2"
         minSdk 23
         targetSdk 32
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 4
+        versionName "1.0.2"
 
         manifestPlaceholders = [
                 schemePrefix          : schemes['bestfriends']
@@ -40,6 +40,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
