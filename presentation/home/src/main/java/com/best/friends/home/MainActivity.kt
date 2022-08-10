@@ -77,10 +77,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         for (index in 0 until binding.tabLayout.tabCount) {
             val tab = (binding.tabLayout.getChildAt(0) as ViewGroup).getChildAt(index)
             tab.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                if (index == 0) {
-                    setMargins(0, 0, 25, 0)
-                } else {
-                    setMargins(25, 0, 0, 0)
+                when (index) {
+                    0 -> setMargins(0, 0, 10, 0)
+                    1 -> setMargins(10, 0, 10, 0)
+                    else -> setMargins(10, 0, 0, 0)
                 }
             }
             tab.requestLayout()

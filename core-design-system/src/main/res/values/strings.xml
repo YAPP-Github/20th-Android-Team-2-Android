@@ -2,6 +2,7 @@
 <resources>
 
     <string name="common_home">홈</string>
+    <string name="common_add">추가</string>
     <string name="common_record">기록</string>
     <string name="common_register">등록</string>
     <string name="common_delete">삭제</string>

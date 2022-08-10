@@ -18,16 +18,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_start"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.2"/>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guide_end"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.8"/>
+
         <androidx.cardview.widget.CardView
-            android:layout_width="220dp"
+            android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginBottom="30dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="100dp"
             app:cardElevation="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintEnd_toEndOf="@id/guide_end"
+            app:layout_constraintStart_toStartOf="@id/guide_start">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tab_layout"

@@ -14,7 +14,7 @@ class FragmentStateAdapter(
 ) : FragmentStateAdapter(fragmentActivity) {
 
     private enum class TabKind {
-        HOME, RECORD
+        HOME, ADD, RECORD
     }
 
     private val fragments = arrayListOf<Fragment>(
@@ -35,6 +35,7 @@ class FragmentStateAdapter(
     fun getTabTitle(position: Int): String {
         return when (TabKind.values()[position]) {
             TabKind.HOME -> context.getString(com.best.friend.design.R.string.common_home)
+            TabKind.ADD -> context.getString(com.best.friend.design.R.string.common_add)
             TabKind.RECORD -> context.getString(com.best.friend.design.R.string.common_record)
         }
     }
@@ -42,6 +43,7 @@ class FragmentStateAdapter(
     fun getTabSelectedResource(position: Int): Drawable? {
         val resourceId = when (TabKind.values()[position]) {
             TabKind.HOME -> com.best.friend.design.R.drawable.icon_home_active
+            TabKind.ADD -> com.best.friend.design.R.drawable.icon_add_active
             TabKind.RECORD -> com.best.friend.design.R.drawable.icon_record_active
         }
 
@@ -51,6 +53,7 @@ class FragmentStateAdapter(
     fun getTabUnSelectedResource(position: Int): Drawable? {
         val resourceId = when (TabKind.values()[position]) {
             TabKind.HOME -> com.best.friend.design.R.drawable.icon_home_inactive
+            TabKind.ADD -> com.best.friend.design.R.drawable.icon_add_inactive
             TabKind.RECORD -> com.best.friend.design.R.drawable.icon_record_inactive
         }
 

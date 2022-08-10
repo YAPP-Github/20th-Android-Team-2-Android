@@ -12,7 +12,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginTop="2dp"
-            tools:srcCompat="@drawable/icon_home_active"
+            tools:srcCompat="@drawable/icon_add_active"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
