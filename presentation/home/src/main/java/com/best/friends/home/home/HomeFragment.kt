@@ -55,7 +55,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
     private val adapter by lazy {
         SavingsListAdapter(
             onItemClick = { product -> startSavingUpdateActivity(product) },
-            onAddClick = { startSavingAddActivity() },
             onItemChecked = { product ->
                 viewModel.checkSavingItem(product)
 
@@ -94,10 +93,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
         binding.ivSettings.setOnSingleClickListener {
             startActivity(settingNavigator.intent(requireContext()))
-        }
-
-        binding.emptyView.tvSavingItemsAdd.setOnSingleClickListener {
-            startSavingAddActivity()
         }
 
         binding.recyclerView.itemAnimator = null
@@ -174,11 +169,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(R.layout.f
 
     private fun startSavingUpdateActivity(product: Product) {
         val intent = SavingItemUpdateActivity.intent(requireContext(), product)
-        addResultLauncher.launch(intent)
-    }
-
-    private fun startSavingAddActivity() {
-        val intent = SavingItemAddActivity.intent(requireContext())
         addResultLauncher.launch(intent)
     }
 

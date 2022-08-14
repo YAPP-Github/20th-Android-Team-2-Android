@@ -17,20 +17,16 @@ import java.time.ZonedDateTime
  */
 internal class SavingsListAdapter(
     private val onItemClick: (product: Product) -> Unit,
-    private val onAddClick: () -> Unit,
     private val onItemChecked: (product: Product) -> Unit
 ) : ListAdapter<Savings, AbstractViewHolder<Savings>>(CALLBACK) {
 
     enum class ViewType {
-        ITEM, ADD
+        ITEM
     }
 
     fun submit(state: HomeViewModel.State, callback: () -> Unit = {}) {
         val list = arrayListOf<Savings>()
         list += state.toSavingItems()
-        if (state.day.isToday) {
-            list += Savings.Add
-        }
         submitList(list, callback)
     }
 
@@ -45,14 +41,6 @@ internal class SavingsListAdapter(
                 ),
                 onItemClick = onItemClick,
                 onItemChecked = onItemChecked
-            )
-            ViewType.ADD -> SavingAddViewHolder(
-                binding = LayoutSavingAddBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                ),
-                onAddClick = onAddClick
             )
         }
 
@@ -111,22 +99,6 @@ internal class SavingsListAdapter(
         }
     }
 
-    class SavingAddViewHolder(
-        private val binding: LayoutSavingAddBinding,
-        onAddClick: () -> Unit
-    ) : AbstractViewHolder<Savings.Add>(binding.root) {
-
-        init {
-            binding.root.setOnSingleClickListener {
-                onAddClick.invoke()
-            }
-        }
-
-        override fun bind(data: Savings.Add) {
-            binding.executePendingBindings()
-        }
-    }
-
     companion object CALLBACK : DiffUtil.ItemCallback<Savings>() {
         override fun areItemsTheSame(oldItem: Savings, newItem: Savings): Boolean {
             return if (oldItem is Savings.Item && newItem is Savings.Item) {
@@ -150,11 +122,6 @@ sealed class Savings {
     data class Item(val product: Product, val day: ZonedDateTime) : Savings() {
         override val viewType: Int
             get() = SavingsListAdapter.ViewType.ITEM.ordinal
-    }
-
-    object Add : Savings() {
-        override val viewType: Int
-            get() = SavingsListAdapter.ViewType.ADD.ordinal
     }
 }
 
