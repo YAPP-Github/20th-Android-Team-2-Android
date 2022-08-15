@@ -202,6 +202,20 @@
         <item name="fontFamily">@font/spoqa_han_sans_bold</item>
     </style>
 
+    <!-- Caption3 -->
+    <style name="Typography.Caption3">
+        <item name="android:textSize" tools:ignore="SpUsage">10dp</item>
+    </style>
+    <style name="Typography.Caption3.Regular">
+        <item name="fontFamily">@font/spoqa_han_sans_regular</item>
+    </style>
+    <style name="Typography.Caption3.Medium">
+        <item name="fontFamily">@font/spoqa_han_sans_medium</item>
+    </style>
+    <style name="Typography.Caption3.Bold">
+        <item name="fontFamily">@font/spoqa_han_sans_bold</item>
+    </style>
+
     <!-- Calender1 -->
     <style name="Typography.Calender1">
         <item name="android:textSize" tools:ignore="SpUsage">15dp</item>

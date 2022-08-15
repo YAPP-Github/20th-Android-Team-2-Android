@@ -9,6 +9,8 @@
     <string name="saving_items_add">절약 리스트 추가</string>
     <string name="saving_items_price_sum_default">절약과 좀 더 친해지는 오늘!</string>
     <string name="saving_items_price_sum_format">총 %s 원을 아꼈어요!</string>
+    <string name="saving_items_name">절약명</string>
+    <string name="saving_items_price">절약한 금액</string>
 
     <!-- 절약 추가 -->
     <string name="saving_item_activity_toolbar_title">절약 추가</string>
@@ -25,5 +27,6 @@
     <string name="saving_item_cannot_delete_popup_title">삭제할 수 없어요.</string>
     <string name="saving_item_delete_popup_description">삭제하시면 되돌릴 수 없어요.\n신중하게 생각해보시고 삭제하세요!</string>
     <string name="saving_item_cannot_delete_popup_description">절약한 항목은 삭제할 수 없어요!\n삭제를 원하면 체크를 해제해주세요. </string>
+    <string name="saving_items_saved">절약했어요</string>
 
 </resources>
