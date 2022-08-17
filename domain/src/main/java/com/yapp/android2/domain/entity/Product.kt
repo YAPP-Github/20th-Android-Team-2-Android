@@ -11,7 +11,9 @@ data class Product(
     val price: String,
     val resolution: String?,
     val today: String?,
-    val checked: Boolean
+    val checked: Boolean,
+    val accmTimes: Int,
+    val totalTimes: Int
 ) : Entity, Serializable {
 
     val formattedPrice: String
@@ -27,5 +29,19 @@ data class Product(
             String.format("%s원", formatText)
         } catch (e: Exception) {
             price
+        }
+
+    val totalTimesFormat: String
+        get() = try {
+            String.format("%d번 중", totalTimes)
+        } catch (e: Exception) {
+            totalTimes.toString()
+        }
+
+    val accmTimesFormat: String
+        get() = try {
+            String.format("%d번", accmTimes)
+        } catch (e: Exception) {
+            accmTimes.toString()
         }
 }

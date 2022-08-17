@@ -7,7 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 interface Service {
     companion object {
-        const val BASE_URL = "https://jeol-chin.com"
+        const val BASE_URL = "http://dev.jeol-chin.com"
+        const val VERSION = "1.1"
 
         internal fun retroBuilder(vararg interceptor: Interceptor): Retrofit {
             return Retrofit.Builder()

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import com.best.friends.core.AbstractViewHolder
 import com.best.friends.core.extensions.isToday
 import com.best.friends.core.setOnSingleClickListener
-import com.best.friends.home.databinding.LayoutSavingAddBinding
 import com.best.friends.home.databinding.LayoutSavingItemBinding
 import com.yapp.android2.domain.entity.Product
 import java.time.ZonedDateTime
@@ -71,6 +70,7 @@ internal class SavingsListAdapter(
             binding.checkboxClickSections.setOnSingleClickListener(100) {
                 if (item.day.isToday) {
                     binding.checkbox.isChecked = !binding.checkbox.isChecked
+                    binding.progress.progress = calculateProgress(item.product.accmTimes + 1, item.product.totalTimes)
                 }
             }
             binding.priceClickSections.setOnSingleClickListener(100) {
@@ -95,7 +95,14 @@ internal class SavingsListAdapter(
                     onItemChecked.invoke(product)
                 }
             }
+            binding.tvProgressSavingTotal.text = product.totalTimesFormat
+            binding.tvProgressSavingNumber.text = product.accmTimesFormat
+            binding.progress.progress = calculateProgress(product.accmTimes, product.totalTimes)
             binding.executePendingBindings()
+        }
+
+        private fun calculateProgress(savingTimes: Int, totalTimes: Int): Int {
+            return (savingTimes.toDouble() / totalTimes.toDouble() * 100).toInt()
         }
     }
 

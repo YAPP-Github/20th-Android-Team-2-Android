@@ -95,7 +95,10 @@ class HomeViewModel @Inject constructor(
             }.onSuccess {
                 val mutableList = _state.value.products.toMutableList()
                 val index = mutableList.indexOfFirst { it.productId == product.productId }
-                mutableList[index] = product.copy(checked = !product.checked)
+                mutableList[index] = product.copy(
+                    checked = !product.checked,
+                    accmTimes = product.accmTimes + 1
+                )
                 _state.value = _state.value.copy(products = mutableList)
             }.onFailure { throwable ->
                 Timber.e("--- HomeViewModel error: ${throwable.message}")
