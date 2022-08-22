@@ -68,7 +68,7 @@ internal class SavingsListAdapter(
 
         init {
             binding.checkboxClickSections.setOnSingleClickListener(100) {
-                if (item.day.isToday) {
+                if (item.day.isToday && item.product.price.isNotEmpty()) {
                     binding.checkbox.isChecked = !binding.checkbox.isChecked
                     binding.progress.progress = calculateProgress(item.product.accmTimes + 1, item.product.totalTimes)
                 }
@@ -91,7 +91,7 @@ internal class SavingsListAdapter(
             binding.checkbox.isChecked = (product.checked)
             binding.checkbox.isEnabled = isToday
             binding.checkbox.setOnCheckedChangeListener { _, _ ->
-                if (isToday) {
+                if (isToday && product.price.isNotEmpty()) {
                     onItemChecked.invoke(product)
                 }
             }
