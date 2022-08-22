@@ -5,10 +5,7 @@ import com.yapp.android2.domain.entity.base.Record
 import com.yapp.android2.domain.entity.base.ApiResponse
 import com.yapp.android2.domain.entity.base.Response
 import com.yapp.android2.domain.entity.base.Summary
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface RecordService : Service {
 
@@ -24,6 +21,7 @@ interface RecordService : Service {
 
     @POST("/api/savingRecords")
     suspend fun updateRecords(
-        @Body request: PostSavingRecordsRequest
+        @Body request: PostSavingRecordsRequest,
+        @Header("X-API-VERSION") version: String = Service.VERSION
     ): ApiResponse<Unit>
 }
