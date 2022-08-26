@@ -21,10 +21,12 @@ import com.best.friends.core.extensions.showToast
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemAddBinding
 import com.best.friends.home.register.SavingItemAddViewModel.Action.ItemAdded
+import com.best.friends.navigator.HomeNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import java.text.DecimalFormat
+import javax.inject.Inject
 
 
 /**
@@ -35,6 +37,9 @@ class SavingItemAddActivity :
     BaseActivity<ActivitySavingItemAddBinding>(R.layout.activity_saving_item_add) {
 
     private val viewModel by viewModels<SavingItemAddViewModel>()
+
+    @Inject
+    lateinit var homeNavigator: HomeNavigator
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +74,11 @@ class SavingItemAddActivity :
             }
         }
         return super.dispatchTouchEvent(event)
+    }
+
+    override fun onBackPressed() {
+        startActivity(homeNavigator.intent(this))
+        super.onBackPressed()
     }
 
     private fun setToolbar() {

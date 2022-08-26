@@ -1,5 +1,6 @@
 package com.best.friends.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -11,6 +12,7 @@ import com.best.friends.core.BaseActivity
 import com.best.friends.core.extensions.showToast
 import com.best.friends.home.databinding.ActivityMainBinding
 import com.best.friends.home.databinding.LayoutCustomTabBinding
+import com.best.friends.home.register.SavingItemAddActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.yapp.android2.deeplink.DeepLinkPrefixSpec
@@ -73,7 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             }
         })
 
-        // 탭 사이 간격을 50으로 설정
+        // 탭 사이 간격을 20으로 설정
         for (index in 0 until binding.tabLayout.tabCount) {
             val tab = (binding.tabLayout.getChildAt(0) as ViewGroup).getChildAt(index)
             tab.updateLayoutParams<ViewGroup.MarginLayoutParams> {
@@ -99,6 +101,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
             tvTitle.setTextColor(textColor)
             ivIcon.setImageDrawable(drawable)
+        }
+
+        // 절약 추가 tab 클릭 시 SavingItemAddActivity로 이동
+        if(tab.position == 1) {
+            val intent = Intent(this, SavingItemAddActivity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
