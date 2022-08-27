@@ -90,20 +90,9 @@ class SavingItemAddActivity :
     }
 
     private fun initView() {
-        binding.etItemPrice.inputType = TYPE_CLASS_NUMBER or TYPE_NUMBER_VARIATION_PASSWORD
-        binding.etItemPrice.transformationMethod = null
-
         binding.ivClearContent.setOnSingleClickListener {
             viewModel.setContentText(String.Empty)
             val editText = binding.etItemContent
-            editText.requestFocus()
-            val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.showSoftInput(editText, 0)
-        }
-
-        binding.ivClearPrice.setOnSingleClickListener {
-            viewModel.setPriceText(String.Empty)
-            val editText = binding.etItemPrice
             editText.requestFocus()
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(editText, 0)
@@ -141,28 +130,6 @@ class SavingItemAddActivity :
 
             if (hasFocus) {
                 editText.filters = arrayOf(whiteSpaceFilter)
-            }
-        }
-
-        binding.etItemPrice.setOnFocusChangeListener { _, hasFocus ->
-            val editText = binding.etItemPrice
-            val price = viewModel.price.value
-            if (price.isBlank()) {
-                return@setOnFocusChangeListener
-            }
-
-            if (hasFocus) {
-                editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(6))
-                val onlyNumber = price
-                    .replace(",", "")
-                    .replace("원", "")
-                editText.setText("")
-                editText.append(onlyNumber)
-            } else {
-                editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(10))
-                val formatText = DecimalFormat("###,###").format(price.toInt())
-                val wonText = String.format("%s원", formatText)
-                viewModel.setPriceText(wonText)
             }
         }
     }

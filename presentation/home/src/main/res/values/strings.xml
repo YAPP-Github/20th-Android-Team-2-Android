@@ -19,6 +19,18 @@
     <string name="saving_items_content_hint">예) 아메리카노, 하리보젤리, 담배</string>
     <string name="saving_items_price_title">회당 지출 금액</string>
     <string name="saving_items_price_hint">예) 4,500원</string>
+    <string name="saving_items_target_period">절약 목표 기간</string>
+    <string name="saving_items_start_day">시작일</string>
+    <string name="saving_items_end_day">종료일</string>
+    <string name="saving_items_day_of_week">절약 요일</string>
+    <string name="saving_items_tilde">~</string>
+    <string name="saving_items_monday">월</string>
+    <string name="saving_items_tuesday">화</string>
+    <string name="saving_items_wednesday">수</string>
+    <string name="saving_items_thursday">목</string>
+    <string name="saving_items_friday">금</string>
+    <string name="saving_items_saturday">토</string>
+    <string name="saving_items_sunday">일</string>
 
     <!-- 절약 수정/삭제 팝업 -->
     <string name="saving_item_update_popup_title">정말 수정하시겠어요?</string>

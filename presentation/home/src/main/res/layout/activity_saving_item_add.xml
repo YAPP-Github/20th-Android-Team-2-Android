@@ -64,7 +64,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="42dp"
                     android:layout_marginTop="10dp"
-                    android:text="@string/saving_items_content_title"
+                    android:text="@string/saving_items_name"
                     android:textAppearance="@style/Typography.Body4.Medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -103,48 +103,182 @@
                     app:srcCompat="@drawable/icon_close" />
 
                 <TextView
-                    android:id="@+id/tv_price_title"
+                    android:id="@+id/tv_saving_period"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="42dp"
                     android:layout_marginTop="26dp"
-                    android:text="@string/saving_items_price_title"
+                    android:text="@string/saving_items_target_period"
                     android:textAppearance="@style/Typography.Body4.Medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/et_item_content" />
 
-                <EditText
-                    android:id="@+id/et_item_price"
+                <TextView
+                    android:id="@+id/tv_period_start"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_marginHorizontal="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="7dp"
                     android:background="@drawable/bg_rect_gray1_r10"
-                    android:hint="@string/saving_items_price_hint"
-                    android:importantForAutofill="no"
-                    android:inputType="numberDecimal"
-                    android:maxLength="6"
-                    android:maxLines="1"
-                    android:paddingHorizontal="24dp"
-                    android:text="@={viewModel.price}"
+                    android:gravity="center"
+                    android:paddingVertical="20dp"
+                    android:text="@string/saving_items_start_day"
                     android:textAppearance="@style/Typography.Body3.Bold"
+                    android:textColor="@drawable/selector_text_color"
+                    app:layout_constraintEnd_toStartOf="@+id/textView5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_saving_period" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saving_items_tilde"
+                    android:textAppearance="@style/Typography.Body3.Bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_period_start"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_price_title"
-                    tools:ignore="LabelFor"
-                    tools:text="4,500원" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_saving_period" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iv_clear_price"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginEnd="14dp"
-                    android:padding="6dp"
-                    android:visibility="@{!viewModel.price.empty}"
-                    app:layout_constraintBottom_toBottomOf="@id/et_item_price"
-                    app:layout_constraintEnd_toEndOf="@id/et_item_price"
-                    app:layout_constraintTop_toTopOf="@id/et_item_price"
-                    app:srcCompat="@drawable/icon_close" />
+                <TextView
+                    android:id="@+id/tv_period_end"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_rect_gray1_r10"
+                    android:gravity="center"
+                    android:paddingVertical="20dp"
+                    android:text="@string/saving_items_end_day"
+                    android:textAppearance="@style/Typography.Body3.Bold"
+                    android:textColor="@drawable/selector_text_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="@+id/tv_period_start" />
+
+                <TextView
+                    android:id="@+id/tv_saving_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="42dp"
+                    android:layout_marginTop="26dp"
+                    android:text="@string/saving_items_day_of_week"
+                    android:textAppearance="@style/Typography.Body4.Medium"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_period_start" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="12dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_saving_day">
+
+                    <CheckBox
+                        android:id="@+id/cb_monday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rect_gray1_r10"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:paddingVertical="20dp"
+                        android:text="@string/saving_items_monday"
+                        android:textAppearance="@style/Typography.Body3.Bold"
+                        android:textColor="@drawable/selector_text_color" />
+
+                    <CheckBox
+                        android:id="@+id/cb_tuesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rect_gray1_r10"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:paddingVertical="20dp"
+                        android:text="@string/saving_items_tuesday"
+                        android:textAppearance="@style/Typography.Body3.Bold"
+                        android:textColor="@drawable/selector_text_color" />
+
+                    <CheckBox
+                        android:id="@+id/cb_wednesday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rect_gray1_r10"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:paddingVertical="20dp"
+                        android:text="@string/saving_items_wednesday"
+                        android:textAppearance="@style/Typography.Body3.Bold"
+                        android:textColor="@drawable/selector_text_color" />
+
+                    <CheckBox
+                        android:id="@+id/cb_thursday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rect_gray1_r10"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:paddingVertical="20dp"
+                        android:text="@string/saving_items_thursday"
+                        android:textAppearance="@style/Typography.Body3.Bold"
+                        android:textColor="@drawable/selector_text_color" />
+
+                    <CheckBox
+                        android:id="@+id/cb_friday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rect_gray1_r10"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:paddingVertical="20dp"
+                        android:text="@string/saving_items_friday"
+                        android:textAppearance="@style/Typography.Body3.Bold"
+                        android:textColor="@drawable/selector_text_color" />
+
+                    <CheckBox
+                        android:id="@+id/cb_saturday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rect_gray1_r10"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:paddingVertical="20dp"
+                        android:text="@string/saving_items_saturday"
+                        android:textAppearance="@style/Typography.Body3.Bold"
+                        android:textColor="@drawable/selector_text_color" />
+
+                    <CheckBox
+                        android:id="@+id/cb_sunday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_rect_gray1_r10"
+                        android:button="@android:color/transparent"
+                        android:gravity="center"
+                        android:paddingVertical="20dp"
+                        android:text="@string/saving_items_sunday"
+                        android:textAppearance="@style/Typography.Body3.Bold"
+                        android:textColor="@drawable/selector_text_color" />
+
+                </LinearLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
