@@ -16,7 +16,8 @@ interface ProductsService {
 
     @POST("/api/products")
     suspend fun postProduct(
-        @Body request: PostProductsRequest
+        @Body request: PostProductsRequest,
+        @Header("X-API-VERSION") version: String = Service.VERSION
     )
 
     @PATCH("/api/products")

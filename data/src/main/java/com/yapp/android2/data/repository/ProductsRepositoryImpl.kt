@@ -30,15 +30,18 @@ class ProductsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun postProducts(
-        userId: Long,
         name: String,
-        price: String
+        freqType: String,
+        freqInterval: String,
+        startYmd: String,
+        endYmd: String
     ) {
         val request = PostProductsRequest(
-            userId = userId,
             name = name,
-            price = price,
-            resolution = "화이팅!"
+            freqType = freqType,
+            freqInterval = freqInterval,
+            startYmd = startYmd,
+            endYmd = endYmd
         )
         return remoteDataSource.postProducts(request)
     }

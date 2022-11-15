@@ -6,9 +6,6 @@ import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.InputFilter
-import android.text.InputType.TYPE_CLASS_NUMBER
-import android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
-import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -16,9 +13,9 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
-import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.core.extensions.Empty
 import com.best.friends.core.extensions.showToast
+import com.best.friends.core.setOnSingleClickListener
 import com.best.friends.home.R
 import com.best.friends.home.databinding.ActivitySavingItemAddBinding
 import com.best.friends.home.register.SavingItemAddViewModel.Action.ItemAdded
@@ -26,7 +23,6 @@ import com.best.friends.navigator.HomeNavigator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import java.text.DecimalFormat
 import javax.inject.Inject
 
 /**

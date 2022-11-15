@@ -8,9 +8,11 @@ interface ProductsRepository {
     suspend fun getProductsByZonedDateTime(zonedDateTime: ZonedDateTime): List<Product>
     suspend fun getProductsByYmd(recordYmd: String): List<Product> // 기록 일자(YYYYMMDD) ex)20220601
     suspend fun postProducts(
-        userId: Long,
         name: String,
-        price: String
+        freqType: String,
+        freqInterval: String,
+        startYmd: String,
+        endYmd: String
     )
     suspend fun updateProducts(
         productId: Long,
