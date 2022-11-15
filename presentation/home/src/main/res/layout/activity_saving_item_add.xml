@@ -117,45 +117,18 @@
                     android:id="@+id/tv_period_start"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="7dp"
                     android:background="@drawable/bg_rect_gray1_r10"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:paddingVertical="20dp"
-                    android:text="@string/saving_items_start_day"
-                    android:textAppearance="@style/Typography.Body3.Bold"
-                    android:textColor="@drawable/selector_text_color"
-                    app:layout_constraintEnd_toStartOf="@+id/textView5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_saving_period" />
-
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/saving_items_tilde"
-                    android:textAppearance="@style/Typography.Body3.Bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_period_start"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_saving_period" />
-
-                <TextView
-                    android:id="@+id/tv_period_end"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="7dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/bg_rect_gray1_r10"
-                    android:gravity="center"
-                    android:paddingVertical="20dp"
-                    android:text="@string/saving_items_end_day"
+                    android:paddingStart="25dp"
+                    android:text="@string/saving_items_period_set"
                     android:textAppearance="@style/Typography.Body3.Bold"
                     android:textColor="@drawable/selector_text_color"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView5"
-                    app:layout_constraintTop_toTopOf="@+id/tv_period_start" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_saving_period" />
 
                 <TextView
                     android:id="@+id/tv_saving_day"

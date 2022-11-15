@@ -20,8 +20,7 @@
     <string name="saving_items_price_title">회당 지출 금액</string>
     <string name="saving_items_price_hint">예) 4,500원</string>
     <string name="saving_items_target_period">절약 목표 기간</string>
-    <string name="saving_items_start_day">시작일</string>
-    <string name="saving_items_end_day">종료일</string>
+    <string name="saving_items_period_set">기간 설정</string>
     <string name="saving_items_day_of_week">절약 요일</string>
     <string name="saving_items_tilde">~</string>
     <string name="saving_items_monday">월</string>
