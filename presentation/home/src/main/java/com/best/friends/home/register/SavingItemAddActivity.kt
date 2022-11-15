@@ -12,6 +12,7 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.best.friends.core.BaseActivity
@@ -28,7 +29,6 @@ import kotlinx.coroutines.flow.onEach
 import java.text.DecimalFormat
 import javax.inject.Inject
 
-
 /**
  * 절약 추가 화면 Activity
  */
@@ -41,22 +41,20 @@ class SavingItemAddActivity :
     @Inject
     lateinit var homeNavigator: HomeNavigator
 
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            startActivity(homeNavigator.intent(this@SavingItemAddActivity))
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.viewModel = viewModel
+        this.onBackPressedDispatcher.addCallback(this, callback)
         setToolbar()
         initView()
         observe()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
@@ -76,14 +74,9 @@ class SavingItemAddActivity :
         return super.dispatchTouchEvent(event)
     }
 
-    override fun onBackPressed() {
-        startActivity(homeNavigator.intent(this))
-        super.onBackPressed()
-    }
-
     private fun setToolbar() {
         binding.ivBack.setOnSingleClickListener {
-            onBackPressed()
+            callback.handleOnBackPressed()
         }
 
         binding.tvToolbarTitle.text = getString(R.string.saving_item_activity_toolbar_title)

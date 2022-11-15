@@ -36,7 +36,7 @@ class NotificationActivity :
 
     private fun initView() {
         binding.ivBack.setOnSingleClickListener {
-            onBackPressed()
+            finish()
         }
 
         binding.tvToolbarTitle.text = getString(R.string.toolbar_title_notification)

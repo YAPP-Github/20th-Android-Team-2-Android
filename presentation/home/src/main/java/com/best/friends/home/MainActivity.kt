@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.view.updateLayoutParams
@@ -35,18 +36,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
     private var backPressedTime = 0L
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setupViewPager()
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (System.currentTimeMillis() - backPressedTime >= 2000) {
+                backPressedTime = System.currentTimeMillis()
+                showToast(getString(R.string.back_pressed_in_cool_time))
+            } else {
+                finish()
+            }
+        }
     }
 
-    override fun onBackPressed() {
-        if (System.currentTimeMillis() - backPressedTime >= 2000) {
-            backPressedTime = System.currentTimeMillis()
-            showToast(getString(R.string.back_pressed_in_cool_time))
-        } else {
-            super.onBackPressed()
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        this.onBackPressedDispatcher.addCallback(this, callback)
+        super.onCreate(savedInstanceState)
+        setupViewPager()
     }
 
     private fun setupViewPager() {

@@ -50,16 +50,6 @@ class SavingItemUpdateActivity :
         binding.viewModel = viewModel
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressed()
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun dispatchTouchEvent(event: MotionEvent): Boolean {
         if (event.action == MotionEvent.ACTION_DOWN) {
             val v = currentFocus
@@ -178,7 +168,7 @@ class SavingItemUpdateActivity :
 
     private fun setToolbar() {
         binding.ivBack.setOnSingleClickListener {
-            onBackPressed()
+            finish()
         }
 
         binding.tvToolbarTitle.text = getString(R.string.saving_item_udpate_activity_toolbar_title)

@@ -1,6 +1,7 @@
 package com.yapp.android2.settings
 
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -34,9 +35,19 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
     @Inject
     lateinit var withDrawNavigator: WithDrawNavigator
 
+    private val callback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            overridePendingTransition(R.anim.activity_out_transition, R.anim.activity_stay_transition)
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.onBackPressedDispatcher.addCallback(this, callback)
+
         overridePendingTransition(R.anim.activity_in_transition, R.anim.activity_stay_transition)
+
 
         binding.setOnClickListener()
 
@@ -54,11 +65,6 @@ class SettingsActivity : BaseActivity<ActivitySettingsBinding>(R.layout.activity
                 }
             }
             .launchIn(lifecycleScope)
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        overridePendingTransition(R.anim.activity_out_transition, R.anim.activity_stay_transition)
     }
 
     private fun ActivitySettingsBinding.viewInit(value: SettingRepository.Settings.Success) {
