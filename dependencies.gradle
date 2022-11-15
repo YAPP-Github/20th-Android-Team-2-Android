@@ -1,7 +1,7 @@
 ext {
     versions = [
-            "coreKtx"               : "1.7.0",
-            "appCompat"             : "1.4.1",
+            "coreKtx"               : "1.9.0",
+            "appCompat"             : "1.5.1",
             "activityKtx"           : "1.4.0",
             "fragmentKtx"           : "1.4.1",
             "material"              : "1.6.0",

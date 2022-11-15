@@ -12,12 +12,12 @@ plugins {
 apply from: "../credentials.gradle"
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.yapp.android2"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 6
         versionName "1.0.4"
 
