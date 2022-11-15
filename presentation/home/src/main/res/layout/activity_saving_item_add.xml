@@ -264,7 +264,7 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/selector_saving_add_button"
-            android:enabled="@{!viewModel.content.empty &amp;&amp; !viewModel.price.empty, default=false}"
+            android:enabled="@{viewModel.state.isDateInitialized &amp;&amp; viewModel.state.isEnteredDayOfWeek &amp;&amp; !viewModel.state.content.empty, default = false}"
             android:gravity="center"
             android:onClick="@{() -> viewModel.addSavingItem()}"
             android:text="@string/common_register"

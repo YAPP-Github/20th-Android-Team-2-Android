@@ -30,6 +30,7 @@
     <string name="saving_items_friday">금</string>
     <string name="saving_items_saturday">토</string>
     <string name="saving_items_sunday">일</string>
+    <string name="saving_items_impossible_day_of_week">절약할 수 없는 요일입니다</string>
 
     <!-- 절약 수정/삭제 팝업 -->
     <string name="saving_item_update_popup_title">정말 수정하시겠어요?</string>

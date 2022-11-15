@@ -52,12 +52,36 @@ class SavingItemAddViewModel @Inject constructor(
         }
     }
 
+    fun addSavingDayOfWeek(dayOfWeek: Int){
+        if(!state.value.isEnteredDayOfWeek.value) {
+            _state.value = _state.value.copy(
+                isEnteredDayOfWeek = MutableStateFlow(true)
+            )
+        }
+        _state.value.checkSavingDayOfWeekList[dayOfWeek] = state.value.availSavingDayOfWeekList[dayOfWeek]
+    }
+
+    fun deleteSavingDayOfWeek(dayOfWeek: Int){
+        _state.value.checkSavingDayOfWeekList[dayOfWeek] = false
+
+        if(state.value.freqInterval.isEmpty()) {
+            _state.value = _state.value.copy(
+                isEnteredDayOfWeek = MutableStateFlow(false)
+            )
+        }
+    }
+
+    fun isAvailDayOfWeek(dayOfWeek: Int): Boolean {
+        return state.value.availSavingDayOfWeekList[dayOfWeek]
+    }
+
     data class State(
-        val isInitialized: Boolean = false,
+        val isDateInitialized: MutableStateFlow<Boolean> = MutableStateFlow(true),
+        val isEnteredDayOfWeek: MutableStateFlow<Boolean> = MutableStateFlow(false),
         val content: MutableStateFlow<String> = MutableStateFlow(String.Empty),
         val startDate: LocalDate = LocalDate.now(),
         val endDate: LocalDate = LocalDate.now(),
-        val checkSavingDayOfWeekList: List<Boolean> = listOf(false, false, false, false, false, false, false),
+        val checkSavingDayOfWeekList: MutableList<Boolean> = mutableListOf(false, false, false, false, false, false, false),
     ) {
         val formattedStartDate: String
             get() {
@@ -74,16 +98,17 @@ class SavingItemAddViewModel @Inject constructor(
                 return checkSavingDayOfWeekList.asString()
             }
 
-        private val availSavingDayOfWeekList: List<Boolean>
+        val availSavingDayOfWeekList: MutableList<Boolean>
             get() {
-                if(startDate.plusDays(ONE_WEEK_DIFF).isAfter(endDate)) {
-                    return listOf(true, true, true, true, true, true, true)
+                if(endDate.isAfter((startDate.plusDays(ONE_WEEK_DIFF)))) {
+                    return mutableListOf(true, true, true, true, true, true, true)
                 }
                 else {
                     val preDayOfWeek =
                         if (startDate.dayOfWeek.value < endDate.dayOfWeek.value) startDate.dayOfWeek.value
                         else endDate.dayOfWeek.value
-                    val postDayOfWeek = if (startDate.dayOfWeek.value > endDate.dayOfWeek.value) startDate.dayOfWeek.value
+                    val postDayOfWeek =
+                        if (startDate.dayOfWeek.value > endDate.dayOfWeek.value) startDate.dayOfWeek.value
                         else endDate.dayOfWeek.value
 
                     val availSavingDayOfWeek: MutableList<Boolean> = mutableListOf(false, false, false, false, false, false, false)
@@ -91,7 +116,7 @@ class SavingItemAddViewModel @Inject constructor(
                         if (dayOfWeek == DayOfWeek.SUNDAY.value) availSavingDayOfWeek[SUNDAY] = true
                         else availSavingDayOfWeek[dayOfWeek - 1] = true
                     }
-                    return availSavingDayOfWeek.toList()
+                    return availSavingDayOfWeek
                 }
             }
 
@@ -118,10 +143,11 @@ class SavingItemAddViewModel @Inject constructor(
 }
 
 fun List<Boolean>.asString(): String {
-    val savingWeekData = ""
+    var savingWeekData = String.Empty
     for (index in this.indices) {
         if(this[index]) {
-            savingWeekData.plus((index+1).toString())
+            if(savingWeekData != String.Empty) savingWeekData = savingWeekData.plus(",")
+            savingWeekData = savingWeekData.plus((index+1).toString())
         }
     }
     return savingWeekData

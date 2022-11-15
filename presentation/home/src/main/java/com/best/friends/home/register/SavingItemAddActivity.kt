@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
+import android.widget.CompoundButton
 import android.widget.EditText
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
@@ -41,6 +42,34 @@ class SavingItemAddActivity :
         override fun handleOnBackPressed() {
             startActivity(homeNavigator.intent(this@SavingItemAddActivity))
             finish()
+        }
+    }
+
+
+    private val dayOfWeekCheckBoxIdMap = mapOf(
+        R.id.cb_monday to MONDAY,
+        R.id.cb_tuesday to TUESDAY,
+        R.id.cb_wednesday to WEDNESDAY,
+        R.id.cb_thursday to THURSDAY,
+        R.id.cb_friday to FRIDAY,
+        R.id.cb_saturday to SATURDAY,
+        R.id.cb_sunday to SUNDAY
+    )
+
+    private val checkListener by lazy {
+        CompoundButton.OnCheckedChangeListener { view, isChecked ->
+            val dayOfWeek = requireNotNull(dayOfWeekCheckBoxIdMap[view.id]) {
+                "요일을 선택하지 않았습니다"
+            }
+
+            if(!viewModel.isAvailDayOfWeek(dayOfWeek)) {
+                view.isChecked = false
+                showToast(getString(R.string.saving_items_impossible_day_of_week))
+            } else if (isChecked) {
+                viewModel.addSavingDayOfWeek(dayOfWeek)
+            } else {
+                viewModel.deleteSavingDayOfWeek(dayOfWeek)
+            }
         }
     }
 
@@ -86,6 +115,14 @@ class SavingItemAddActivity :
             val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(editText, 0)
         }
+
+        binding.cbMonday.setOnCheckedChangeListener(checkListener)
+        binding.cbTuesday.setOnCheckedChangeListener(checkListener)
+        binding.cbWednesday.setOnCheckedChangeListener(checkListener)
+        binding.cbThursday.setOnCheckedChangeListener(checkListener)
+        binding.cbFriday.setOnCheckedChangeListener(checkListener)
+        binding.cbSaturday.setOnCheckedChangeListener(checkListener)
+        binding.cbSunday.setOnCheckedChangeListener(checkListener)
     }
 
     private fun observe() {
@@ -128,5 +165,13 @@ class SavingItemAddActivity :
         fun intent(context: Context): Intent {
             return Intent(context, SavingItemAddActivity::class.java)
         }
+
+        const val MONDAY = 0
+        const val TUESDAY = 1
+        const val WEDNESDAY = 2
+        const val THURSDAY = 3
+        const val FRIDAY = 4
+        const val SATURDAY = 5
+        const val SUNDAY = 6
     }
 }
